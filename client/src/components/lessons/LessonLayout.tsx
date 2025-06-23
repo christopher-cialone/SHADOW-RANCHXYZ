@@ -116,7 +116,7 @@ export function LessonLayout({
                     <TechButton
                       variant="primary"
                       onClick={onNext}
-                      disabled={!hasNext}
+                      disabled={!canGoNext}
                       size="sm"
                     >
                       {nextButtonText.toUpperCase()}
