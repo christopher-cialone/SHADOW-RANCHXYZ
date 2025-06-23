@@ -21,20 +21,28 @@ export function MainLayout({ children }: MainLayoutProps) {
   }, []);
 
   useEffect(() => {
-    // Create data particles periodically
+    // Create data particles periodically with error handling
     const createDataParticle = () => {
-      const particle = document.createElement('div');
-      particle.className = 'data-particle';
-      particle.style.top = Math.random() * 100 + '%';
-      particle.style.animationDelay = Math.random() * 15 + 's';
-      particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-      document.body.appendChild(particle);
-      
-      setTimeout(() => {
-        if (particle.parentNode) {
-          particle.parentNode.removeChild(particle);
-        }
-      }, 25000);
+      try {
+        const particle = document.createElement('div');
+        particle.className = 'data-particle';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+          try {
+            if (particle.parentNode) {
+              particle.parentNode.removeChild(particle);
+            }
+          } catch (error) {
+            console.debug('Particle cleanup error:', error);
+          }
+        }, 25000);
+      } catch (error) {
+        console.debug('Particle creation error:', error);
+      }
     };
 
     const interval = setInterval(createDataParticle, 2000);
@@ -44,7 +52,9 @@ export function MainLayout({ children }: MainLayoutProps) {
       setTimeout(createDataParticle, i * 500);
     }
     
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const toggleTheme = () => {
