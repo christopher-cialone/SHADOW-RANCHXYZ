@@ -14,6 +14,7 @@ import Ranch from "@/pages/Ranch";
 import Playground from "@/pages/Playground";
 import CypherpunksEthos from "@/pages/CypherpunksEthos";
 import CypherpunkModule1 from "@/pages/CypherpunkModule1";
+import CypherpunkModule2 from "@/pages/CypherpunkModule2";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/playground" component={Playground} />
       <Route path="/cypherpunks-ethos" component={CypherpunksEthos} />
       <Route path="/cypherpunk-module-1" component={CypherpunkModule1} />
+      <Route path="/cypherpunk-module-2" component={CypherpunkModule2} />
       <Route component={NotFound} />
     </Switch>
   );

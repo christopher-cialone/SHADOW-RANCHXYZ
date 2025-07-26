@@ -2,10 +2,26 @@ import { Link, useLocation } from "wouter";
 import { TechButton } from "@/components/ui/TechButton";
 import { TechCard } from "@/components/ui/TechCard";
 import { usePageLoader } from "@/hooks/use-page-loader";
+import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 
 export default function Lessons() {
   const [, setLocation] = useLocation();
+  const { getTrackProgress, getCurrentModule } = useCypherpunkProgress();
   usePageLoader();
+
+  const trackProgress = getTrackProgress();
+  const currentModule = getCurrentModule();
+  
+  const handleCypherpunkTrackClick = () => {
+    if (currentModule === 1) {
+      setLocation('/cypherpunk-module-1');
+    } else if (currentModule === 2) {
+      setLocation('/cypherpunk-module-2');
+    } else {
+      // Future modules
+      setLocation('/cypherpunk-module-1');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-tech-purple-900 to-gray-900">
@@ -41,8 +57,12 @@ export default function Lessons() {
 
               <div className="space-y-3 mb-8">
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className="w-2 h-2 bg-tech-cyan-400 rounded-full mr-3"></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 20 ? 'bg-tech-cyan-400' : 'bg-gray-600'}`}></span>
                   The Genesis of a Movement
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 40 ? 'bg-tech-cyan-400' : currentModule === 2 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  The Pillars of a Free Internet
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
                   <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
@@ -68,16 +88,16 @@ export default function Lessons() {
 
               {/* Progress Bar */}
               <div className="w-full bg-gray-700 rounded-full h-2 mb-6">
-                <div className="bg-gradient-to-r from-tech-cyan-500 to-tech-cyan-400 h-2 rounded-full" style={{ width: '15%' }}></div>
+                <div className="bg-gradient-to-r from-tech-cyan-500 to-tech-cyan-400 h-2 rounded-full transition-all duration-500" style={{ width: `${trackProgress}%` }}></div>
               </div>
 
               <TechButton 
                 variant="accent" 
                 className="w-full"
-                onClick={() => setLocation('/cypherpunk-module-1')}
+                onClick={handleCypherpunkTrackClick}
               >
-                <span className="mr-2">🚀</span>
-                START LEGACY TRACK
+                <span className="mr-2">{trackProgress > 0 ? '🎯' : '🚀'}</span>
+                {trackProgress > 0 ? 'CONTINUE TRACK' : 'START LEGACY TRACK'}
               </TechButton>
             </div>
           </TechCard>

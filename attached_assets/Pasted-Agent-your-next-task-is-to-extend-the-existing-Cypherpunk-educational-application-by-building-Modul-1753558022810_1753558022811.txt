@@ -1,0 +1,43 @@
+Agent, your next task is to extend the existing Cypherpunk educational application by building Module 2, titled "The Pillars of a Free Internet." You will be adding this new module and updating the application's state management to handle user progress.
+
+Integrate the following features into the existing React application structure:
+
+1. Update State Management and Dashboard UI:
+* Modify the main App component to track the user's progress through the "Cypherpunk Legacy" track.
+* When Module 1 is completed, the progress bar for that track on the Dashboard should show 20%.
+* The button for that track should now read "Continue Track."
+* When the user clicks "Continue Track," the application should check their progress and launch the correct module. If they have completed Module 1, it should launch CypherpunkModule2.
+
+2. Create the CypherpunkModule2.js component:
+* This component will manage the step-by-step flow for the second lesson. It will contain an introduction and three interactive "Pillar" challenges.
+* Use a state variable (step) to progress the user through the elements of this module.
+
+3. Implement the Interactive "Pillar" Components for Module 2:
+
+* **Pillar 1: Privacy Scenario:**
+    * Create a component that presents the user with a scenario: "A journalist in an oppressive regime needs to send a sensitive document..."
+    * Provide two choices as buttons: one representing a secure method (end-to-end encryption) and one an insecure method (social media DM).
+    * When the user makes a choice, display contextual feedback explaining the outcome of their decision (e.g., "Correct. The message is secure." or "Risky. The message was intercepted.").
+    * After feedback is displayed, allow the user to proceed to the next pillar.
+
+* **Pillar 2: Anonymity Game (Remailer):**
+    * Create a visual component to demonstrate how an anonymous remailer works.
+    * Display a "You" entity on the left, a "Recipient" on the right, and three "Remailer Node" icons in between.
+    * When the user clicks a "Send Message" button, trigger a CSS animation: a "message packet" icon should travel from left to right.
+    * As the packet passes each node, its "From:" label should visually glitch or become obscured, demonstrating how anonymity is achieved.
+
+* **Pillar 3 & 4: Decentralization Visualization:**
+    * Create a component that shows a side-by-side comparison of two network types.
+    * **Left Side (Centralized):** Display a "spider" diagram with one central server connected to several user nodes. If the user clicks the central server, animate the entire network failing (e.g., all connections turn red and fade out).
+    * **Right Side (Decentralized):** Display a "mesh" or "starfish" diagram where all nodes are interconnected. If the user clicks any single node, animate only that node and its direct connections failing, while the rest of the network remains intact and functional. This visually demonstrates resilience.
+4. Create the Module 2 Completion Screen:
+* Upon finishing the final pillar, transition to a "MISSION 2 COMPLETE" screen.
+* Showcase the newly unlocked "Pillars Badge" with a server icon.
+* The "Return to Dashboard" button should now update the track's progress to 40%.
+
+5. Styling and Technical Requirements:
+* Maintain the existing dark theme, fonts (Monospace for titles, Serif for body), and overall "declassified archive" aesthetic.
+* Use Tailwind CSS for all new components.
+* Ensure all new components are functional and all animations are smooth.
+
+Please update the previous code to include this new module and the required logic for progressing from Module 1 to Module 2.

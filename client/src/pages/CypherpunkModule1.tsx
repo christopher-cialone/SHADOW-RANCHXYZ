@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { TechCard } from "@/components/ui/TechCard";
 import { TechButton } from "@/components/ui/TechButton";
 import { usePageLoader } from "@/hooks/use-page-loader";
+import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 import { CryptoWarsTimeline } from "@/components/cypherpunk/CryptoWarsTimeline";
 import { ManifestoQuiz } from "@/components/cypherpunk/ManifestoQuiz";
 
@@ -12,6 +13,7 @@ export default function CypherpunkModule1() {
   const [terminalText, setTerminalText] = useState("");
   const [showNarrative, setShowNarrative] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const { completeModule } = useCypherpunkProgress();
   
   usePageLoader();
 
@@ -47,6 +49,7 @@ export default function CypherpunkModule1() {
   };
 
   const handleReturnToDashboard = () => {
+    completeModule(1);
     setLocation('/lessons');
   };
 
@@ -253,7 +256,7 @@ export default function CypherpunkModule1() {
             </TechButton>
             
             <p className="text-gray-400 text-sm font-code">
-              Next: Cryptographic Foundations (Coming Soon)
+              Progress: 20% • Next: The Pillars of a Free Internet
             </p>
           </div>
         </div>

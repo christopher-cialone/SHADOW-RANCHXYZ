@@ -112,6 +112,17 @@ The application implements a flexible storage interface pattern:
 
 ```
 Changelog:
+- July 26, 2025: Dual-Track Learning System with Module 2 Implementation
+  - Split lessons into two distinct tracks: "The Cypherpunk Legacy" and "Solana Corps of Engineers"
+  - Implemented comprehensive progress tracking system with Zustand persistence
+  - Created Module 2: "The Pillars of a Free Internet" with interactive components:
+    * Privacy scenario simulation with real-world journalism case study
+    * Anonymous remailer demonstration with visual message routing
+    * Network decentralization comparison (centralized vs. mesh networks)
+    * Interactive failure simulations showing resilience differences
+  - Enhanced dashboard with dynamic progress bars and track completion indicators
+  - Added intelligent module routing based on user progress
+  - Maintained consistent tech aesthetic with cyan/purple gradient themes
 - June 18, 2025: Enhanced V6 Interactive Ethos Implementation Complete
   - Rebuilt comprehensive cypherpunk ethos curriculum (Modules 0-3)
   - Added interactive quiz system with multiple question types (text-input, multiple-choice, true-false)
