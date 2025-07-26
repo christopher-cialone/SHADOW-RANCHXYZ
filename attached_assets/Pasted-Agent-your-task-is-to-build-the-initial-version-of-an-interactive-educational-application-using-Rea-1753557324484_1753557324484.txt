@@ -1,0 +1,38 @@
+Agent, your task is to build the initial version of an interactive educational application using React and Tailwind CSS. This application teaches users about the Cypherpunk movement. For this first task, you will implement Module 1, titled "The Genesis of a Movement."
+
+Follow these instructions precisely:
+
+1. Set up the main application structure in a single file (App.js):
+* Create a main App component.
+* Include a Header component that displays the title "SHADOW RANCH" and a "Connect Wallet" button.
+* Create a Dashboard component that displays two "learning tracks": "The Cypherpunk Legacy" and "Solana Corps of Engineers."
+* Each track card on the dashboard should show a title, description, an icon, tags, and a progress bar. Use the content from the project plan for this.
+* Manage the application's state to track which lesson is currently active. When a user clicks "Start Track" on "The Cypherpunk Legacy," the view should switch from the Dashboard to the CypherpunkModule1 component.
+
+2. Create the CypherpunkModule1.js component:
+* This component will manage the step-by-step flow of the first lesson. Use a state variable (e.g., step) to track the user's position within the module.
+* The module consists of 6 steps as outlined in the project plan: Intro, Chapter 1, Interactive Timeline, Chapter 2, Interactive Quiz, and Completion Screen.
+
+3. Implement the interactive elements for Module 1:
+
+* **Intro Screen (Step 0):**
+    * Create a full-screen view with a dark background.
+    * Animate a terminal cursor effect where the text `> RUN GENESIS_ARCHIVE.EXE` types out on screen. Use `useEffect` and `setTimeout` for this.
+    * After the typing animation, fade in the narrative text: "What if your every digital whisper could be heard?..."
+    * Finally, fade in a "Begin Mission" button that, when clicked, advances the `step` state.
+
+* **Crypto Wars Timeline (Step 2):**
+    * Create a `CryptoWarsTimeline` component.
+    * It should visually display the three key events from the project plan (1976: Public Key Crypto, 1991: PGP Released, 1993: The Clipper Chip) along a vertical line.
+    * Style it to look like an archival, declassified document.
+
+* **Manifesto Quiz (Step 4):**
+    * Create a `ManifestoQuiz` component.
+    * It must present the two multiple-choice questions from the project plan.
+    * The "Submit" button should be disabled until both questions are answered.
+    * Provide immediate visual feedback for correct (green highlight/icon) or incorrect (red highlight/icon) answers. A correct submission should automatically advance the `step` state after a short delay.
+
+* **Completion Screen (Step 5):**
+    * Display a "MISSION 1 COMPLETE" message.
+    * Showcase the "Genesis Badge" with its shield icon.
+    * Include a button to "Return to Dashboard," which should reset the active lesson state in the main `App` component.

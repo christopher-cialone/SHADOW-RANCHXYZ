@@ -1,95 +1,156 @@
-import { Link } from "wouter";
-import { WesternButton } from "@/components/ui/WesternButton";
-import { WesternCard, WesternCardContent, WesternCardHeader, WesternCardTitle } from "@/components/ui/WesternCard";
-import { useLessonStore } from "@/hooks/use-lesson-store";
-import { formatRanchCoin, getRarityColor } from "@/lib/utils";
-import { lessons, type LessonData } from "@/data/lessons";
+import { Link, useLocation } from "wouter";
+import { TechButton } from "@/components/ui/TechButton";
+import { TechCard } from "@/components/ui/TechCard";
 import { usePageLoader } from "@/hooks/use-page-loader";
 
 export default function Lessons() {
-  const { getLessonProgress, isLessonUnlocked } = useLessonStore();
+  const [, setLocation] = useLocation();
   usePageLoader();
 
-
-
   return (
-    <div className="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-tech-purple-900 to-gray-900">
+      <div className="container mx-auto px-4 py-20">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="font-western text-4xl md:text-5xl text-sunset-400 mb-6">Choose Your Path</h1>
-          <p className="font-deputy text-lg text-gray-300 max-w-2xl mx-auto">
-            Master the art of Solana development through hands-on challenges. Each lesson brings you closer to becoming a blockchain pioneer.
+          <h1 className="font-titulo text-5xl md:text-6xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent mb-6">
+            CHOOSE YOUR PATH
+          </h1>
+          <p className="font-tech text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Two tracks await at Shadow Ranch. Master the philosophical foundations before diving into the technical depths.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {lessons?.map((lesson) => {
-            const progress = getLessonProgress(lesson.id);
-            const isUnlocked = isLessonUnlocked(lesson.id, lesson.requiredLessons || []);
-            const progressPercentage = progress?.isCompleted ? 100 : 
-              progress?.currentStep ? (progress.currentStep / lesson.content.steps.length) * 100 : 0;
+        {/* Learning Tracks */}
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Cypherpunk Track */}
+          <TechCard variant="cyan" className="group hover:scale-105 transition-all duration-300">
+            <div className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-tech-cyan-500 to-tech-cyan-600 rounded-lg flex items-center justify-center mr-4">
+                  <span className="text-2xl">🔓</span>
+                </div>
+                <div>
+                  <h2 className="font-titulo text-2xl text-tech-cyan-400 mb-2">THE CYPHERPUNK LEGACY</h2>
+                  <p className="text-sm text-gray-400 font-code">FOUNDATIONAL TRACK</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                Discover the philosophical foundations of digital freedom. Learn about the rebels who dreamed of a decentralized future before blockchain existed.
+              </p>
 
-            return (
-              <WesternCard 
-                key={lesson.id} 
-                className={`hover:scale-105 transition-transform duration-200 animate-slide-up ${
-                  !isUnlocked ? 'opacity-60' : ''
-                }`}
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-tech-cyan-400 rounded-full mr-3"></span>
+                  The Genesis of a Movement
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                  Cryptographic Foundations
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                  Digital Rights Manifesto
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex space-x-4">
+                  <span className="px-3 py-1 bg-tech-cyan-900/50 text-tech-cyan-400 rounded-full text-xs font-code">
+                    PHILOSOPHY
+                  </span>
+                  <span className="px-3 py-1 bg-tech-cyan-900/50 text-tech-cyan-400 rounded-full text-xs font-code">
+                    HISTORY
+                  </span>
+                </div>
+                <span className="text-xs text-gray-500 font-code">6 MODULES</span>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-700 rounded-full h-2 mb-6">
+                <div className="bg-gradient-to-r from-tech-cyan-500 to-tech-cyan-400 h-2 rounded-full" style={{ width: '15%' }}></div>
+              </div>
+
+              <TechButton 
+                variant="accent" 
+                className="w-full"
+                onClick={() => setLocation('/cypherpunk-module-1')}
               >
-                <WesternCardHeader>
-                  <div className="flex items-center justify-between mb-4">
-                    <WesternCardTitle className="text-xl">{lesson.title}</WesternCardTitle>
-                    <span className={`px-2 py-1 rounded text-sm font-mono ${getRarityColor(lesson.difficulty)} bg-gray-800`}>
-                      {lesson.difficulty}
-                    </span>
-                  </div>
-                </WesternCardHeader>
-                
-                <WesternCardContent>
-                  <p className="text-gray-300 mb-4 font-mono text-sm">
-                    {lesson.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center text-desert-400">
-                      <i className="fas fa-clock mr-1" />
-                      <span className="text-sm">{lesson.duration}</span>
-                    </div>
-                    <div className="flex items-center text-sunset-400">
-                      <i className="fas fa-coins mr-1" />
-                      <span className="text-sm">+{formatRanchCoin(lesson.reward)} RC</span>
-                    </div>
-                  </div>
-                  
-                  <div className="progress-trail h-2 rounded-full mb-4">
-                    <div 
-                      className="bg-gradient-to-r from-desert-500 to-sunset-500 h-full rounded-full transition-all duration-300"
-                      style={{ width: `${progressPercentage}%` }}
-                    />
-                  </div>
-                  
-                  {isUnlocked ? (
-                    <Link href={`/lessons/${lesson.id}`}>
-                      <WesternButton variant="primary" className="w-full">
-                        <i className="fas fa-horse mr-2" />
-                        {progress?.isCompleted ? 'Review Lesson' : 
-                         progress?.currentStep ? 'Continue Lesson' : 'Start Lesson'}
-                      </WesternButton>
-                    </Link>
-                  ) : (
-                    <WesternButton 
-                      variant="ghost" 
-                      className="w-full cursor-not-allowed" 
-                      disabled
-                    >
-                      <i className="fas fa-lock mr-2" />
-                      Complete Previous Lessons
-                    </WesternButton>
-                  )}
-                </WesternCardContent>
-              </WesternCard>
-            );
-          })}
+                <span className="mr-2">🚀</span>
+                START LEGACY TRACK
+              </TechButton>
+            </div>
+          </TechCard>
+
+          {/* Solana Programming Track */}
+          <TechCard variant="purple" className="group hover:scale-105 transition-all duration-300 opacity-60">
+            <div className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-tech-purple-500 to-tech-purple-600 rounded-lg flex items-center justify-center mr-4">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <div>
+                  <h2 className="font-titulo text-2xl text-tech-purple-400 mb-2">SOLANA CORPS OF ENGINEERS</h2>
+                  <p className="text-sm text-gray-400 font-code">TECHNICAL TRACK</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                Master the technical arts of Solana development. Build, deploy, and optimize high-performance blockchain applications.
+              </p>
+
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                  Rust Fundamentals
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                  Anchor Framework
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                  Program Development
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex space-x-4">
+                  <span className="px-3 py-1 bg-tech-purple-900/50 text-tech-purple-400 rounded-full text-xs font-code">
+                    RUST
+                  </span>
+                  <span className="px-3 py-1 bg-tech-purple-900/50 text-tech-purple-400 rounded-full text-xs font-code">
+                    SOLANA
+                  </span>
+                </div>
+                <span className="text-xs text-gray-500 font-code">12 MODULES</span>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-700 rounded-full h-2 mb-6">
+                <div className="bg-gradient-to-r from-tech-purple-500 to-tech-purple-400 h-2 rounded-full" style={{ width: '0%' }}></div>
+              </div>
+
+              <TechButton 
+                variant="secondary" 
+                className="w-full cursor-not-allowed"
+                disabled
+              >
+                <span className="mr-2">🔒</span>
+                COMPLETE LEGACY TRACK FIRST
+              </TechButton>
+            </div>
+          </TechCard>
+        </div>
+
+        {/* Bottom Navigation */}
+        <div className="text-center mt-16">
+          <Link href="/">
+            <TechButton variant="secondary" size="sm">
+              <span className="mr-2">←</span>
+              BACK TO DASHBOARD
+            </TechButton>
+          </Link>
         </div>
       </div>
     </div>

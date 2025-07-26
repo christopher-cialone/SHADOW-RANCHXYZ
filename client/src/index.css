@@ -255,3 +255,13 @@
       0 0 20px hsl(var(--tech-cyan));
   }
 }
+
+/* Fade in animation for cypherpunk module */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
