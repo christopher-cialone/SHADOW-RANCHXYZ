@@ -39,13 +39,13 @@ const initialModules: CypherpunkModule[] = [
   },
   {
     id: 4,
-    title: "Cryptographic Foundations",
+    title: "The Fight for the Future",
     isCompleted: false,
     isUnlocked: false,
   },
   {
     id: 5,
-    title: "Digital Rights Manifesto",
+    title: "Cryptographic Foundations",
     isCompleted: false,
     isUnlocked: false,
   },
@@ -78,7 +78,8 @@ export const useCypherpunkProgress = create<CypherpunkProgressState>()(
           });
 
           const completedCount = updatedModules.filter(m => m.isCompleted).length;
-          const progressPercentage = (completedCount / updatedModules.length) * 100;
+          // Modules 1-4 represent the complete Cypherpunk Legacy track (67%)
+          const progressPercentage = completedCount >= 4 ? 67 : Math.round((completedCount / 4) * 67);
           
           const nextModule = updatedModules.find(m => !m.isCompleted && m.isUnlocked)?.id || moduleId;
 

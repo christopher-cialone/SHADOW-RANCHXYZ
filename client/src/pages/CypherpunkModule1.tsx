@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { TechCard } from "@/components/ui/TechCard";
 import { TechButton } from "@/components/ui/TechButton";
+import { BackButton } from "@/components/ui/BackButton";
 import { usePageLoader } from "@/hooks/use-page-loader";
 import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 import { CryptoWarsTimeline } from "@/components/cypherpunk/CryptoWarsTimeline";
@@ -56,7 +57,9 @@ export default function CypherpunkModule1() {
   if (step === 0) {
     // Intro Screen
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
+      <>
+        <BackButton currentModule={1} />
+        <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-tech-cyan-900/20 to-tech-purple-900/20"></div>
         
         <div className="text-center z-10 max-w-4xl px-8">
@@ -85,7 +88,8 @@ export default function CypherpunkModule1() {
             </div>
           )}
         </div>
-      </div>
+        </div>
+      </>
     );
   }
 

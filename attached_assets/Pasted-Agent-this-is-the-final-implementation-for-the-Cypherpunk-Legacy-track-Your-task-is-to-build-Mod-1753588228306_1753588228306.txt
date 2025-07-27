@@ -1,0 +1,31 @@
+Agent, this is the final implementation for the "Cypherpunk Legacy" track. Your task is to build Module 4, titled "The Fight for the Future," and to add navigation controls allowing users to revisit previous lessons.
+
+Please update the existing application with the following features:
+
+1. Update Application Progress and Navigation Logic:
+* In the main App component, update the logic so that if a user has completed Module 3 (60% progress), the "Continue Track" button launches CypherpunkModule4.
+* Add Back-Navigation: Modify the in-lesson view. When a lesson is active, add a "PREVIOUS" button (e.g., < PREVIOUS) in the header. This button should allow the user to go back to the start of the preceding module. It should be disabled or hidden if the user is on Module 1.
+* Upon completion of Module 4, the track's progress should be updated to 80%.
+
+2. Create the CypherpunkModule4.js component:
+* This component will manage the step-by-step flow for the fourth and final lesson.
+* The narrative will bring all previous lessons into a modern context and end with a powerful call to action. Use a state variable (step) to manage the user's progression.
+
+3. Implement the Core Content and Interactive Elements for Module 4:
+
+* **Introductory Animation: "The Web2Montage":**
+    * Create a new component for this animation. It should be a full-screen, self-playing sequence.
+    * **Animation Sequence:**
+        1.  Animate a series of well-known Web 2.0 logos (e.g., Facebook, Google, TikTok) fading in and out, one after another.
+        2.  As each logo is displayed, overlay it with flashing, glitch-style text terms like `DATA HARVESTED`, `TRACKING ENABLED`, and `CENSORED`.
+        3.  After the logo sequence, fade everything to black and then fade in the narrative text: "The Cypherpunks gave us the tools for a free and open internet. But what did we build?..."
+        4.  Finally, display a "Continue" button.
+    * Use CSS `keyframes` and staggered `animation-delay` to achieve this layered effect.
+
+* **Interactive Dilemma: "The Principled Builder":**
+    * Create a component that presents the user with the ethical dilemma from the project plan: "A VC offers you $10 million, but their terms require you to implement KYC and give them the ability to freeze user assets. What do you do, and why?"
+    * Provide a `<textarea>` for the user to type their reflective response. The content does not need to be saved or validated.
+4. Create the Module 4 Completion Screen and Track Handoff:
+* After the final chapter, transition to a "MISSION 4 COMPLETE" screen.
+* Showcase the "Torchbearer Badge" with a suitable torch icon.
+* Crucially, the primary call-to-action button on this screen should not be "Return to Dashboard." It should be a distinct, visually highlighted button (e.g., using the green color from the Solana track) that says "BEGIN SOLANA TRAINING." This button should take the user back to the main dashboard, where they are now primed to start the next track.

@@ -19,6 +19,8 @@ export default function Lessons() {
       setLocation('/cypherpunk-module-2');
     } else if (currentModule === 3) {
       setLocation('/cypherpunk-module-3');
+    } else if (currentModule === 4) {
+      setLocation('/cypherpunk-module-4');
     } else {
       // Future modules
       setLocation('/cypherpunk-module-1');
@@ -71,12 +73,12 @@ export default function Lessons() {
                   From Mailing List to Mainnet
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
-                  Cryptographic Foundations
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 67 ? 'bg-tech-cyan-400' : currentModule === 4 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  The Fight for the Future
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
                   <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
-                  Digital Rights Manifesto
+                  Cryptographic Foundations
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
                   <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
@@ -101,14 +103,26 @@ export default function Lessons() {
                 <div className="bg-gradient-to-r from-tech-cyan-500 to-tech-cyan-400 h-2 rounded-full transition-all duration-500" style={{ width: `${trackProgress}%` }}></div>
               </div>
 
-              <TechButton 
-                variant="accent" 
-                className="w-full"
-                onClick={handleCypherpunkTrackClick}
-              >
-                <span className="mr-2">{trackProgress > 0 ? '🎯' : '🚀'}</span>
-                {trackProgress > 0 ? 'CONTINUE TRACK' : 'START LEGACY TRACK'}
-              </TechButton>
+              {trackProgress >= 50 ? (
+                <TechButton 
+                  variant="accent" 
+                  className="w-full bg-gradient-to-r from-green-600 to-tech-cyan-600 hover:from-green-500 hover:to-tech-cyan-500 border-green-400"
+                  onClick={() => setLocation('/cypherpunk-module-4')}
+                >
+                  <span className="mr-2">⚡</span>
+                  COMPLETE FINAL MISSION
+                  <span className="ml-2">⚡</span>
+                </TechButton>
+              ) : (
+                <TechButton 
+                  variant="accent" 
+                  className="w-full"
+                  onClick={handleCypherpunkTrackClick}
+                >
+                  <span className="mr-2">{trackProgress > 0 ? '🎯' : '🚀'}</span>
+                  {trackProgress > 0 ? 'CONTINUE TRACK' : 'START LEGACY TRACK'}
+                </TechButton>
+              )}
             </div>
           </TechCard>
 

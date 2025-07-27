@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { TechCard } from "@/components/ui/TechCard";
 import { TechButton } from "@/components/ui/TechButton";
+import { BackButton } from "@/components/ui/BackButton";
 import { usePageLoader } from "@/hooks/use-page-loader";
 import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 import { DoubleSpendProblem } from "@/components/cypherpunk/DoubleSpendProblem";
@@ -32,7 +33,9 @@ export default function CypherpunkModule3() {
   if (step === 0) {
     // Introduction Screen
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
+      <>
+        <BackButton currentModule={3} />
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="font-titulo text-5xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent mb-6">
@@ -88,7 +91,8 @@ export default function CypherpunkModule3() {
             </div>
           </TechCard>
         </div>
-      </div>
+        </div>
+      </>
     );
   }
 

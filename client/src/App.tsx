@@ -16,6 +16,8 @@ import CypherpunksEthos from "@/pages/CypherpunksEthos";
 import CypherpunkModule1 from "@/pages/CypherpunkModule1";
 import CypherpunkModule2 from "@/pages/CypherpunkModule2";
 import CypherpunkModule3 from "@/pages/CypherpunkModule3";
+import CypherpunkModule4 from "@/pages/CypherpunkModule4";
+
 
 function Router() {
   return (
@@ -29,6 +31,7 @@ function Router() {
       <Route path="/cypherpunk-module-1" component={CypherpunkModule1} />
       <Route path="/cypherpunk-module-2" component={CypherpunkModule2} />
       <Route path="/cypherpunk-module-3" component={CypherpunkModule3} />
+      <Route path="/cypherpunk-module-4" component={CypherpunkModule4} />
       <Route component={NotFound} />
     </Switch>
   );
