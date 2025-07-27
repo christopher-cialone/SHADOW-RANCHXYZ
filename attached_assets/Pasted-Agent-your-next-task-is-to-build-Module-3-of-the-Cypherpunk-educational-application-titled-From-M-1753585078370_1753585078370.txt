@@ -1,0 +1,36 @@
+Agent, your next task is to build Module 3 of the Cypherpunk educational application, titled "From Mailing List to Mainnet." This module is crucial as it connects the foundational Cypherpunk philosophy to the creation of Bitcoin.
+
+Please modify the existing application with the following features and logic:
+
+1. Update Application Progress and Navigation:
+* In the main App component, update the logic to handle user progress. If a user has completed Module 2 (40% progress), the "Continue Track" button should now launch CypherpunkModule3.
+* Upon completion of this new module, the track's progress should be updated to 60%.
+
+2. Create the CypherpunkModule3.js component:
+* This component will manage the step-by-step flow for the third lesson.
+* The narrative will guide the user from the "double-spend problem" to the DAO Hack dilemma. Use a state variable (step) to manage the user's progression through the module's chapters and interactive elements.
+
+3. Implement the Core Content and Interactive Elements for Module 3:
+
+* **The Double-Spend Problem:**
+    * Create a chapter that explains this core challenge. You can use a simple animated diagram showing a digital coin being copied and failing to be spent at two places simultaneously.
+
+* **The Satoshi Nakamoto Introduction:**
+    * Create a chapter titled "The Ghost in the Machine."
+    * Visually style this section to look like an archival email from a mailing list, presenting Satoshi's famous introductory message about a "new electronic cash system."
+
+* **Interactive Game: "Connecting the Dots":**
+    * Create a new component for this interactive challenge.
+    * On the left side of the screen, display a list of four Cypherpunk concepts: `Anonymous eCash`, `Decentralized Servers`, `"We Write Code"`, and `Digital Signatures`.
+    * On the right side, display a list of four Bitcoin features: `Pseudonymous Addresses`, `Peer-to-Peer Network`, `Open Source Codebase`, and `Public/Private Key Crypto`.
+    * The user must connect the correct concept to its corresponding feature. A simple click-to-connect mechanic is sufficient. When a user clicks a concept, it becomes "active." When they click the correct feature, a line is drawn between them, and the pair is locked in as "correct."
+    * The user cannot proceed until all four pairs are correctly connected.
+
+* **Interactive Dilemma: "The DAO Hack":**
+    * Create a component that presents the user with the philosophical crisis of The DAO Hack.
+    * Clearly state the two choices the Ethereum community faced: uphold "code is law" or intervene via a fork.
+    * Provide a `<textarea>` input for the user to write their thoughts. This is a reflective exercise, not a quiz. The content does not need to be validated, but the user should be able to type in the box.
+4. Create the Module 3 Completion Screen:
+* After the DAO Dilemma, transition to a "MISSION 3 COMPLETE" screen.
+* Showcase the newly unlocked "Bitcoin Genesis Badge," using a suitable Bitcoin icon.
+* The "Return to Dashboard" button should trigger the state update, setting the track's progress to 60%.

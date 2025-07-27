@@ -17,6 +17,8 @@ export default function Lessons() {
       setLocation('/cypherpunk-module-1');
     } else if (currentModule === 2) {
       setLocation('/cypherpunk-module-2');
+    } else if (currentModule === 3) {
+      setLocation('/cypherpunk-module-3');
     } else {
       // Future modules
       setLocation('/cypherpunk-module-1');
@@ -57,12 +59,16 @@ export default function Lessons() {
 
               <div className="space-y-3 mb-8">
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 20 ? 'bg-tech-cyan-400' : 'bg-gray-600'}`}></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 17 ? 'bg-tech-cyan-400' : 'bg-gray-600'}`}></span>
                   The Genesis of a Movement
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 40 ? 'bg-tech-cyan-400' : currentModule === 2 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 33 ? 'bg-tech-cyan-400' : currentModule === 2 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
                   The Pillars of a Free Internet
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 50 ? 'bg-tech-cyan-400' : currentModule === 3 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  From Mailing List to Mainnet
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
                   <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
@@ -71,6 +77,10 @@ export default function Lessons() {
                 <div className="flex items-center text-sm text-gray-400">
                   <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
                   Digital Rights Manifesto
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                  Building the Decentralized Web
                 </div>
               </div>
 

@@ -170,7 +170,7 @@ export default function CypherpunkModule2() {
             </TechButton>
             
             <p className="text-gray-400 text-sm font-code">
-              Progress: 40% • Next: Cryptographic Foundations
+              Progress: 33% • Next: From Mailing List to Mainnet
             </p>
           </div>
         </div>

@@ -33,18 +33,24 @@ const initialModules: CypherpunkModule[] = [
   },
   {
     id: 3,
-    title: "Cryptographic Foundations",
+    title: "From Mailing List to Mainnet",
     isCompleted: false,
     isUnlocked: false,
   },
   {
     id: 4,
-    title: "Digital Rights Manifesto",
+    title: "Cryptographic Foundations",
     isCompleted: false,
     isUnlocked: false,
   },
   {
     id: 5,
+    title: "Digital Rights Manifesto",
+    isCompleted: false,
+    isUnlocked: false,
+  },
+  {
+    id: 6,
     title: "Building the Decentralized Web",
     isCompleted: false,
     isUnlocked: false,

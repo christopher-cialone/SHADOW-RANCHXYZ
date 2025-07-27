@@ -256,7 +256,7 @@ export default function CypherpunkModule1() {
             </TechButton>
             
             <p className="text-gray-400 text-sm font-code">
-              Progress: 20% • Next: The Pillars of a Free Internet
+              Progress: 17% • Next: The Pillars of a Free Internet
             </p>
           </div>
         </div>
