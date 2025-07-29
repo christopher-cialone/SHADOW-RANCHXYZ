@@ -25,8 +25,8 @@ export default function CypherpunksEthos() {
         <div className="relative aspect-video w-full mb-12 rounded-lg overflow-hidden shadow-xl border border-tech-cyan-600/20">
           <iframe
             className="absolute top-0 left-0 w-full h-full"
-            src="https://www.youtube.com/embed/9vM0oIEhMag?si=9wEUfCc1bmpz9orU"
-            title="The Cypherpunk Ethos - YouTube video player"
+            src="https://www.youtube.com/embed/PYl9_1cBeVc?si=3-vOsKouvBAEp1mV&autoplay=1&loop=1&playlist=PYl9_1cBeVc"
+            title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
