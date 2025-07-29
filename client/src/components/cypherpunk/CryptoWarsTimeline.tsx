@@ -86,7 +86,7 @@ export function CryptoWarsTimeline() {
       </div>
       
       {/* Bottom decoration */}
-      <div className="mt-16 text-center">
+      <div className="mt-32 text-center">
         <div className="inline-block bg-gray-800 px-6 py-2 rounded border border-tech-cyan-400/50">
           <span className="font-code text-tech-cyan-400 text-sm">END OF TIMELINE • CLASSIFICATION LEVEL: EYES ONLY</span>
         </div>
