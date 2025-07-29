@@ -36,7 +36,7 @@ export function CryptoWarsTimeline() {
   return (
     <div className="relative">
       {/* Central Timeline Line */}
-      <div className="absolute left-1/2 transform -translate-x-0.5 h-full w-1 bg-gradient-to-b from-tech-cyan-400 via-tech-purple-400 to-tech-cyan-400"></div>
+      <div className="absolute left-1/2 transform -translate-x-0.5 w-1 bg-gradient-to-b from-tech-cyan-400 via-tech-purple-400 to-tech-cyan-400" style={{ height: 'calc(100% - 8rem)' }}></div>
       
       <div className="space-y-16">
         {events.map((event, index) => (
