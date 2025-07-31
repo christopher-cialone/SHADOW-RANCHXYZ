@@ -4,7 +4,7 @@ import { formatWalletAddress } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
 export function WalletButton() {
-  const { connected, address, connecting, connect, disconnect } = useWallet();
+  const { connected, address, connecting, connect, disconnect, walletInstalled } = useWallet();
   const { toast } = useToast();
 
   const handleClick = async () => {
@@ -15,16 +15,26 @@ export function WalletButton() {
         description: "Your wallet has been disconnected from Shadow Ranch",
       });
     } else {
+      if (!walletInstalled) {
+        toast({
+          title: "No Wallet Found",
+          description: "Please install Phantom wallet to connect to Shadow Ranch",
+          variant: "destructive",
+        });
+        window.open('https://phantom.app/', '_blank');
+        return;
+      }
+      
       try {
         await connect();
         toast({
           title: "Wallet Connected",
           description: "Welcome to Shadow Ranch, partner!",
         });
-      } catch (error) {
+      } catch (error: any) {
         toast({
           title: "Connection Failed",
-          description: "Failed to connect wallet. Please try again.",
+          description: error.message || "Failed to connect wallet. Please try again.",
           variant: "destructive",
         });
       }
