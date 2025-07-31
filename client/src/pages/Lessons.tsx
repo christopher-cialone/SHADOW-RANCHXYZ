@@ -179,7 +179,10 @@ export default function Lessons() {
                 <TechButton 
                   variant="accent" 
                   className="w-full"
-                  onClick={() => setLocation('/lesson/1')}
+                  onClick={() => {
+                    console.log('Navigating to Solana track - lesson 1');
+                    setLocation('/lessons/1');
+                  }}
                 >
                   <span className="mr-2">⚡</span>
                   START SOLANA TRACK
