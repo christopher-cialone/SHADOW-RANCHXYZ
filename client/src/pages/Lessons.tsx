@@ -127,7 +127,7 @@ export default function Lessons() {
           </TechCard>
 
           {/* Solana Programming Track */}
-          <TechCard variant="purple" className="group hover:scale-105 transition-all duration-300 opacity-60">
+          <TechCard variant="purple" className={`group hover:scale-105 transition-all duration-300 ${trackProgress >= 17 ? '' : 'opacity-60'}`}>
             <div className="p-8">
               <div className="flex items-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-tech-purple-500 to-tech-purple-600 rounded-lg flex items-center justify-center mr-4">
@@ -175,14 +175,25 @@ export default function Lessons() {
                 <div className="bg-gradient-to-r from-tech-purple-500 to-tech-purple-400 h-2 rounded-full" style={{ width: '0%' }}></div>
               </div>
 
-              <TechButton 
-                variant="secondary" 
-                className="w-full cursor-not-allowed"
-                disabled
-              >
-                <span className="mr-2">🔒</span>
-                COMPLETE LEGACY TRACK FIRST
-              </TechButton>
+              {trackProgress >= 17 ? (
+                <TechButton 
+                  variant="accent" 
+                  className="w-full"
+                  onClick={() => setLocation('/lesson/1')}
+                >
+                  <span className="mr-2">⚡</span>
+                  START SOLANA TRACK
+                </TechButton>
+              ) : (
+                <TechButton 
+                  variant="secondary" 
+                  className="w-full cursor-not-allowed"
+                  disabled
+                >
+                  <span className="mr-2">🔒</span>
+                  COMPLETE FIRST CYPHERPUNK MODULE
+                </TechButton>
+              )}
             </div>
           </TechCard>
         </div>
