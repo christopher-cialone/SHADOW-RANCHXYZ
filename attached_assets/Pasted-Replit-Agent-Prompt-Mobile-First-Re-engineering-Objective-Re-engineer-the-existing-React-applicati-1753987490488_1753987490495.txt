@@ -1,0 +1,85 @@
+Replit Agent Prompt: Mobile-First Re-engineering
+Objective: Re-engineer the existing React application, focusing on a mobile-first design philosophy. The goal is to ensure the application is fully optimized and visually appealing on smaller screens (smartphones) before scaling up to tablet and desktop views.
+
+Core Directives for Mobile-First Design:
+
+Prioritize Mobile Layouts: Begin all component design and styling with the smallest viewport in mind. Use Tailwind CSS's mobile-first approach (sm:, md:, lg: prefixes) extensively, but ensure the default (no prefix) styles are for mobile.
+
+Responsive Typography: Ensure font sizes, line heights, and spacing are legible and comfortable on mobile screens.
+
+Touch Target Optimization: All interactive elements (buttons, navigation links, editor controls) must have sufficiently large touch targets (minimum 44x44px) and adequate spacing for easy tapping on touch devices.
+
+Performance on Mobile: Consider mobile network conditions and device capabilities. Optimize for fast loading and smooth interactions.
+
+Simplified Navigation: Design navigation patterns that are intuitive and accessible on mobile (e.g., hamburger menus, bottom navigation bars for primary actions).
+
+Specific Component Re-engineering Directives:
+1. Overall Application Structure (App.js/App.tsx and index.html)
+
+Prompt: "Re-evaluate the entire App.js (or App.tsx) layout to be mobile-first. Ensure the index.html viewport meta tag is correctly configured. The global Inter font and rounded corners rule still apply. The header and footer should be compact and mobile-friendly. The main content area should fluidly adapt to the screen width."
+
+2. Solana Wallet Connection Component (WalletConnectButton.js/.tsx)
+
+Prompt: "Re-engineer the WalletConnectButton component for mobile-first.
+
+Ensure the button itself is easily tappable on mobile screens.
+
+When the wallet connection modal/dropdown appears, it should be full-screen or a bottom sheet on mobile, providing ample space for wallet selection.
+
+The truncated public key display should be clear and concise on small screens.
+
+Maintain existing functionality (connect/disconnect, error handling) but optimize its visual presentation for mobile."
+
+3. Main Learning Layout and Module Navigation (LearningLayout.js/.tsx)
+
+Prompt: "Completely re-design the LearningLayout component with a mobile-first perspective.
+
+Sidebar Navigation: On mobile, the sidebar should default to being hidden and accessible via a prominent hamburger menu icon (or similar mobile-friendly toggle) in the header. When opened, it should overlay the content or slide in from the side, taking up a significant portion of the screen width. On tablet/desktop, it can transition to a persistent sidebar.
+
+Main Content Area: The main content area should occupy 100% width on mobile, with appropriate padding.
+
+Module Progression: Ensure the mechanism for tracking and highlighting the active module is clear and visually distinct on mobile.
+
+Styling: Use Tailwind CSS to implement these responsive changes. Prioritize vertical stacking and single-column layouts for mobile, transitioning to multi-column layouts on larger screens."
+
+4. Module Content Display Component (ModuleContent.js/.tsx)
+
+Prompt: "Re-engineer the ModuleContent component for mobile-first readability and interaction.
+
+Typography: Adjust heading and body text sizes to be comfortable for reading on mobile.
+
+Spacing: Ensure adequate vertical spacing between sections (objectives, key concepts, exercises) to prevent visual clutter.
+
+Markdown Rendering: Ensure the react-markdown output is well-formatted and readable on small screens, avoiding horizontal scrolling.
+
+NFT Achievement Placeholder: The NFT display should be visually prominent but not consume excessive screen real estate on mobile. It should scale gracefully."
+
+5. Monaco Editor Wrapper Component (CodeEditor.js/.tsx)
+
+Prompt: "Re-engineer the CodeEditor component to provide an optimal coding experience on mobile, despite screen size limitations.
+
+Editor Size: The Monaco editor should dynamically adjust its height and width to fit the available screen space, preventing horizontal scrolling within the editor itself.
+
+Run Button: The 'Run Code' button should be easily accessible below the editor, with a sufficient touch target.
+
+Focus Management: Consider how the virtual keyboard might interact with the editor on mobile and ensure it doesn't obscure critical UI elements. (Agent: This might require more advanced Monaco configuration or user input, but aim for the best possible default.)
+
+Styling: Maintain the clean border and rounded corners, ensuring they look good on mobile."
+
+6. NFT Achievement Display Component (AchievementNFT.js/.tsx)
+
+Prompt: "Ensure the AchievementNFT component is mobile-friendly. The card-like display should scale down gracefully, and the image should remain clear and appropriately sized on smaller screens."
+
+General Design Guidelines (Reiterate and Emphasize for Mobile):
+
+Tailwind CSS: Continue to use Tailwind CSS exclusively for styling, leveraging its responsive utility classes (sm:, md:, lg:).
+
+Rounded Corners: Apply rounded corners consistently to all elements for a modern look.
+
+Inter Font: Maintain the Inter font family.
+
+No alert(): Continue to avoid alert() and confirm() for user feedback.
+
+Accessibility: Ensure all interactive elements are accessible via touch.
+
+By focusing on these directives, your Replit agent should be able to transform your application into a truly mobile-first experience.

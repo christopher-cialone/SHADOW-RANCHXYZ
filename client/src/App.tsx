@@ -7,7 +7,7 @@ import { WalletProvider } from "@/components/wallet/WalletProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ThemeProvider } from "next-themes";
 import NotFound from "@/pages/not-found";
-import Home from "@/pages/Home";
+import HomeMobile from "@/pages/HomeMobile";
 import Lessons from "@/pages/Lessons";
 import LessonDetail from "@/pages/LessonDetail";
 import Ranch from "@/pages/Ranch";
@@ -23,7 +23,7 @@ import { WalletTest } from "@/pages/WalletTest";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={HomeMobile} />
       <Route path="/lessons" component={Lessons} />
       <Route path="/lessons/:id" component={LessonDetail} />
       <Route path="/ranch" component={Ranch} />

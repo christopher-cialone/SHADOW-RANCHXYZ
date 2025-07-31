@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const techCardVariants = cva(
-  "tech-card p-6 rounded-lg shadow-xl backdrop-blur-sm",
+  "card-mobile-compact sm:card-mobile shadow-xl backdrop-blur-sm transition-all duration-200 hover:shadow-2xl",
   {
     variants: {
       variant: {

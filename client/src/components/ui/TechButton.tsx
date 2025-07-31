@@ -8,7 +8,7 @@ interface TechButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const TechButton = forwardRef<HTMLButtonElement, TechButtonProps>(
   ({ className, variant = "primary", size = "md", ...props }, ref) => {
-    const baseClasses = "inline-flex items-center justify-center font-tech uppercase tracking-wider transition-all duration-200 relative overflow-hidden border-2 disabled:opacity-50 disabled:cursor-not-allowed";
+    const baseClasses = "touch-target inline-flex items-center justify-center font-mono uppercase tracking-wider transition-all duration-200 relative overflow-hidden border-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95";
     
     const variants = {
       primary: "bg-tech-cyan-600 hover:bg-tech-cyan-500 border-tech-cyan-400 text-white hover:shadow-lg hover:shadow-tech-cyan-500/25",
@@ -18,9 +18,9 @@ const TechButton = forwardRef<HTMLButtonElement, TechButtonProps>(
     };
 
     const sizes = {
-      sm: "px-3 py-1.5 text-xs rounded",
-      md: "px-4 py-2 text-sm rounded-md",
-      lg: "px-6 py-3 text-base rounded-lg"
+      sm: "px-3 py-2 text-mobile-sm rounded-md min-h-10",
+      md: "px-4 py-3 text-mobile-base rounded-lg min-h-11", 
+      lg: "px-6 py-4 text-mobile-lg rounded-xl min-h-12"
     };
 
     return (

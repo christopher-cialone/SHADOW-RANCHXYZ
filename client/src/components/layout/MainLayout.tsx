@@ -81,7 +81,10 @@ export function MainLayout({ children }: MainLayoutProps) {
       <div className="data-particle" style={{ top: '45%', animationDelay: '-12s' }} />
       <div className="data-particle" style={{ top: '85%', animationDelay: '-14s' }} />
       <Header onThemeToggle={toggleTheme} currentTheme={theme} />
-      <main className="pt-20 flex-grow">
+      <main 
+        className="flex-grow px-3 sm:px-4 md:px-6 lg:px-8"
+        style={{ paddingTop: 'var(--header-height)' }}
+      >
         {children}
       </main>
       {/* Game Canvas Overlay */}
