@@ -134,7 +134,7 @@ export default function Lessons() {
                   <span className="text-2xl">⚡</span>
                 </div>
                 <div>
-                  <h2 className="font-titulo text-2xl text-tech-purple-400 mb-2">SOLANA CORPS OF ENGINEERS</h2>
+                  <h2 className="font-titulo text-2xl text-tech-purple-400 mb-2">SOLANA PROGRAM DEVELOPMENT</h2>
                   <p className="text-sm text-gray-400 font-code">TECHNICAL TRACK</p>
                 </div>
               </div>
