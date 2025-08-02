@@ -144,21 +144,14 @@ export default function CypherpunkModule1() {
   if (step === 2) {
     // Interactive Timeline
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
-        <div className="container mx-auto px-4 max-w-5xl">
+      <div className="min-h-screen bg-black py-20">
+        <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">The Crypto Wars Timeline</h1>
+            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">The Crypto Wars Timeline</h1>
             <p className="text-gray-400 font-tech">Declassified: Key moments in the battle for digital freedom</p>
           </div>
           
-          <CryptoWarsTimeline />
-          
-          <div className="text-center mt-12">
-            <TechButton variant="primary" onClick={handleNext}>
-              PROCEED TO CHAPTER 2
-              <span className="ml-2">→</span>
-            </TechButton>
-          </div>
+          <CryptoWarsTimeline onComplete={handleNext} />
         </div>
       </div>
     );
@@ -167,11 +160,11 @@ export default function CypherpunkModule1() {
   if (step === 3) {
     // Chapter 2: The Manifesto
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <TechCard variant="purple" className="mb-8">
             <div className="p-8">
-              <h1 className="font-titulo text-3xl text-tech-purple-400 mb-6">Chapter 2: A Cypherpunk's Manifesto</h1>
+              <h1 className="font-titulo text-3xl text-purple-400 mb-6">Chapter 2: A Cypherpunk's Manifesto</h1>
               
               <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p>
@@ -180,8 +173,8 @@ export default function CypherpunkModule1() {
                   groundwork for everything that would follow—from PGP encryption to Bitcoin.
                 </p>
                 
-                <div className="bg-gray-800 p-6 rounded border-l-4 border-tech-purple-400 font-code text-sm">
-                  <p className="text-tech-purple-400 mb-4">[CLASSIFIED DOCUMENT - EYES ONLY]</p>
+                <div className="bg-gray-800 p-6 rounded border-l-4 border-purple-400 font-code text-sm">
+                  <p className="text-purple-400 mb-4">[CLASSIFIED DOCUMENT - EYES ONLY]</p>
                   <p className="mb-4">
                     "Privacy is not secrecy. A private matter is something one doesn't want the whole world 
                     to know, but a secret matter is something one doesn't want anybody to know. Privacy is 
@@ -216,10 +209,10 @@ export default function CypherpunkModule1() {
   if (step === 4) {
     // Interactive Quiz
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">Manifesto Quiz</h1>
+            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">Manifesto Quiz</h1>
             <p className="text-gray-400 font-tech">Prove your understanding of the cypherpunk philosophy</p>
           </div>
           
@@ -232,20 +225,20 @@ export default function CypherpunkModule1() {
   if (step === 5) {
     // Completion Screen
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center max-w-2xl px-8">
           <div className="animate-pulse mb-8">
-            <div className="w-32 h-32 bg-gradient-to-br from-tech-cyan-400 to-tech-purple-400 rounded-full mx-auto flex items-center justify-center mb-6">
+            <div className="w-32 h-32 bg-cyan-500/20 border border-cyan-400/30 rounded-full mx-auto flex items-center justify-center mb-6">
               <span className="text-4xl">🛡️</span>
             </div>
           </div>
           
-          <h1 className="font-titulo text-5xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent mb-6">
+          <h1 className="font-titulo text-5xl text-cyan-400 mb-6">
             MISSION 1 COMPLETE
           </h1>
           
-          <div className="bg-tech-cyan-900/30 border border-tech-cyan-400/50 rounded-lg p-6 mb-8">
-            <h2 className="font-tech text-tech-cyan-400 text-xl mb-4">GENESIS BADGE ACQUIRED</h2>
+          <div className="bg-cyan-500/10 border border-cyan-400/50 rounded-lg p-6 mb-8">
+            <h2 className="font-tech text-cyan-400 text-xl mb-4">GENESIS BADGE ACQUIRED</h2>
             <p className="text-gray-300">
               You've successfully completed "The Genesis of a Movement" and earned your first badge 
               in the Cypherpunk Legacy track. You now understand the philosophical foundations that 

@@ -1,0 +1,31 @@
+As a Replit agent, your task is to significantly enhance the User Experience (UX) of the "Crypto Wars Timeline" page, particularly focusing on its responsiveness for mobile devices and introducing dynamic, automated progression.
+
+**Current State Analysis (from provided screenshots):**
+The page features a vertical timeline with distinct information cards for each event. It has a dark, futuristic aesthetic with neon blue accents and "classified" document styling. Currently, the page is static, requiring manual scrolling, and renders poorly on mobile.
+
+**Desired Enhancements:**
+
+1.  **Automated Timeline Progression:**
+    * Implement an automatic scrolling or "reveal" mechanism for the timeline. When the user lands on the page, the timeline should smoothly scroll or animate upwards, progressively revealing each event card.
+    * Each event card should become fully visible and centered (or near-centered) on the screen before the next one begins to animate into view.
+    * Allow the user to pause/play this automatic progression and manually navigate forward/backward through the timeline events using clear, intuitive controls (e.g., "Next Event," "Previous Event" buttons, or subtle arrow indicators).
+
+2.  **Mobile Responsiveness (Priority):**
+    * **Fluid Layout:** Ensure the timeline and event cards adapt gracefully to various screen sizes, especially mobile. Avoid fixed widths and use relative units (percentages, `vw`, `vh`) or responsive CSS frameworks (like Tailwind CSS classes if applicable in your project) to achieve this.
+    * **Optimized Card Display:** On mobile, the event cards should be easily readable without horizontal scrolling. Consider adjusting font sizes and padding for better mobile legibility.
+    * **Timeline Visibility:** The vertical timeline line and its nodes should remain clearly visible and functional on mobile. If the timeline becomes too long for a single mobile screen, ensure the automated scrolling effectively brings new sections into view.
+    * **Touch-Friendly Navigation:** Ensure any manual navigation controls (play/pause, next/previous) are large enough and well-spaced for touch interactions.
+
+3.  **Enhanced Visuals & Micro-interactions:**
+    * As each event card "rolls up" or animates into view, add subtle visual effects (e.g., a fade-in, a slight scale-up, or a glow effect on the corresponding timeline node) to highlight the active event.
+    * Maintain the existing dark, neon, "classified" aesthetic. Ensure the animations and responsiveness complement this style.
+
+4.  **User Friendliness:**
+    * The overall experience should feel intuitive and engaging, guiding the user through the "Crypto Wars Timeline" narrative without friction.
+    * The "PROCEED TO CHAPTER 2" button should appear clearly at the end of the timeline's automated progression.
+
+**Implementation Notes:**
+* Focus on HTML, CSS, and JavaScript for the core implementation.
+* Prioritize smooth performance on all devices.
+* Ensure the solution is self-contained and runnable within a single file or a few linked files if necessary.
+* Add comments to explain the logic, especially for the animation and responsiveness.
