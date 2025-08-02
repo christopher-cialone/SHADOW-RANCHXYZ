@@ -333,6 +333,33 @@
   }
 }
 
+/* Mobile accordion animations */
+@media (max-width: 768px) {
+  .ethos-accordion {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .ethos-accordion-content {
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .ethos-accordion-header {
+    min-height: 64px;
+    touch-action: manipulation;
+  }
+  
+  .ethos-accordion-header:active {
+    background-color: rgba(55, 65, 81, 0.5);
+  }
+}
+
+/* Smooth accordion transitions */
+.ethos-accordion-expanded {
+  max-height: 500px !important;
+  opacity: 1 !important;
+}
+
 @keyframes glow-tech {
   0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2); }
   50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3); }

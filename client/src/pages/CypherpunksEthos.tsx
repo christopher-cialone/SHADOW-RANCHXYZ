@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { TechButton } from "@/components/ui/TechButton";
 import { TechCard } from "@/components/ui/TechCard";
 import { usePageLoader } from "@/hooks/use-page-loader";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface Section {
   id: string;
@@ -51,14 +52,31 @@ export default function CypherpunksEthos() {
   const [showStickyNav, setShowStickyNav] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [expandedAccordions, setExpandedAccordions] = useState<Set<string>>(new Set());
+  const [isMobile, setIsMobile] = useState(false);
 
   // Refs
   const videoRef = useRef<HTMLIFrameElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
+  // Check if mobile and manage responsive behavior
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Intersection Observer for sticky navigation and active section tracking
   useEffect(() => {
+    // Skip intersection observer setup on mobile since we're using accordion
+    if (isMobile) return;
+    
     const observerOptions = {
       rootMargin: '-20% 0px -60% 0px',
       threshold: 0.1
@@ -93,7 +111,7 @@ export default function CypherpunksEthos() {
       sectionObserver.disconnect();
       heroObserver.disconnect();
     };
-  }, []);
+  }, [isMobile]);
 
   // Smooth scroll to section
   const scrollToSection = (sectionId: string) => {
@@ -116,66 +134,68 @@ export default function CypherpunksEthos() {
     }
   };
 
+  // Accordion toggle handler
+  const toggleAccordion = (sectionId: string) => {
+    const newExpanded = new Set(expandedAccordions);
+    
+    if (expandedAccordions.has(sectionId)) {
+      newExpanded.delete(sectionId);
+    } else {
+      // On mobile, optionally collapse others to maintain focus
+      if (isMobile) {
+        newExpanded.clear();
+      }
+      newExpanded.add(sectionId);
+    }
+    
+    setExpandedAccordions(newExpanded);
+  };
+
   return (
     <div className="min-h-screen bg-black text-gray-100">
-      {/* Sticky Navigation */}
-      <div className={`fixed top-16 left-0 right-0 z-40 transition-all duration-300 ${
-        showStickyNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-      }`}>
-        <div className="bg-black/95 backdrop-blur-md border-b border-cyan-400/20">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between py-3">
-              <span className="font-data70 text-cyan-400 text-sm hidden sm:block">
-                CYPHERPUNK ETHOS
-              </span>
-              
-              {/* Desktop Navigation */}
-              <nav className="hidden md:flex items-center space-x-6">
-                {sections.map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => scrollToSection(section.id)}
-                    className={`font-mono text-sm uppercase tracking-wider transition-colors px-3 py-2 rounded ${
-                      activeSection === section.id
-                        ? 'text-cyan-400 bg-cyan-400/10'
-                        : 'text-gray-400 hover:text-cyan-400'
-                    }`}
-                  >
-                    {section.shortTitle}
-                  </button>
-                ))}
-              </nav>
+      {/* Sticky Navigation - Desktop Only */}
+      {!isMobile && (
+        <div className={`fixed top-16 left-0 right-0 z-40 transition-all duration-300 ${
+          showStickyNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+        }`}>
+          <div className="bg-black/95 backdrop-blur-md border-b border-cyan-400/20">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between py-3">
+                <span className="font-data70 text-cyan-400 text-sm">
+                  CYPHERPUNK ETHOS
+                </span>
+                
+                {/* Desktop Navigation */}
+                <nav className="flex items-center space-x-6">
+                  {sections.map((section) => (
+                    <button
+                      key={section.id}
+                      onClick={() => scrollToSection(section.id)}
+                      className={`font-mono text-sm uppercase tracking-wider transition-colors px-3 py-2 rounded ${
+                        activeSection === section.id
+                          ? 'text-cyan-400 bg-cyan-400/10'
+                          : 'text-gray-400 hover:text-cyan-400'
+                      }`}
+                    >
+                      {section.shortTitle}
+                    </button>
+                  ))}
+                </nav>
 
-              {/* Mobile Navigation - Horizontal Scroll */}
-              <nav className="md:hidden flex items-center space-x-4 ethos-nav-scroll overflow-x-auto pb-1">
-                {sections.map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => scrollToSection(section.id)}
-                    className={`font-mono text-xs uppercase tracking-wider transition-colors px-2 py-1 rounded whitespace-nowrap ${
-                      activeSection === section.id
-                        ? 'text-cyan-400 bg-cyan-400/10'
-                        : 'text-gray-400 hover:text-cyan-400'
-                    }`}
-                  >
-                    {section.shortTitle}
-                  </button>
-                ))}
-              </nav>
-
-              {/* Progress Indicator */}
-              <div className="w-20 sm:w-32 bg-gray-700 rounded-full h-1 hidden sm:block">
-                <div 
-                  className="bg-gradient-to-r from-cyan-400 to-purple-400 h-1 rounded-full transition-all duration-300"
-                  style={{ 
-                    width: `${((sections.findIndex(s => s.id === activeSection) + 1) / sections.length) * 100}%` 
-                  }}
-                />
+                {/* Progress Indicator */}
+                <div className="w-32 bg-gray-700 rounded-full h-1">
+                  <div 
+                    className="bg-gradient-to-r from-cyan-400 to-purple-400 h-1 rounded-full transition-all duration-300"
+                    style={{ 
+                      width: `${((sections.findIndex(s => s.id === activeSection) + 1) / sections.length) * 100}%` 
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Content */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ethos-container">
@@ -227,51 +247,116 @@ export default function CypherpunksEthos() {
           </div>
         </div>
 
-        {/* Content Sections */}
-        <div className="space-y-8 sm:space-y-12">
-          {sections.map((section, index) => (
-            <section
-              key={section.id}
-              id={section.id}
-              ref={el => sectionRefs.current[section.id] = el as HTMLDivElement}
-              className="scroll-mt-32"
-            >
-              <TechCard 
-                variant={section.variant} 
-                className={`transition-all duration-500 ${
-                  activeSection === section.id 
-                    ? 'ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-400/10' 
-                    : ''
-                }`}
-              >
-                <div className="p-6 sm:p-8">
-                  <div className="flex items-start space-x-4">
-                    {/* Section Number */}
-                    <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center font-data70 text-sm sm:text-base ${
-                      section.variant === 'cyan' 
-                        ? 'border-cyan-400 text-cyan-400' 
-                        : 'border-purple-400 text-purple-400'
-                    }`}>
-                      {index + 1}
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h2 className={`text-xl sm:text-2xl font-bold mb-4 font-data70 ${
+        {/* Content Sections - Desktop vs Mobile */}
+        {isMobile ? (
+          /* Mobile Accordion Layout */
+          <div className="space-y-4">
+            <div className="mb-6">
+              <p className="text-center text-gray-400 font-mono text-sm">
+                Tap each section to explore the cypherpunk philosophy
+              </p>
+            </div>
+            
+            {sections.map((section, index) => {
+              const isExpanded = expandedAccordions.has(section.id);
+              
+              return (
+                <div
+                  key={section.id}
+                  className="border border-gray-700 rounded-lg overflow-hidden bg-gray-900/50 backdrop-blur-sm"
+                >
+                  {/* Accordion Header */}
+                  <button
+                    onClick={() => toggleAccordion(section.id)}
+                    className="w-full p-4 flex items-center justify-between text-left hover:bg-gray-800/50 transition-colors"
+                  >
+                    <div className="flex items-center space-x-4">
+                      {/* Section Number */}
+                      <div className={`flex-shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center font-data70 text-sm ${
+                        section.variant === 'cyan' 
+                          ? 'border-cyan-400 text-cyan-400' 
+                          : 'border-purple-400 text-purple-400'
+                      }`}>
+                        {index + 1}
+                      </div>
+                      
+                      {/* Section Title */}
+                      <h3 className={`text-lg font-bold font-data70 ${
                         section.variant === 'cyan' ? 'text-cyan-400' : 'text-purple-400'
                       }`}>
                         {section.title}
-                      </h2>
-                      <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-mono">
+                      </h3>
+                    </div>
+                    
+                    {/* Expand/Collapse Icon */}
+                    <div className={`transition-transform duration-200 ${
+                      isExpanded ? 'rotate-90' : ''
+                    }`}>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  </button>
+                  
+                  {/* Accordion Content */}
+                  <div className={`transition-all duration-300 ease-in-out ${
+                    isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  } overflow-hidden`}>
+                    <div className="p-4 pt-0 border-t border-gray-700/50">
+                      <p className="text-gray-300 text-sm leading-relaxed font-mono">
                         {section.content}
                       </p>
                     </div>
                   </div>
                 </div>
-              </TechCard>
-            </section>
-          ))}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          /* Desktop Card Layout */
+          <div className="space-y-12">
+            {sections.map((section, index) => (
+              <section
+                key={section.id}
+                id={section.id}
+                ref={el => sectionRefs.current[section.id] = el as HTMLDivElement}
+                className="scroll-mt-32"
+              >
+                <TechCard 
+                  variant={section.variant} 
+                  className={`transition-all duration-500 ${
+                    activeSection === section.id 
+                      ? 'ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-400/10' 
+                      : ''
+                  }`}
+                >
+                  <div className="p-8">
+                    <div className="flex items-start space-x-4">
+                      {/* Section Number */}
+                      <div className={`flex-shrink-0 w-12 h-12 rounded-full border-2 flex items-center justify-center font-data70 text-base ${
+                        section.variant === 'cyan' 
+                          ? 'border-cyan-400 text-cyan-400' 
+                          : 'border-purple-400 text-purple-400'
+                      }`}>
+                        {index + 1}
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <h2 className={`text-2xl font-bold mb-4 font-data70 ${
+                          section.variant === 'cyan' ? 'text-cyan-400' : 'text-purple-400'
+                        }`}>
+                          {section.title}
+                        </h2>
+                        <p className="text-gray-300 text-base leading-relaxed font-mono">
+                          {section.content}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </TechCard>
+              </section>
+            ))}
+          </div>
+        )}
 
         {/* Quote Section */}
         <div className="my-12 sm:my-16">
