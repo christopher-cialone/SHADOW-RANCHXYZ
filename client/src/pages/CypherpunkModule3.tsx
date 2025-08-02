@@ -35,13 +35,13 @@ export default function CypherpunkModule3() {
     return (
       <>
         <BackButton currentModule={3} />
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
+        <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-5xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent mb-6">
+            <h1 className="font-titulo text-5xl text-cyan-400 mb-6">
               MODULE 3: FROM MAILING LIST TO MAINNET
             </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 mx-auto mb-8"></div>
+            <div className="w-24 h-1 bg-cyan-400 mx-auto mb-8"></div>
           </div>
 
           <TechCard variant="purple" className="mb-8">
@@ -53,23 +53,23 @@ export default function CypherpunkModule3() {
                   impossible until a mysterious figure emerged from the shadows.
                 </p>
                 
-                <div className="bg-tech-purple-900/20 border-l-4 border-tech-purple-400 p-6 rounded">
-                  <h3 className="font-tech text-tech-purple-400 text-lg mb-4">The Journey</h3>
+                <div className="bg-purple-500/10 border-l-4 border-purple-400 p-6 rounded">
+                  <h3 className="font-tech text-purple-400 text-lg mb-4">The Journey</h3>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-cyan-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
                       <span>The Double-Spend Problem</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
                       <span>The Ghost in the Machine</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-cyan-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
                       <span>Connecting the Dots</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
                       <span>The DAO Hack Dilemma</span>
                     </div>
                   </div>
@@ -99,10 +99,10 @@ export default function CypherpunkModule3() {
   if (step === 1) {
     // Double-Spend Problem
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-purple-400 mb-4">THE DOUBLE-SPEND PROBLEM</h1>
+            <h1 className="font-titulo text-4xl text-purple-400 mb-4">THE DOUBLE-SPEND PROBLEM</h1>
             <p className="text-gray-400 font-tech">The core challenge of digital money</p>
           </div>
           
@@ -115,10 +115,10 @@ export default function CypherpunkModule3() {
   if (step === 2) {
     // Satoshi Message
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">THE GHOST IN THE MACHINE</h1>
+            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">THE GHOST IN THE MACHINE</h1>
             <p className="text-gray-400 font-tech">October 31, 2008 • Cryptography Mailing List</p>
           </div>
           

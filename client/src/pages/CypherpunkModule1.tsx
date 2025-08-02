@@ -60,10 +60,10 @@ export default function CypherpunkModule1() {
       <>
         <BackButton currentModule={1} />
         <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-tech-cyan-900/20 to-tech-purple-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/10 to-purple-900/10"></div>
         
         <div className="text-center z-10 max-w-4xl px-8">
-          <div className="font-code text-tech-cyan-400 text-xl mb-8">
+          <div className="font-code text-cyan-400 text-xl mb-8">
             {terminalText}
             <span className="animate-pulse">|</span>
           </div>
@@ -96,11 +96,11 @@ export default function CypherpunkModule1() {
   if (step === 1) {
     // Chapter 1: The Digital Frontier
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <TechCard variant="cyan" className="mb-8">
             <div className="p-8">
-              <h1 className="font-titulo text-3xl text-tech-cyan-400 mb-6">Chapter 1: The Digital Frontier</h1>
+              <h1 className="font-titulo text-3xl text-cyan-400 mb-6">Chapter 1: The Digital Frontier</h1>
               
               <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p>
@@ -117,7 +117,7 @@ export default function CypherpunkModule1() {
                   a tool—it was a fundamental right.
                 </p>
                 
-                <p className="font-tech text-tech-cyan-400 bg-tech-cyan-900/20 p-4 rounded border-l-4 border-tech-cyan-400">
+                <p className="font-tech text-cyan-400 bg-cyan-500/10 p-4 rounded border-l-4 border-cyan-400">
                   "Privacy is necessary for an open society in the electronic age... We cannot expect 
                   governments, corporations, or other large, faceless organizations to grant us privacy 
                   out of their beneficence."

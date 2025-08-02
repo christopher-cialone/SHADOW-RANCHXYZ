@@ -34,13 +34,13 @@ export default function CypherpunkModule2() {
     return (
       <>
         <BackButton currentModule={2} />
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
+        <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-5xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent mb-6">
+            <h1 className="font-titulo text-5xl text-cyan-400 mb-6">
               MODULE 2: THE PILLARS OF A FREE INTERNET
             </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 mx-auto mb-8"></div>
+            <div className="w-24 h-1 bg-cyan-400 mx-auto mb-8"></div>
           </div>
 
           <TechCard variant="cyan" className="mb-8">
@@ -52,23 +52,23 @@ export default function CypherpunkModule2() {
                   the blueprint for everything that followed.
                 </p>
                 
-                <div className="bg-tech-cyan-900/20 border-l-4 border-tech-cyan-400 p-6 rounded">
-                  <h3 className="font-tech text-tech-cyan-400 text-lg mb-4">The Four Pillars</h3>
+                <div className="bg-cyan-500/10 border-l-4 border-cyan-400 p-6 rounded">
+                  <h3 className="font-tech text-cyan-400 text-lg mb-4">The Four Pillars</h3>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-cyan-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
                       <span>Privacy Through Encryption</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
                       <span>Anonymity Networks</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-cyan-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
                       <span>Decentralized Architecture</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-tech-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
                       <span>Resilient Networks</span>
                     </div>
                   </div>
@@ -98,10 +98,10 @@ export default function CypherpunkModule2() {
   if (step === 1) {
     // Pillar 1: Privacy Scenario
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">PILLAR 1: PRIVACY THROUGH ENCRYPTION</h1>
+            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">PILLAR 1: PRIVACY THROUGH ENCRYPTION</h1>
             <p className="text-gray-400 font-tech">Real-world scenario simulation</p>
           </div>
           
@@ -114,10 +114,10 @@ export default function CypherpunkModule2() {
   if (step === 2) {
     // Pillar 2: Anonymity Game
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
+      <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-purple-400 mb-4">PILLAR 2: ANONYMITY NETWORKS</h1>
+            <h1 className="font-titulo text-4xl text-purple-400 mb-4">PILLAR 2: ANONYMITY NETWORKS</h1>
             <p className="text-gray-400 font-tech">Interactive remailer demonstration</p>
           </div>
           

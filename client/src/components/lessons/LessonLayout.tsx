@@ -46,12 +46,12 @@ export function LessonLayout({
   return (
     <div className="min-h-screen flex flex-col">
       {/* Fixed Header */}
-      <div className="fixed top-0 left-0 right-0 z-40 w-full bg-tech-purple-900/80 backdrop-blur-sm border-b border-tech-cyan-600/20">
+      <div className="fixed top-0 left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-sm border-b border-cyan-400/20">
         <div className="container mx-auto px-4 py-4">
-          <TechCard variant="purple" className="bg-tech-purple-900/60 border-tech-purple-600">
+          <TechCard variant="cyan" className="bg-gray-900/60 border-cyan-400/30">
             <div className="p-4">
               <div className="flex items-center justify-between mb-3">
-                <h1 className="font-titulo text-2xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent">
+                <h1 className="font-titulo text-2xl text-cyan-400">
                   {title}
                 </h1>
                 <TechButton
@@ -82,9 +82,9 @@ export function LessonLayout({
       </main>
 
       {/* Bottom Navigation - Fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 w-full bg-tech-purple-900/80 backdrop-blur-sm border-t border-tech-cyan-600/20">
+      <div className="fixed bottom-0 left-0 right-0 z-30 w-full bg-black/80 backdrop-blur-sm border-t border-cyan-400/20">
         <div className="container mx-auto px-4 py-4">
-          <TechCard variant="purple" className="bg-tech-purple-900/60 border-tech-purple-600">
+          <TechCard variant="cyan" className="bg-gray-900/60 border-cyan-400/30">
             <div className="p-3">
               <div className="flex items-center justify-between">
                 <TechButton
@@ -100,7 +100,7 @@ export function LessonLayout({
                 <div className="flex items-center space-x-4">
                   <div className="text-center">
                     <div className="font-tech text-xs text-gray-400 uppercase tracking-wider">STEP</div>
-                    <div className="font-code text-sm text-tech-cyan-400">{currentStep} / {totalSteps}</div>
+                    <div className="font-code text-sm text-cyan-400">{currentStep} / {totalSteps}</div>
                   </div>
                   
                   {isCompleted ? (

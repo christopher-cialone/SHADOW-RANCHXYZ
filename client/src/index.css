@@ -122,46 +122,46 @@
   }
 }
 
-/* Tech Theme Custom Styles */
+/* Blueshift-inspired Custom Styles */
 .data-particle {
   position: fixed;
-  width: 3px;
-  height: 3px;
-  background: rgba(139, 92, 246, 0.6);
+  width: 2px;
+  height: 2px;
+  background: rgba(0, 255, 255, 0.8);
   border-radius: 2px;
   pointer-events: none;
   animation: data-flow 15s infinite linear;
-  box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
 }
 
 .data-particle:nth-child(odd) {
   animation-delay: -5s;
   animation-duration: 20s;
-  background: rgba(20, 184, 166, 0.6);
-  box-shadow: 0 0 8px rgba(20, 184, 166, 0.4);
+  background: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 0 4px rgba(0, 255, 255, 0.4);
 }
 
 .data-particle:nth-child(3n) {
   animation-delay: -10s;
   animation-duration: 25s;
-  background: rgba(236, 72, 153, 0.6);
-  box-shadow: 0 0 8px rgba(236, 72, 153, 0.4);
+  background: rgba(147, 51, 234, 0.6);
+  box-shadow: 0 0 4px rgba(147, 51, 234, 0.4);
 }
 
 .btn-tech-primary {
-  @apply bg-gradient-to-r from-tech-purple-600 to-tech-purple-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-tech-purple-500 font-mono;
+  @apply bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-cyan-400 font-mono;
 }
 
 .btn-tech-secondary {
-  @apply bg-gradient-to-r from-tech-cyan-600 to-tech-cyan-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-tech-cyan-500 font-mono;
+  @apply bg-gray-800 hover:bg-gray-700 text-cyan-400 font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-gray-600 font-mono;
 }
 
 .btn-tech-accent {
-  @apply bg-gradient-to-r from-tech-pink-600 to-tech-pink-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-tech-pink-500 font-mono;
+  @apply bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-purple-400 font-mono;
 }
 
 .tech-card {
-  @apply bg-gradient-to-br from-tech-purple-900/90 to-tech-purple-800/90 border-2 border-tech-purple-600 rounded-lg shadow-xl backdrop-blur-sm;
+  @apply bg-gray-900/50 border-2 border-cyan-400/30 rounded-lg shadow-xl backdrop-blur-sm;
 }
 
 .code-editor {
@@ -216,13 +216,28 @@
 
 @keyframes tech-pulse {
   0%, 100% { transform: scale(1); filter: brightness(1) hue-rotate(0deg); }
-  50% { transform: scale(1.05); filter: brightness(1.2) hue-rotate(15deg); }
+  50% { transform: scale(1.02); filter: brightness(1.1) hue-rotate(10deg); }
+}
+
+/* Blueshift-specific animations */
+@keyframes blueshift-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2), 0 0 10px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.05);
+  }
+  50% { 
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2), inset 0 0 15px rgba(0, 255, 255, 0.1);
+  }
+}
+
+@keyframes blueshift-scan {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
 }
 
 @keyframes glow-tech {
-  0% { box-shadow: 0 0 10px rgba(139, 92, 246, 0.4), 0 0 20px rgba(139, 92, 246, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.6), 0 0 40px rgba(20, 184, 166, 0.3); }
-  100% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.5), 0 0 30px rgba(236, 72, 153, 0.3); }
+  0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3); }
+  100% { box-shadow: 0 0 15px rgba(147, 51, 234, 0.5), 0 0 30px rgba(147, 51, 234, 0.3); }
 }
 
 @keyframes fade-in {

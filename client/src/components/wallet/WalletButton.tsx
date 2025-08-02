@@ -47,8 +47,8 @@ export function WalletButton() {
       className={cn(
         "btn-mobile rounded-lg font-mono text-mobile-sm sm:text-mobile-base transition-all duration-200 border-2",
         connected 
-          ? "bg-gradient-to-r from-tech-cyan-600 to-tech-cyan-700 border-tech-cyan-500 text-white hover:from-tech-cyan-500 hover:to-tech-cyan-600" 
-          : "bg-gradient-to-r from-tech-purple-600 to-tech-purple-700 border-tech-purple-500 text-white hover:from-tech-purple-500 hover:to-tech-purple-600",
+          ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-black font-bold" 
+          : "bg-gray-800 hover:bg-gray-700 border-gray-600 text-cyan-400",
         connecting && "opacity-75 cursor-not-allowed",
         "shadow-lg hover:shadow-xl active:scale-95"
       )}

@@ -7,17 +7,17 @@ const techCardVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-br from-tech-purple-900/90 to-tech-purple-800/90 border-2 border-tech-purple-600",
-        purple: "bg-gradient-to-br from-tech-purple-900/90 to-tech-purple-800/90 border-2 border-tech-purple-500",
-        cyan: "bg-gradient-to-br from-tech-cyan-900/90 to-tech-cyan-800/90 border-2 border-tech-cyan-500",
-        pink: "bg-gradient-to-br from-tech-pink-900/90 to-tech-pink-800/90 border-2 border-tech-pink-500",
-        neutral: "bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-2 border-slate-600",
+        default: "bg-gray-900/50 border-2 border-cyan-400/30",
+        purple: "bg-gray-900/50 border-2 border-purple-400/30",
+        cyan: "bg-gray-900/50 border-2 border-cyan-400/30",
+        pink: "bg-gray-900/50 border-2 border-purple-400/30",
+        neutral: "bg-gray-900/50 border-2 border-gray-600/30",
       },
       glow: {
         none: "",
-        purple: "shadow-2xl shadow-tech-purple-500/20",
-        cyan: "shadow-2xl shadow-tech-cyan-500/20",
-        pink: "shadow-2xl shadow-tech-pink-500/20",
+        purple: "shadow-2xl shadow-purple-500/20",
+        cyan: "shadow-2xl shadow-cyan-500/20",
+        pink: "shadow-2xl shadow-purple-500/20",
       }
     },
     defaultVariants: {

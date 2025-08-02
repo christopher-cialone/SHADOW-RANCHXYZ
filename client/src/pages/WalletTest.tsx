@@ -6,16 +6,16 @@ export function WalletTest() {
   const { connected, address, connecting, connect, disconnect, walletInstalled } = useWallet();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tech-purple-900 via-gray-900 to-tech-cyan-900 p-6">
+    <div className="min-h-screen bg-black p-6">
       <div className="container mx-auto max-w-2xl">
-        <TechCard variant="purple" className="p-8">
-          <h1 className="font-data70 text-3xl text-tech-cyan-400 mb-8 text-center">
+        <TechCard variant="cyan" className="p-8">
+          <h1 className="font-data70 text-3xl text-cyan-400 mb-8 text-center">
             Wallet Connection Test
           </h1>
           
           <div className="space-y-6">
             <div className="bg-gray-800 rounded-lg p-4">
-              <h3 className="text-tech-cyan-400 font-tech mb-2">Wallet Status:</h3>
+              <h3 className="text-cyan-400 font-tech mb-2">Wallet Status:</h3>
               <div className="space-y-2 text-sm font-mono">
                 <div>Wallet Installed: <span className={walletInstalled ? "text-green-400" : "text-red-400"}>
                   {walletInstalled ? "YES" : "NO"}
@@ -26,14 +26,14 @@ export function WalletTest() {
                 <div>Connecting: <span className={connecting ? "text-yellow-400" : "text-gray-400"}>
                   {connecting ? "YES" : "NO"}
                 </span></div>
-                <div>Address: <span className="text-tech-cyan-400">
+                <div>Address: <span className="text-cyan-400">
                   {address || "None"}
                 </span></div>
               </div>
             </div>
 
             <div className="bg-gray-800 rounded-lg p-4">
-              <h3 className="text-tech-cyan-400 font-tech mb-2">What happens when you click Connect:</h3>
+              <h3 className="text-cyan-400 font-tech mb-2">What happens when you click Connect:</h3>
               <div className="text-sm text-gray-300 space-y-1">
                 {!walletInstalled && <div>• Will show error and open Phantom website</div>}
                 {walletInstalled && !connected && <div>• Will call window.phantom.solana.connect()</div>}

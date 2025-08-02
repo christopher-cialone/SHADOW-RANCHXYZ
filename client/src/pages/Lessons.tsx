@@ -28,11 +28,11 @@ export default function Lessons() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-tech-purple-900 to-gray-900">
+    <div className="min-h-screen bg-black">
       <div className="container mx-auto px-4 py-20">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="font-titulo text-5xl md:text-6xl bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent mb-6">
+          <h1 className="font-titulo text-5xl md:text-6xl text-cyan-400 mb-6">
             CHOOSE YOUR PATH
           </h1>
           <p className="font-tech text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -46,11 +46,11 @@ export default function Lessons() {
           <TechCard variant="cyan" className="group hover:scale-105 transition-all duration-300">
             <div className="p-8">
               <div className="flex items-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-tech-cyan-500 to-tech-cyan-600 rounded-lg flex items-center justify-center mr-4">
+                <div className="w-16 h-16 bg-cyan-500/20 border border-cyan-400/30 rounded-lg flex items-center justify-center mr-4">
                   <span className="text-2xl">🔓</span>
                 </div>
                 <div>
-                  <h2 className="font-titulo text-2xl text-tech-cyan-400 mb-2">THE CYPHERPUNK LEGACY</h2>
+                  <h2 className="font-titulo text-2xl text-cyan-400 mb-2">THE CYPHERPUNK LEGACY</h2>
                   <p className="text-sm text-gray-400 font-code">FOUNDATIONAL TRACK</p>
                 </div>
               </div>
@@ -61,19 +61,19 @@ export default function Lessons() {
 
               <div className="space-y-3 mb-8">
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 17 ? 'bg-tech-cyan-400' : 'bg-gray-600'}`}></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 17 ? 'bg-cyan-400' : 'bg-gray-600'}`}></span>
                   The Genesis of a Movement
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 33 ? 'bg-tech-cyan-400' : currentModule === 2 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 33 ? 'bg-cyan-400' : currentModule === 2 ? 'bg-cyan-400/50' : 'bg-gray-600'}`}></span>
                   The Pillars of a Free Internet
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 50 ? 'bg-tech-cyan-400' : currentModule === 3 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 50 ? 'bg-cyan-400' : currentModule === 3 ? 'bg-cyan-400/50' : 'bg-gray-600'}`}></span>
                   From Mailing List to Mainnet
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
-                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 67 ? 'bg-tech-cyan-400' : currentModule === 4 ? 'bg-tech-cyan-400/50' : 'bg-gray-600'}`}></span>
+                  <span className={`w-2 h-2 rounded-full mr-3 ${trackProgress >= 67 ? 'bg-cyan-400' : currentModule === 4 ? 'bg-cyan-400/50' : 'bg-gray-600'}`}></span>
                   The Fight for the Future
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
@@ -88,10 +88,10 @@ export default function Lessons() {
 
               <div className="flex justify-between items-center mb-6">
                 <div className="flex space-x-4">
-                  <span className="px-3 py-1 bg-tech-cyan-900/50 text-tech-cyan-400 rounded-full text-xs font-code">
+                  <span className="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-code">
                     PHILOSOPHY
                   </span>
-                  <span className="px-3 py-1 bg-tech-cyan-900/50 text-tech-cyan-400 rounded-full text-xs font-code">
+                  <span className="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-code">
                     HISTORY
                   </span>
                 </div>
@@ -100,7 +100,7 @@ export default function Lessons() {
 
               {/* Progress Bar */}
               <div className="w-full bg-gray-700 rounded-full h-2 mb-6">
-                <div className="bg-gradient-to-r from-tech-cyan-500 to-tech-cyan-400 h-2 rounded-full transition-all duration-500" style={{ width: `${trackProgress}%` }}></div>
+                <div className="bg-gradient-to-r from-cyan-500 to-cyan-400 h-2 rounded-full transition-all duration-500" style={{ width: `${trackProgress}%` }}></div>
               </div>
 
               {trackProgress >= 50 ? (

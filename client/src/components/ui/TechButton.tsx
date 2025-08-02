@@ -11,9 +11,9 @@ const TechButton = forwardRef<HTMLButtonElement, TechButtonProps>(
     const baseClasses = "touch-target inline-flex items-center justify-center font-mono uppercase tracking-wider transition-all duration-200 relative overflow-hidden border-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95";
     
     const variants = {
-      primary: "bg-tech-cyan-600 hover:bg-tech-cyan-500 border-tech-cyan-400 text-white hover:shadow-lg hover:shadow-tech-cyan-500/25",
-      secondary: "bg-tech-purple-600 hover:bg-tech-purple-500 border-tech-purple-400 text-white hover:shadow-lg hover:shadow-tech-purple-500/25",
-      accent: "bg-tech-pink-600 hover:bg-tech-pink-500 border-tech-pink-400 text-white hover:shadow-lg hover:shadow-tech-pink-500/25",
+      primary: "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-black font-bold hover:shadow-lg hover:shadow-cyan-400/25",
+      secondary: "bg-gray-800 hover:bg-gray-700 border-gray-600 text-cyan-400 hover:shadow-lg hover:shadow-gray-700/25",
+      accent: "bg-purple-600 hover:bg-purple-500 border-purple-400 text-white hover:shadow-lg hover:shadow-purple-500/25",
       danger: "bg-red-600 hover:bg-red-500 border-red-400 text-white hover:shadow-lg hover:shadow-red-500/25"
     };
 
