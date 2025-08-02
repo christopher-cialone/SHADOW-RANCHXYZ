@@ -36,61 +36,78 @@
   --sidebar-width: 280px;
   --touch-target: 44px; /* Minimum touch target size */
   
-  /* Tech Theme Colors */
-  --tech-purple-50: 270 100% 98%; /* #f8f7ff */
-  --tech-purple-100: 269 100% 95%; /* #ede9fe */
-  --tech-purple-200: 269 100% 91%; /* #ddd6fe */
-  --tech-purple-300: 268 100% 83%; /* #c4b5fd */
-  --tech-purple-400: 268 100% 74%; /* #a78bfa */
-  --tech-purple-500: 268 56% 59%; /* #8b5cf6 */
-  --tech-purple-600: 267 57% 51%; /* #7c3aed */
-  --tech-purple-700: 267 66% 44%; /* #6d28d9 */
-  --tech-purple-800: 267 83% 35%; /* #5b21b6 */
-  --tech-purple-900: 267 83% 29%; /* #4c1d95 */
+  /* Blueshift-inspired Ultra Dark Theme */
+  --blueshift-black: 0 0% 0%; /* Pure black #000000 */
+  --blueshift-dark-950: 240 5% 2%; /* Near black #050507 */
+  --blueshift-dark-900: 240 6% 4%; /* Ultra dark #0a0a0f */
+  --blueshift-dark-800: 240 7% 6%; /* Very dark #0f0f18 */
+  --blueshift-dark-700: 240 8% 10%; /* Dark gray #181820 */
+  --blueshift-dark-600: 240 9% 15%; /* Medium dark #222230 */
+  --blueshift-dark-500: 240 10% 20%; /* Lighter dark #2d2d40 */
   
-  --tech-cyan-50: 178 100% 97%; /* #f0fdfa */
-  --tech-cyan-100: 180 100% 93%; /* #ccfbf1 */
-  --tech-cyan-200: 181 100% 84%; /* #99f6e4 */
-  --tech-cyan-300: 182 85% 67%; /* #5eead4 */
-  --tech-cyan-400: 183 80% 55%; /* #2dd4bf */
-  --tech-cyan-500: 183 78% 46%; /* #14b8a6 */
-  --tech-cyan-600: 184 77% 38%; /* #0d9488 */
-  --tech-cyan-700: 185 84% 29%; /* #0f766e */
-  --tech-cyan-800: 186 91% 23%; /* #115e59 */
-  --tech-cyan-900: 186 91% 17%; /* #134e4a */
+  /* Vibrant Neon Cyan System (Blueshift signature) */
+  --blueshift-neon: 180 100% 50%; /* Pure cyan #00FFFF */
+  --blueshift-electric: 180 100% 47%; /* Electric cyan #00EAFF */
+  --blueshift-cyan-50: 180 100% 97%; /* Very light cyan */
+  --blueshift-cyan-100: 180 100% 90%; /* Light cyan */
+  --blueshift-cyan-200: 180 100% 80%; /* Medium light cyan */
+  --blueshift-cyan-300: 180 100% 70%; /* Medium cyan */
+  --blueshift-cyan-400: 180 100% 60%; /* Bright cyan */
+  --blueshift-cyan-500: 180 100% 50%; /* Pure cyan */
+  --blueshift-cyan-600: 180 100% 40%; /* Dark cyan */
+  --blueshift-cyan-700: 180 100% 30%; /* Darker cyan */
+  --blueshift-cyan-800: 180 100% 20%; /* Very dark cyan */
+  --blueshift-cyan-900: 180 100% 10%; /* Ultra dark cyan */
   
-  --tech-pink-50: 322 100% 97%; /* #fdf2f8 */
-  --tech-pink-100: 322 87% 94%; /* #fce7f3 */
-  --tech-pink-200: 322 84% 87%; /* #fbcfe8 */
-  --tech-pink-300: 322 78% 75%; /* #f9a8d4 */
-  --tech-pink-400: 322 75% 61%; /* #f472b6 */
-  --tech-pink-500: 322 81% 48%; /* #ec4899 */
-  --tech-pink-600: 322 88% 40%; /* #db2777 */
-  --tech-pink-700: 322 87% 34%; /* #be185d */
-  --tech-pink-800: 322 86% 27%; /* #9d174d */
-  --tech-pink-900: 322 78% 20%; /* #831843 */
+  /* Secondary Purple Accents */
+  --blueshift-purple-400: 268 100% 74%; /* #a78bfa */
+  --blueshift-purple-500: 268 56% 59%; /* #8b5cf6 */
+  --blueshift-purple-600: 267 57% 51%; /* #7c3aed */
+  --blueshift-purple-700: 267 66% 44%; /* #6d28d9 */
+  --blueshift-purple-800: 267 83% 35%; /* #5b21b6 */
+  --blueshift-purple-900: 267 83% 29%; /* #4c1d95 */
+
+  /* Legacy compatibility */
+  --tech-cyan-50: var(--blueshift-cyan-50);
+  --tech-cyan-100: var(--blueshift-cyan-100);
+  --tech-cyan-200: var(--blueshift-cyan-200);
+  --tech-cyan-300: var(--blueshift-cyan-300);
+  --tech-cyan-400: var(--blueshift-cyan-400);
+  --tech-cyan-500: var(--blueshift-cyan-500);
+  --tech-cyan-600: var(--blueshift-cyan-600);
+  --tech-cyan-700: var(--blueshift-cyan-700);
+  --tech-cyan-800: var(--blueshift-cyan-800);
+  --tech-cyan-900: var(--blueshift-cyan-900);
+  
+  --tech-purple-400: var(--blueshift-purple-400);
+  --tech-purple-500: var(--blueshift-purple-500);
+  --tech-purple-600: var(--blueshift-purple-600);
+  --tech-purple-700: var(--blueshift-purple-700);
+  --tech-purple-800: var(--blueshift-purple-800);
+  --tech-purple-900: var(--blueshift-purple-900);
 }
 
 .dark {
-  --background: 240 10% 3.9%;
+  /* Blueshift Ultra Dark Theme */
+  --background: var(--blueshift-black);
   --foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
+  --muted: var(--blueshift-dark-700);
   --muted-foreground: 240 5% 64.9%;
-  --popover: 240 10% 3.9%;
+  --popover: var(--blueshift-dark-900);
   --popover-foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
+  --card: var(--blueshift-dark-900);
   --card-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --primary: 207 90% 54%;
-  --primary-foreground: 211 100% 99%;
-  --secondary: 240 3.7% 15.9%;
+  --border: var(--blueshift-dark-600);
+  --input: var(--blueshift-dark-700);
+  --primary: var(--blueshift-neon);
+  --primary-foreground: var(--blueshift-black);
+  --secondary: var(--blueshift-dark-700);
   --secondary-foreground: 0 0% 98%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
+  --accent: var(--blueshift-neon);
+  --accent-foreground: var(--blueshift-black);
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --ring: 240 4.9% 83.9%;
+  --ring: var(--blueshift-neon);
   --radius: 0.5rem;
 }
 

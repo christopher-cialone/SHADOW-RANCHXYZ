@@ -66,20 +66,21 @@ export function MainLayout({ children }: MainLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tech-purple-900 via-slate-900 to-tech-cyan-900 text-gray-100 overflow-x-hidden relative flex flex-col">
-      {/* Tech circuit pattern background */}
-      <div className="absolute inset-0 opacity-5 bg-repeat" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238b5cf6' stroke-width='1'%3E%3Cpath d='M10 10h20v20H10z'/%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3Cpath d='M20 0v10M40 20H30M20 40V30M0 20h10'/%3E%3C/g%3E%3C/svg%3E")`,
+    <div className="min-h-screen bg-black text-white overflow-x-hidden relative flex flex-col">
+      {/* Blueshift geometric grid pattern background */}
+      <div className="absolute inset-0 opacity-[0.03] bg-repeat" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2300FFFF' stroke-width='0.5'%3E%3Cpath d='M0 0h60v60H0z'/%3E%3Cpath d='M0 30h60M30 0v60'/%3E%3Cpath d='M15 0v60M45 0v60M0 15h60M0 45h60'/%3E%3C/g%3E%3C/svg%3E")`,
       }} />
-      {/* Fixed data particles */}
-      <div className="data-particle" style={{ top: '15%', animationDelay: '0s' }} />
-      <div className="data-particle" style={{ top: '35%', animationDelay: '-2s' }} />
-      <div className="data-particle" style={{ top: '55%', animationDelay: '-4s' }} />
-      <div className="data-particle" style={{ top: '75%', animationDelay: '-6s' }} />
-      <div className="data-particle" style={{ top: '25%', animationDelay: '-8s' }} />
-      <div className="data-particle" style={{ top: '65%', animationDelay: '-10s' }} />
-      <div className="data-particle" style={{ top: '45%', animationDelay: '-12s' }} />
-      <div className="data-particle" style={{ top: '85%', animationDelay: '-14s' }} />
+      {/* Subtle tech accent lines */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `linear-gradient(45deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%), linear-gradient(-45deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%)`,
+        backgroundSize: '20px 20px'
+      }} />
+      {/* Blueshift-style floating data elements */}
+      <div className="absolute top-[15%] right-[10%] w-1 h-1 bg-cyan-400 rounded-full opacity-60 animate-pulse" style={{ animationDelay: '0s' }} />
+      <div className="absolute top-[35%] left-[5%] w-1 h-1 bg-cyan-400 rounded-full opacity-40 animate-pulse" style={{ animationDelay: '-2s' }} />
+      <div className="absolute top-[55%] right-[20%] w-1 h-1 bg-cyan-400 rounded-full opacity-70 animate-pulse" style={{ animationDelay: '-4s' }} />
+      <div className="absolute top-[75%] left-[15%] w-1 h-1 bg-cyan-400 rounded-full opacity-50 animate-pulse" style={{ animationDelay: '-6s' }} />
       <Header onThemeToggle={toggleTheme} currentTheme={theme} />
       <main 
         className="flex-grow px-3 sm:px-4 md:px-6 lg:px-8"
@@ -97,8 +98,8 @@ export function MainLayout({ children }: MainLayoutProps) {
       />
       {/* Global Loader */}
       <GlobalLoader show={showLoader} />
-      {/* Compact Footer */}
-      <footer className="bg-tech-purple-900/30 border-t border-tech-cyan-600/20 py-4 backdrop-blur-sm mt-auto">
+      {/* Blueshift-style Footer */}
+      <footer className="bg-black/50 border-t border-cyan-400/10 py-4 backdrop-blur-sm mt-auto">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <div className="flex items-center space-x-4">
