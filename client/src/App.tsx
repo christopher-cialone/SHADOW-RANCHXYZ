@@ -4,10 +4,10 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { WalletProvider } from "@/components/wallet/WalletProvider";
-import { MainLayout } from "@/components/layout/MainLayout";
+import { ModernLayout } from "@/components/layout/ModernLayout";
 import { ThemeProvider } from "next-themes";
 import NotFound from "@/pages/not-found";
-import HomeMobile from "@/pages/HomeMobile";
+import ModernHome from "@/pages/ModernHome";
 import Lessons from "@/pages/Lessons";
 import LessonDetail from "@/pages/LessonDetail";
 import Ranch from "@/pages/Ranch";
@@ -23,7 +23,7 @@ import { WalletTest } from "@/pages/WalletTest";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={HomeMobile} />
+      <Route path="/" component={ModernHome} />
       <Route path="/lessons" component={Lessons} />
       <Route path="/lessons/:id" component={LessonDetail} />
       <Route path="/ranch" component={Ranch} />
@@ -45,10 +45,10 @@ function App() {
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
         <TooltipProvider>
           <WalletProvider>
-            <MainLayout>
+            <ModernLayout>
               <Toaster />
               <Router />
-            </MainLayout>
+            </ModernLayout>
           </WalletProvider>
         </TooltipProvider>
       </ThemeProvider>
