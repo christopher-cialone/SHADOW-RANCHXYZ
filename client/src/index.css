@@ -333,6 +333,74 @@
   }
 }
 
+/* Accordion animations for mobile */
+@keyframes accordion-slide-down {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-slide-up {
+  from {
+    max-height: 1000px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.accordion-enter {
+  animation: accordion-slide-down 0.3s ease-in-out;
+}
+
+.accordion-exit {
+  animation: accordion-slide-up 0.3s ease-in-out;
+}
+
+/* Mobile tab navigation enhancements */
+@media (max-width: 768px) {
+  .ethos-nav-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .ethos-nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Touch-friendly tab buttons */
+  .ethos-nav-scroll button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Ensure sufficient touch targets */
+  .ethos-mobile-tab {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Enhanced accordion styling */
+.accordion-header {
+  transition: all 0.2s ease-in-out;
+}
+
+.accordion-header:active {
+  transform: scale(0.98);
+}
+
+.accordion-content {
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
 @keyframes glow-tech {
   0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2); }
   50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3); }

@@ -1,0 +1,27 @@
+As a Replit agent, your task is to redesign the mobile version of the "Ethos" page, implementing an **Accordion with Tabbed Navigation** to solve the problem of overwhelming text on small screens. The goal is to make the content visually digestible and easy to navigate.
+
+**Current State Analysis (Mobile):**
+The page displays long blocks of text in a scrolling format, which is not optimized for mobile. The content is broken into sections, but they are presented statically.
+
+**Desired Implementation - Approach 1: Accordion with Tabbed Navigation**
+
+1.  **Tabbed Navigation:**
+    * At the top of the content area, below the main header, implement a horizontal, scrollable tab navigation bar.
+    * The tabs should correspond to the content sections: "Foundation," "Pioneers," "Web3 Connection," and "Building the Future."
+    * The active tab should be clearly highlighted with a neon blue underline or background glow. This tab should be "sticky," staying visible even as the user scrolls through the active content.
+
+2.  **Accordion Content Panels:**
+    * Below the tab bar, each content section should be contained within a collapsible accordion panel. The panels should be styled as dark, rounded cards, matching the app's cyberpunk aesthetic.
+    * The accordion header should be the section title (e.g., "A Foundation for Web3"). This header should be a single-line, clickable element.
+    * Clicking a tab in the navigation bar should automatically expand the corresponding accordion panel and scroll the user to that section.
+    * An icon (like a chevrons or plus/minus sign) should be included in the accordion header to visually indicate its collapsible nature. This icon should animate to reflect the open/closed state.
+
+3.  **User Interaction Flow:**
+    * When the page loads, only the first panel ("A Foundation for Web3") should be expanded by default. The user can then interact with the tabs to jump to another section or scroll down to view the next accordion panel.
+    * Clicking a tab should smoothly scroll to and expand the new section.
+    * The "Cypherpunks write code" quote and the "Start Your Cypherpunk Journey" button should remain at the very end of the page, visible after all content sections have been expanded and scrolled through.
+
+4.  **Aesthetics and Responsiveness:**
+    * Use the established design principles: dark backgrounds, clean typography, and neon blue accents.
+    * Ensure all touch targets (tabs, accordion headers) are large enough for comfortable tapping on mobile devices.
+    * All animations (expanding/collapsing, tab highlights) should be smooth and subtle.
