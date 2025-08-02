@@ -82,15 +82,8 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
           </nav>
           
           {/* Right side actions */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          <div className="flex items-center">
             <WalletButton />
-            <button
-              onClick={onThemeToggle}
-              className="touch-target flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 text-gray-400 hover:text-tech-cyan-400 transition-colors rounded-lg hover:bg-tech-cyan-400/10"
-              aria-label="Toggle theme"
-            >
-              <span className="text-base sm:text-lg">{currentTheme === 'dark' ? '🌙' : '☀️'}</span>
-            </button>
           </div>
         </div>
       </header>
