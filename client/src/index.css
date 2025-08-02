@@ -284,6 +284,55 @@
   }
 }
 
+/* Ethos Page Enhanced Styles */
+@keyframes ethos-section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ethos-section-reveal {
+  animation: ethos-section-reveal 0.6s ease-out;
+}
+
+/* Custom scrollbar for navigation */
+.ethos-nav-scroll::-webkit-scrollbar {
+  height: 2px;
+}
+
+.ethos-nav-scroll::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.1);
+}
+
+.ethos-nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3);
+  border-radius: 1px;
+}
+
+/* Video overlay hover effects */
+.ethos-video-overlay:hover .ethos-play-button {
+  transform: scale(1.1);
+}
+
+/* Enhanced mobile responsiveness for ethos page */
+@media (max-width: 640px) {
+  .ethos-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .ethos-nav-mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+}
+
 @keyframes glow-tech {
   0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2); }
   50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3); }
