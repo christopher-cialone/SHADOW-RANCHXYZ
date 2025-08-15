@@ -103,7 +103,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <div className="flex items-center space-x-4">
-              <span className="font-space-gothic text-sm bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent">🏜️ brb: shadow ranch</span>
+              <span className="font-space-gothic text-sm bg-gradient-to-r from-tech-cyan-400 to-tech-purple-400 bg-clip-text text-transparent">@shadowranch.xyz </span>
               <span className="text-gray-500 font-code text-xs">|</span>
               <span className="text-gray-400 font-code text-xs">Learn Solana Program Development</span>
             </div>
