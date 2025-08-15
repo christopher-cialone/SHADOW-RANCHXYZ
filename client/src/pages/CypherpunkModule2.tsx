@@ -53,7 +53,7 @@ export default function CypherpunkModule2() {
                 </p>
                 
                 <div className="bg-cyan-500/10 border-l-4 border-cyan-400 p-6 rounded">
-                  <h3 className="font-tech text-cyan-400 text-lg mb-4">The Four Pillars</h3>
+                  <h3 className="font-space-gothic text-cyan-400 text-lg mb-4">The Four Pillars</h3>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center">
                       <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
@@ -101,7 +101,7 @@ export default function CypherpunkModule2() {
       <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">PILLAR 1: PRIVACY THROUGH ENCRYPTION</h1>
+            <h1 className="font-space-gothic text-4xl text-cyan-400 mb-4">PILLAR 1: PRIVACY THROUGH ENCRYPTION</h1>
             <p className="text-gray-400 font-tech">Real-world scenario simulation</p>
           </div>
           
@@ -117,7 +117,7 @@ export default function CypherpunkModule2() {
       <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-purple-400 mb-4">PILLAR 2: ANONYMITY NETWORKS</h1>
+            <h1 className="font-space-gothic text-4xl text-purple-400 mb-4">PILLAR 2: ANONYMITY NETWORKS</h1>
             <p className="text-gray-400 font-tech">Interactive remailer demonstration</p>
           </div>
           
@@ -133,7 +133,7 @@ export default function CypherpunkModule2() {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">PILLARS 3 & 4: DECENTRALIZATION & RESILIENCE</h1>
+            <h1 className="font-space-gothic text-4xl text-tech-cyan-400 mb-4">PILLARS 3 & 4: DECENTRALIZATION & RESILIENCE</h1>
             <p className="text-gray-400 font-tech">Network architecture comparison</p>
           </div>
           
@@ -159,7 +159,7 @@ export default function CypherpunkModule2() {
           </h1>
           
           <div className="bg-tech-purple-900/30 border border-tech-purple-400/50 rounded-lg p-6 mb-8">
-            <h2 className="font-tech text-tech-purple-400 text-xl mb-4">PILLARS BADGE ACQUIRED</h2>
+            <h2 className="font-space-gothic text-tech-purple-400 text-xl mb-4">PILLARS BADGE ACQUIRED</h2>
             <p className="text-gray-300">
               You've mastered the four foundational pillars of digital freedom: Privacy, Anonymity, 
               Decentralization, and Resilience. These principles guide all modern privacy-preserving 

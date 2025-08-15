@@ -276,7 +276,7 @@ export default function LessonDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <TechCard className="p-8 text-center">
           <span className="text-4xl mb-4 block">⚠️</span>
-          <h2 className="font-tech text-2xl text-gray-300 mb-4">LESSON NOT FOUND</h2>
+          <h2 className="font-space-gothic text-2xl text-gray-300 mb-4">LESSON NOT FOUND</h2>
           <p className="font-code text-gray-400">The requested lesson could not be found.</p>
         </TechCard>
       </div>

@@ -18,7 +18,7 @@ export function RewardNftGallery({ rewards }: RewardNftGalleryProps) {
     return (
       <TechCard variant="purple" className="p-6 text-center">
         <div className="text-tech-cyan-400 text-4xl mb-4">🎁</div>
-        <h3 className="font-tech text-lg text-gray-300 mb-2">No NFT Rewards Yet</h3>
+        <h3 className="font-space-gothic text-lg text-gray-300 mb-2">No NFT Rewards Yet</h3>
         <p className="font-code text-sm text-gray-500">
           Complete lesson challenges to earn collectible NFT rewards!
         </p>
@@ -28,7 +28,7 @@ export function RewardNftGallery({ rewards }: RewardNftGalleryProps) {
 
   return (
     <TechCard variant="purple" className="p-6">
-      <h3 className="font-tech text-xl text-tech-cyan-400 mb-6 flex items-center">
+      <h3 className="font-space-gothic text-xl text-tech-cyan-400 mb-6 flex items-center">
         <span className="mr-2">🏆</span>
         NFT REWARD COLLECTION
       </h3>

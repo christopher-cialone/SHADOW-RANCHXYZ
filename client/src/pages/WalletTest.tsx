@@ -15,7 +15,7 @@ export function WalletTest() {
           
           <div className="space-y-6">
             <div className="bg-gray-800 rounded-lg p-4">
-              <h3 className="text-cyan-400 font-tech mb-2">Wallet Status:</h3>
+              <h3 className="text-cyan-400 font-space-gothic mb-2">Wallet Status:</h3>
               <div className="space-y-2 text-sm font-mono">
                 <div>Wallet Installed: <span className={walletInstalled ? "text-green-400" : "text-red-400"}>
                   {walletInstalled ? "YES" : "NO"}
@@ -33,7 +33,7 @@ export function WalletTest() {
             </div>
 
             <div className="bg-gray-800 rounded-lg p-4">
-              <h3 className="text-cyan-400 font-tech mb-2">What happens when you click Connect:</h3>
+              <h3 className="text-cyan-400 font-space-gothic mb-2">What happens when you click Connect:</h3>
               <div className="text-sm text-gray-300 space-y-1">
                 {!walletInstalled && <div>• Will show error and open Phantom website</div>}
                 {walletInstalled && !connected && <div>• Will call window.phantom.solana.connect()</div>}
@@ -56,7 +56,7 @@ export function WalletTest() {
 
             {!walletInstalled && (
               <div className="bg-red-900/20 border border-red-400 rounded-lg p-4">
-                <h3 className="text-red-400 font-tech mb-2">No Wallet Detected</h3>
+                <h3 className="text-red-400 font-space-gothic mb-2">No Wallet Detected</h3>
                 <p className="text-gray-300 text-sm mb-3">
                   Install Phantom wallet to test real Solana wallet connection.
                 </p>

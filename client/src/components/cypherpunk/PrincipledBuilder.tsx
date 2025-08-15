@@ -25,7 +25,7 @@ export function PrincipledBuilder({ onComplete }: PrincipledBuilderProps) {
       {/* The Scenario */}
       <TechCard variant="cyan">
         <div className="p-8">
-          <h2 className="font-tech text-2xl text-tech-cyan-400 mb-6">The Ultimate Test</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-cyan-400 mb-6">The Ultimate Test</h2>
           
           <div className="space-y-4 text-gray-300 leading-relaxed">
             <p>
@@ -57,7 +57,7 @@ export function PrincipledBuilder({ onComplete }: PrincipledBuilderProps) {
             </span>
           </div>
           
-          <h3 className="font-tech text-tech-purple-400 text-xl mb-6">The Devil's Bargain</h3>
+          <h3 className="font-space-gothic text-tech-purple-400 text-xl mb-6">The Devil's Bargain</h3>
           
           <div className="space-y-4 text-gray-300 text-sm">
             <p>
@@ -145,7 +145,7 @@ export function PrincipledBuilder({ onComplete }: PrincipledBuilderProps) {
       {/* User Response */}
       <TechCard variant="purple">
         <div className="p-8">
-          <h3 className="font-tech text-tech-purple-400 text-lg mb-4">Your Decision</h3>
+          <h3 className="font-space-gothic text-tech-purple-400 text-lg mb-4">Your Decision</h3>
           <p className="text-gray-300 mb-4">
             This is the test every builder faces. When the pressure mounts and the stakes are real, 
             will you hold the line or make the "pragmatic" choice?
@@ -182,7 +182,7 @@ export function PrincipledBuilder({ onComplete }: PrincipledBuilderProps) {
       {showAnalysis && (
         <TechCard variant="cyan" className="animate-fade-in">
           <div className="p-8">
-            <h3 className="font-tech text-tech-cyan-400 text-lg mb-4">The Weight of Choice</h3>
+            <h3 className="font-space-gothic text-tech-cyan-400 text-lg mb-4">The Weight of Choice</h3>
             
             <div className="space-y-4 text-gray-300 text-sm">
               <p>

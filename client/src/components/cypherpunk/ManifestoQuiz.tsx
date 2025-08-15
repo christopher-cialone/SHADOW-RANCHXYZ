@@ -80,7 +80,7 @@ export function ManifestoQuiz({ onComplete }: ManifestoQuizProps) {
         <TechCard key={question.id} variant="purple" className="relative">
           <div className="p-6">
             <div className="flex items-start justify-between mb-6">
-              <h3 className="font-tech text-lg text-white pr-4">{question.question}</h3>
+              <h3 className="font-space-gothic text-lg text-white pr-4">{question.question}</h3>
               {submitted && (
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                   isAnswerCorrect(question.id) ? 'bg-green-600' : 'bg-red-600'

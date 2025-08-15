@@ -100,7 +100,7 @@ export default function CypherpunkModule1() {
         <div className="container mx-auto px-4 max-w-4xl">
           <TechCard variant="cyan" className="mb-8">
             <div className="p-8">
-              <h1 className="font-titulo text-3xl text-cyan-400 mb-6">Chapter 1: The Digital Frontier</h1>
+              <h1 className="font-space-gothic text-3xl text-cyan-400 mb-6">Chapter 1: The Digital Frontier</h1>
               
               <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p>
@@ -147,7 +147,7 @@ export default function CypherpunkModule1() {
       <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">The Crypto Wars Timeline</h1>
+            <h1 className="font-space-gothic text-4xl text-cyan-400 mb-4">The Crypto Wars Timeline</h1>
             <p className="text-gray-400 font-tech">Declassified: Key moments in the battle for digital freedom</p>
           </div>
           
@@ -164,7 +164,7 @@ export default function CypherpunkModule1() {
         <div className="container mx-auto px-4 max-w-4xl">
           <TechCard variant="purple" className="mb-8">
             <div className="p-8">
-              <h1 className="font-titulo text-3xl text-purple-400 mb-6">Chapter 2: A Cypherpunk's Manifesto</h1>
+              <h1 className="font-space-gothic text-3xl text-purple-400 mb-6">Chapter 2: A Cypherpunk's Manifesto</h1>
               
               <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p>
@@ -212,7 +212,7 @@ export default function CypherpunkModule1() {
       <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">Manifesto Quiz</h1>
+            <h1 className="font-space-gothic text-4xl text-cyan-400 mb-4">Manifesto Quiz</h1>
             <p className="text-gray-400 font-tech">Prove your understanding of the cypherpunk philosophy</p>
           </div>
           
@@ -238,7 +238,7 @@ export default function CypherpunkModule1() {
           </h1>
           
           <div className="bg-cyan-500/10 border border-cyan-400/50 rounded-lg p-6 mb-8">
-            <h2 className="font-tech text-cyan-400 text-xl mb-4">GENESIS BADGE ACQUIRED</h2>
+            <h2 className="font-space-gothic text-cyan-400 text-xl mb-4">GENESIS BADGE ACQUIRED</h2>
             <p className="text-gray-300">
               You've successfully completed "The Genesis of a Movement" and earned your first badge 
               in the Cypherpunk Legacy track. You now understand the philosophical foundations that 

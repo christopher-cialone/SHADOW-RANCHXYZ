@@ -73,7 +73,7 @@ export function DecentralizationVisualization({ onComplete }: DecentralizationVi
       {/* Explanation */}
       <TechCard variant="cyan">
         <div className="p-6">
-          <h2 className="font-tech text-2xl text-tech-cyan-400 mb-4">Network Architecture Comparison</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-cyan-400 mb-4">Network Architecture Comparison</h2>
           <p className="text-gray-300 mb-4">
             Explore the fundamental difference between centralized and decentralized networks. 
             Click on nodes to see how each architecture responds to failures.

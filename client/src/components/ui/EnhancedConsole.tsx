@@ -17,7 +17,7 @@ export function EnhancedConsole({
     <TechCard variant="neutral" className="h-fit">
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-tech text-sm text-gray-300 uppercase tracking-wider">{title}</h3>
+          <h3 className="font-space-gothic text-sm text-gray-300 uppercase tracking-wider">{title}</h3>
           {isLive && (
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 rounded-full bg-tech-cyan-400 animate-pulse"></div>

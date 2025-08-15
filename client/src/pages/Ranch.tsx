@@ -161,7 +161,7 @@ export default function Ranch() {
             {selectedTab === 'overview' && (
               <WesternCard className="h-96 relative overflow-hidden">
                 <WesternCardContent className="p-6 h-full">
-                  <h3 className="font-deputy text-xl text-rust-400 mb-4">Ranch Overview</h3>
+                  <h3 className="font-space-gothic text-xl text-rust-400 mb-4">Ranch Overview</h3>
                   
                   {/* Expanded ranch view */}
                   <div className="absolute inset-6 bg-gradient-to-b from-sunset-500/30 via-desert-500/20 to-desert-800/40 rounded-lg border-2 border-desert-600">

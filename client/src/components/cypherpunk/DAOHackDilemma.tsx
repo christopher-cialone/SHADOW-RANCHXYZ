@@ -25,7 +25,7 @@ export function DAOHackDilemma({ onComplete }: DAOHackDilemmaProps) {
       {/* Background */}
       <TechCard variant="cyan">
         <div className="p-8">
-          <h2 className="font-tech text-2xl text-tech-cyan-400 mb-6">The Philosophy Meets Reality</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-cyan-400 mb-6">The Philosophy Meets Reality</h2>
           
           <div className="space-y-4 text-gray-300 leading-relaxed">
             <p>
@@ -62,7 +62,7 @@ export function DAOHackDilemma({ onComplete }: DAOHackDilemmaProps) {
             </span>
           </div>
           
-          <h3 className="font-tech text-tech-purple-400 text-xl mb-6">The Hack</h3>
+          <h3 className="font-space-gothic text-tech-purple-400 text-xl mb-6">The Hack</h3>
           
           <div className="space-y-4 text-gray-300 text-sm">
             <p>
@@ -144,7 +144,7 @@ export function DAOHackDilemma({ onComplete }: DAOHackDilemmaProps) {
       {/* User Reflection */}
       <TechCard variant="cyan">
         <div className="p-8">
-          <h3 className="font-tech text-tech-cyan-400 text-lg mb-4">Your Perspective</h3>
+          <h3 className="font-space-gothic text-tech-cyan-400 text-lg mb-4">Your Perspective</h3>
           <p className="text-gray-300 mb-4">
             The Ethereum community ultimately chose to "hard fork"—creating a new version of the 
             blockchain that returned the stolen funds. This decision split the community forever.
@@ -181,7 +181,7 @@ export function DAOHackDilemma({ onComplete }: DAOHackDilemmaProps) {
       {showAnalysis && (
         <TechCard variant="purple" className="animate-fade-in">
           <div className="p-8">
-            <h3 className="font-tech text-tech-purple-400 text-lg mb-4">The Lasting Impact</h3>
+            <h3 className="font-space-gothic text-tech-purple-400 text-lg mb-4">The Lasting Impact</h3>
             
             <div className="space-y-4 text-gray-300 text-sm">
               <p>

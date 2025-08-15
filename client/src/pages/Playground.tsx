@@ -193,7 +193,7 @@ export default function Playground() {
             <TechCard variant="cyan" className="h-full">
               <div className="p-6 h-full flex flex-col">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-tech text-xl text-tech-cyan-400 uppercase tracking-wider">MAIN TERMINAL</h2>
+                  <h2 className="font-space-gothic text-xl text-tech-cyan-400 uppercase tracking-wider">MAIN TERMINAL</h2>
                   <div className="flex space-x-2">
                     <TechButton variant="primary" size="sm" onClick={handleRunCode} disabled={isRunning}>
                       <span className="mr-1">⚡</span>
@@ -228,7 +228,7 @@ export default function Playground() {
             {/* Template Selector */}
             <TechCard variant="purple" className="overflow-hidden">
               <div className="p-6">
-                <h3 className="font-tech text-lg text-tech-purple-400 mb-4 uppercase tracking-wider">PROTOCOL TEMPLATES</h3>
+                <h3 className="font-space-gothic text-lg text-tech-purple-400 mb-4 uppercase tracking-wider">PROTOCOL TEMPLATES</h3>
                 <div className="space-y-3">
                   {codeTemplates.map((template, index) => (
                     <TechButton

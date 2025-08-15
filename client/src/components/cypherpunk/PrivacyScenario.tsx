@@ -30,7 +30,7 @@ export function PrivacyScenario({ onComplete }: PrivacyScenarioProps) {
             </span>
           </div>
           
-          <h2 className="font-tech text-2xl text-tech-cyan-400 mb-6">Emergency Communication</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-cyan-400 mb-6">Emergency Communication</h2>
           
           <div className="space-y-4 text-gray-300 leading-relaxed">
             <p>
@@ -66,7 +66,7 @@ export function PrivacyScenario({ onComplete }: PrivacyScenarioProps) {
               <div className="w-12 h-12 bg-tech-purple-600 rounded-lg flex items-center justify-center mr-4">
                 <span className="text-xl">📱</span>
               </div>
-              <h3 className="font-tech text-tech-purple-400 text-lg">Option A</h3>
+              <h3 className="font-space-gothic text-tech-purple-400 text-lg">Option A</h3>
             </div>
             
             <p className="text-gray-300 text-sm mb-4">
@@ -93,7 +93,7 @@ export function PrivacyScenario({ onComplete }: PrivacyScenarioProps) {
               <div className="w-12 h-12 bg-tech-cyan-600 rounded-lg flex items-center justify-center mr-4">
                 <span className="text-xl">🔐</span>
               </div>
-              <h3 className="font-tech text-tech-cyan-400 text-lg">Option B</h3>
+              <h3 className="font-space-gothic text-tech-cyan-400 text-lg">Option B</h3>
             </div>
             
             <p className="text-gray-300 text-sm mb-4">

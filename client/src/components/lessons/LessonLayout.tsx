@@ -51,7 +51,7 @@ export function LessonLayout({
           <TechCard variant="cyan" className="bg-gray-900/60 border-cyan-400/30">
             <div className="p-4">
               <div className="flex items-center justify-between mb-3">
-                <h1 className="font-titulo text-2xl text-cyan-400">
+                <h1 className="font-space-gothic text-2xl text-cyan-400">
                   {title}
                 </h1>
                 <TechButton

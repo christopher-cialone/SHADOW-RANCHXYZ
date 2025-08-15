@@ -88,7 +88,7 @@ export function ConnectingTheDots({ onComplete }: ConnectingTheDotsProps) {
       {/* Instructions */}
       <TechCard variant="purple">
         <div className="p-6">
-          <h2 className="font-tech text-2xl text-tech-purple-400 mb-4">Connection Analysis</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-purple-400 mb-4">Connection Analysis</h2>
           <p className="text-gray-300 mb-4">
             Connect each cypherpunk concept to its corresponding Bitcoin implementation. 
             Click a concept on the left, then click its matching feature on the right.

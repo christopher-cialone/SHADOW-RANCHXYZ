@@ -76,7 +76,7 @@ The nature of Bitcoin is such that once version 0.1 was released, the core desig
       <TechCard variant="purple" className="relative">
         <div className="p-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-tech text-2xl text-tech-purple-400">Message Decryption</h2>
+            <h2 className="font-space-gothic text-2xl text-tech-purple-400">Message Decryption</h2>
             <div className="px-3 py-1 bg-tech-purple-900 text-tech-purple-400 text-xs font-code rounded">
               CLASSIFIED: LEVEL 5
             </div>
@@ -119,7 +119,7 @@ The nature of Bitcoin is such that once version 0.1 was released, the core desig
       {/* Historical Context */}
       <TechCard variant="cyan">
         <div className="p-6">
-          <h3 className="font-tech text-tech-cyan-400 text-lg mb-4">Historical Significance</h3>
+          <h3 className="font-space-gothic text-tech-cyan-400 text-lg mb-4">Historical Significance</h3>
           <div className="space-y-3 text-gray-300 text-sm">
             <p>
               This message, sent on Halloween 2008, introduced Bitcoin to the world. Posted to the 

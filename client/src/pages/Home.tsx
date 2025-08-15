@@ -65,7 +65,7 @@ export default function Home() {
             <WesternCard className="p-6 hover:scale-105 transition-transform duration-200 animate-slide-up">
               <div className="text-center">
                 <i className="fas fa-code text-4xl text-desert-400 mb-4" />
-                <h3 className="font-deputy text-xl text-desert-400 mb-3">Interactive Coding</h3>
+                <h3 className="font-space-gothic text-xl text-desert-400 mb-3">Interactive Coding</h3>
                 <p className="text-gray-300 font-mono text-sm">
                   Learn by doing with our interactive code editor and real-time feedback system.
                 </p>
@@ -75,7 +75,7 @@ export default function Home() {
             <WesternCard className="p-6 hover:scale-105 transition-transform duration-200 animate-slide-up">
               <div className="text-center">
                 <i className="fas fa-gamepad text-4xl text-sage-400 mb-4" />
-                <h3 className="font-deputy text-xl text-sage-400 mb-3">Gamified Learning</h3>
+                <h3 className="font-space-gothic text-xl text-sage-400 mb-3">Gamified Learning</h3>
                 <p className="text-gray-300 font-mono text-sm">
                   Build your virtual ranch, collect characters, and earn rewards as you progress.
                 </p>
@@ -85,7 +85,7 @@ export default function Home() {
             <WesternCard className="p-6 hover:scale-105 transition-transform duration-200 animate-slide-up">
               <div className="text-center">
                 <i className="fas fa-graduation-cap text-4xl text-sunset-400 mb-4" />
-                <h3 className="font-deputy text-xl text-sunset-400 mb-3">Expert Curriculum</h3>
+                <h3 className="font-space-gothic text-xl text-sunset-400 mb-3">Expert Curriculum</h3>
                 <p className="text-gray-300 font-mono text-sm">Learn the principles crypto was built on through carefully crafted lessons and challenges.</p>
               </div>
             </WesternCard>

@@ -35,7 +35,7 @@ export function AnonymityGame({ onComplete }: AnonymityGameProps) {
       {/* Explanation */}
       <TechCard variant="purple">
         <div className="p-6">
-          <h2 className="font-tech text-2xl text-tech-purple-400 mb-4">Anonymous Remailer Network</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-purple-400 mb-4">Anonymous Remailer Network</h2>
           <p className="text-gray-300 mb-4">
             Watch how a message travels through multiple remailer nodes to achieve anonymity. 
             Each node strips away identifying information, making it impossible to trace the 
@@ -138,7 +138,7 @@ export function AnonymityGame({ onComplete }: AnonymityGameProps) {
           <div className="space-y-6 animate-fade-in">
             <TechCard variant="purple">
               <div className="p-6">
-                <h3 className="font-tech text-tech-purple-400 text-lg mb-4">Anonymity Achieved</h3>
+                <h3 className="font-space-gothic text-tech-purple-400 text-lg mb-4">Anonymity Achieved</h3>
                 <div className="space-y-3 text-gray-300 text-sm">
                   <p>
                     <strong>What happened:</strong> Your message passed through 3 remailer nodes. 

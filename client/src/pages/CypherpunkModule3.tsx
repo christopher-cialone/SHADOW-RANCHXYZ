@@ -54,7 +54,7 @@ export default function CypherpunkModule3() {
                 </p>
                 
                 <div className="bg-purple-500/10 border-l-4 border-purple-400 p-6 rounded">
-                  <h3 className="font-tech text-purple-400 text-lg mb-4">The Journey</h3>
+                  <h3 className="font-space-gothic text-purple-400 text-lg mb-4">The Journey</h3>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center">
                       <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
@@ -102,7 +102,7 @@ export default function CypherpunkModule3() {
       <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-purple-400 mb-4">THE DOUBLE-SPEND PROBLEM</h1>
+            <h1 className="font-space-gothic text-4xl text-purple-400 mb-4">THE DOUBLE-SPEND PROBLEM</h1>
             <p className="text-gray-400 font-tech">The core challenge of digital money</p>
           </div>
           
@@ -118,7 +118,7 @@ export default function CypherpunkModule3() {
       <div className="min-h-screen bg-black py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-cyan-400 mb-4">THE GHOST IN THE MACHINE</h1>
+            <h1 className="font-space-gothic text-4xl text-cyan-400 mb-4">THE GHOST IN THE MACHINE</h1>
             <p className="text-gray-400 font-tech">October 31, 2008 • Cryptography Mailing List</p>
           </div>
           
@@ -134,7 +134,7 @@ export default function CypherpunkModule3() {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-purple-900 py-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-purple-400 mb-4">CONNECTING THE DOTS</h1>
+            <h1 className="font-space-gothic text-4xl text-tech-purple-400 mb-4">CONNECTING THE DOTS</h1>
             <p className="text-gray-400 font-tech">Link cypherpunk concepts to Bitcoin features</p>
           </div>
           
@@ -150,7 +150,7 @@ export default function CypherpunkModule3() {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">THE DAO HACK DILEMMA</h1>
+            <h1 className="font-space-gothic text-4xl text-tech-cyan-400 mb-4">THE DAO HACK DILEMMA</h1>
             <p className="text-gray-400 font-tech">When ideology meets reality</p>
           </div>
           
@@ -176,7 +176,7 @@ export default function CypherpunkModule3() {
           </h1>
           
           <div className="bg-tech-purple-900/30 border border-tech-purple-400/50 rounded-lg p-6 mb-8">
-            <h2 className="font-tech text-tech-purple-400 text-xl mb-4">BITCOIN GENESIS BADGE ACQUIRED</h2>
+            <h2 className="font-space-gothic text-tech-purple-400 text-xl mb-4">BITCOIN GENESIS BADGE ACQUIRED</h2>
             <p className="text-gray-300">
               You've traced the evolution from cypherpunk theory to Bitcoin implementation. 
               Understanding this connection reveals why blockchain technology embodies the 

@@ -57,7 +57,7 @@ export default function CypherpunkModule4() {
                 </p>
                 
                 <div className="bg-red-900/20 border-l-4 border-red-400 p-6 rounded">
-                  <h3 className="font-tech text-red-400 text-lg mb-4">The Current Battlefield</h3>
+                  <h3 className="font-space-gothic text-red-400 text-lg mb-4">The Current Battlefield</h3>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center">
                       <span className="w-2 h-2 bg-red-400 rounded-full mr-3"></span>
@@ -110,7 +110,7 @@ export default function CypherpunkModule4() {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-tech-cyan-900 py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h1 className="font-titulo text-4xl text-tech-cyan-400 mb-4">THE PRINCIPLED BUILDER</h1>
+            <h1 className="font-space-gothic text-4xl text-tech-cyan-400 mb-4">THE PRINCIPLED BUILDER</h1>
             <p className="text-gray-400 font-tech">When principles meet profit</p>
           </div>
           
@@ -136,7 +136,7 @@ export default function CypherpunkModule4() {
           </h1>
           
           <div className="bg-tech-purple-900/30 border border-tech-purple-400/50 rounded-lg p-8 mb-8">
-            <h2 className="font-tech text-tech-purple-400 text-xl mb-4">TORCHBEARER BADGE ACQUIRED</h2>
+            <h2 className="font-space-gothic text-tech-purple-400 text-xl mb-4">TORCHBEARER BADGE ACQUIRED</h2>
             <p className="text-gray-300 leading-relaxed">
               You've journeyed through the complete cypherpunk legacy—from the philosophical foundations 
               to the technical implementations, from Bitcoin's creation to modern governance challenges. 
@@ -145,7 +145,7 @@ export default function CypherpunkModule4() {
           </div>
           
           <div className="bg-gradient-to-r from-green-900/30 to-tech-cyan-900/30 border border-green-400/50 rounded-lg p-6 mb-8">
-            <h3 className="font-tech text-green-400 text-lg mb-3">THE TORCH PASSES TO YOU</h3>
+            <h3 className="font-space-gothic text-green-400 text-lg mb-3">THE TORCH PASSES TO YOU</h3>
             <p className="text-gray-300 text-sm">
               The cypherpunks gave us the tools. Now it's your turn to build the decentralized future. 
               Ready to learn the technical skills to make it reality?

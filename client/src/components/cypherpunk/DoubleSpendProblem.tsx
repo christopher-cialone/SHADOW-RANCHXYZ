@@ -34,7 +34,7 @@ export function DoubleSpendProblem({ onComplete }: DoubleSpendProblemProps) {
       {/* Problem Explanation */}
       <TechCard variant="purple">
         <div className="p-8">
-          <h2 className="font-tech text-2xl text-tech-purple-400 mb-6">The Digital Money Challenge</h2>
+          <h2 className="font-space-gothic text-2xl text-tech-purple-400 mb-6">The Digital Money Challenge</h2>
           
           <div className="space-y-4 text-gray-300 leading-relaxed mb-8">
             <p>
@@ -169,7 +169,7 @@ export function DoubleSpendProblem({ onComplete }: DoubleSpendProblemProps) {
           <div className="space-y-6 animate-fade-in">
             <TechCard variant="cyan">
               <div className="p-6">
-                <h3 className="font-tech text-tech-cyan-400 text-lg mb-4">Why This Matters</h3>
+                <h3 className="font-space-gothic text-tech-cyan-400 text-lg mb-4">Why This Matters</h3>
                 <div className="space-y-3 text-gray-300 text-sm">
                   <p>
                     <strong>The Problem:</strong> Alice copied her digital coin and spent it at two different 

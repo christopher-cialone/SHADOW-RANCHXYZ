@@ -50,7 +50,7 @@ export default function Lessons() {
                   <span className="text-2xl">🔓</span>
                 </div>
                 <div>
-                  <h2 className="font-titulo text-2xl text-cyan-400 mb-2">THE CYPHERPUNK LEGACY</h2>
+                  <h2 className="font-space-gothic text-2xl text-cyan-400 mb-2">THE CYPHERPUNK LEGACY</h2>
                   <p className="text-sm text-gray-400 font-code">FOUNDATIONAL TRACK</p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function Lessons() {
                   <span className="text-2xl">⚡</span>
                 </div>
                 <div>
-                  <h2 className="font-titulo text-2xl text-tech-purple-400 mb-2">SOLANA PROGRAM DEVELOPMENT</h2>
+                  <h2 className="font-space-gothic text-2xl text-tech-purple-400 mb-2">SOLANA PROGRAM DEVELOPMENT</h2>
                   <p className="text-sm text-gray-400 font-code">TECHNICAL TRACK</p>
                 </div>
               </div>

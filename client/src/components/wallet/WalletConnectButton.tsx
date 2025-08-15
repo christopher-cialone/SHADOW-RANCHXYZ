@@ -93,7 +93,7 @@ export function WalletConnectButton() {
           <TechCard variant="cyan" className="w-full max-w-md">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="font-titulo text-xl text-tech-cyan-400">
+                <h3 className="font-space-gothic text-xl text-tech-cyan-400">
                   Connect Wallet
                 </h3>
                 <button

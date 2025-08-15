@@ -173,7 +173,7 @@ export function MonacoEditor({
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-deputy text-xl text-sunset-400">Code Editor</h3>
+        <h3 className="font-space-gothic text-xl text-sunset-400">Code Editor</h3>
         <div className="flex items-center space-x-3">
           <LanguageSelector 
             value={language} 
