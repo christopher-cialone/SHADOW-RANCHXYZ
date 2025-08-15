@@ -11,6 +11,15 @@
   font-display: swap;
 }
 
+/* SpaceGothic Font */
+@font-face {
+  font-family: 'SpaceGothic';
+  src: url('@assets/JlsspacegothicRnc-n2zY_1755284411518.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
