@@ -23,7 +23,7 @@ export default function HomeMobile() {
         
         <div className="text-center relative z-10 max-w-md sm:max-w-2xl mx-auto">
           <div className="animate-fade-in space-y-6 sm:space-y-8">
-            <h1 className="font-data70 text-mobile-3xl sm:text-4xl md:text-6xl lg:text-8xl text-cyan-400 font-bold tracking-wider leading-tight">
+            <h1 className="font-space-gothic text-mobile-3xl sm:text-4xl md:text-6xl lg:text-8xl text-cyan-400 font-bold tracking-wider leading-tight">
               welcome to shadow ranch
             </h1>
             <p className="text-mobile-base sm:text-mobile-lg md:text-xl text-gray-300 leading-relaxed">
@@ -59,7 +59,7 @@ export default function HomeMobile() {
       <section className="py-8 sm:py-12 lg:py-20">
         <div className="space-y-8 sm:space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="font-data70 text-mobile-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cyan-400">
+            <h2 className="font-space-gothic text-mobile-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cyan-400">
               Why Choose Shadow Ranch?
             </h2>
             <p className="text-mobile-base sm:text-mobile-lg text-gray-300 max-w-xl mx-auto px-4">
@@ -111,7 +111,7 @@ export default function HomeMobile() {
       {ranchData && (
         <section className="py-8 bg-gray-900/30 border border-cyan-400/20 rounded-xl mx-4 sm:mx-0">
           <div className="text-center space-y-6">
-            <h2 className="font-data70 text-mobile-xl sm:text-2xl text-cyan-400">
+            <h2 className="font-space-gothic text-mobile-xl sm:text-2xl text-cyan-400">
               Your Progress
             </h2>
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 max-w-2xl mx-auto">
@@ -146,7 +146,7 @@ export default function HomeMobile() {
 
       {/* Blueshift-style CTA Section */}
       <section className="py-8 sm:py-12 text-center space-y-6">
-        <h2 className="font-data70 text-mobile-2xl sm:text-3xl md:text-4xl text-cyan-400">
+        <h2 className="font-space-gothic text-mobile-2xl sm:text-3xl md:text-4xl text-cyan-400">
           Ready to Start Your Journey?
         </h2>
         <p className="text-mobile-base sm:text-mobile-lg text-gray-300 max-w-md mx-auto px-4">

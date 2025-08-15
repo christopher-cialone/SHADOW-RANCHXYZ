@@ -26,7 +26,7 @@ export default function Home() {
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="animate-fade-in">
-            <h1 className="font-data70 text-6xl md:text-8xl text-desert-400 mb-6 animate-glow-pulse font-bold tracking-wider">welcome to shadow ranch</h1>
+            <h1 className="font-space-gothic text-6xl md:text-8xl text-desert-400 mb-6 animate-glow-pulse font-bold tracking-wider">welcome to shadow ranch</h1>
             <p className="font-deputy md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto text-[22px] font-medium">
               <TypewriterText 
                 text="Learn to write Solana Programs through gamified challenges. Cypherpunks write code."

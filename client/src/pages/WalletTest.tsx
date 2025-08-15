@@ -9,7 +9,7 @@ export function WalletTest() {
     <div className="min-h-screen bg-black p-6">
       <div className="container mx-auto max-w-2xl">
         <TechCard variant="cyan" className="p-8">
-          <h1 className="font-data70 text-3xl text-cyan-400 mb-8 text-center">
+          <h1 className="font-space-gothic text-3xl text-cyan-400 mb-8 text-center">
             Wallet Connection Test
           </h1>
           

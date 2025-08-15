@@ -177,7 +177,7 @@ export default function CypherpunksEthos() {
         <div className="bg-black/95 backdrop-blur-md border-b border-cyan-400/20">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between py-3">
-              <span className="font-data70 text-cyan-400 text-sm hidden sm:block">
+              <span className="font-space-gothic text-cyan-400 text-sm hidden sm:block">
                 CYPHERPUNK ETHOS
               </span>
               
@@ -241,7 +241,7 @@ export default function CypherpunksEthos() {
               </TechButton>
             </Link>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center text-cyan-400 font-data70 mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center text-cyan-400 font-space-gothic mb-4">
               the cypherpunk ethos
             </h1>
             <p className="text-center text-gray-400 font-mono text-sm sm:text-base">
@@ -329,14 +329,14 @@ export default function CypherpunksEthos() {
                       }`}
                     >
                       <div className="flex items-center space-x-3">
-                        <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-data70 text-sm ${
+                        <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-space-gothic text-sm ${
                           section.variant === 'cyan' 
                             ? 'border-cyan-400 text-cyan-400' 
                             : 'border-purple-400 text-purple-400'
                         }`}>
                           {index + 1}
                         </div>
-                        <h2 className={`text-lg font-bold font-data70 ${
+                        <h2 className={`text-lg font-bold font-space-gothic ${
                           section.variant === 'cyan' ? 'text-cyan-400' : 'text-purple-400'
                         }`}>
                           {section.title}
@@ -373,7 +373,7 @@ export default function CypherpunksEthos() {
                     <div className="p-6 sm:p-8">
                       <div className="flex items-start space-x-4">
                         {/* Section Number */}
-                        <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center font-data70 text-sm sm:text-base ${
+                        <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center font-space-gothic text-sm sm:text-base ${
                           section.variant === 'cyan' 
                             ? 'border-cyan-400 text-cyan-400' 
                             : 'border-purple-400 text-purple-400'
@@ -383,7 +383,7 @@ export default function CypherpunksEthos() {
                         
                         {/* Content */}
                         <div className="flex-1 min-w-0">
-                          <h2 className={`text-xl sm:text-2xl font-bold mb-4 font-data70 ${
+                          <h2 className={`text-xl sm:text-2xl font-bold mb-4 font-space-gothic ${
                             section.variant === 'cyan' ? 'text-cyan-400' : 'text-purple-400'
                           }`}>
                             {section.title}
@@ -406,7 +406,7 @@ export default function CypherpunksEthos() {
           <TechCard variant="cyan" className="text-center">
             <div className="p-6 sm:p-8 lg:p-12">
               <div className="max-w-3xl mx-auto">
-                <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-bold text-cyan-400 mb-4 font-data70">
+                <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-bold text-cyan-400 mb-4 font-space-gothic">
                   "Cypherpunks write code."
                 </blockquote>
                 <p className="text-gray-400 italic text-sm sm:text-base">
