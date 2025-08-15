@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { TechCard } from "@/components/ui/TechCard";
 import { TechButton } from "@/components/ui/TechButton";
 import { BackButton } from "@/components/ui/BackButton";
+import { TypewriterText } from "@/components/ui/TypewriterText";
 import { usePageLoader } from "@/hooks/use-page-loader";
 import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 import { CryptoWarsTimeline } from "@/components/cypherpunk/CryptoWarsTimeline";
@@ -175,15 +176,20 @@ export default function CypherpunkModule1() {
                 
                 <div className="bg-gray-800 p-6 rounded border-l-4 border-purple-400 font-code text-sm">
                   <p className="text-purple-400 mb-4">[CLASSIFIED DOCUMENT - EYES ONLY]</p>
-                  <p className="mb-4">
-                    "Privacy is not secrecy. A private matter is something one doesn't want the whole world 
-                    to know, but a secret matter is something one doesn't want anybody to know. Privacy is 
-                    the power to selectively reveal oneself to the world."
-                  </p>
-                  <p>
-                    "Cypherpunks write code. We know that someone has to write software to defend privacy, 
-                    and since we can't get privacy unless we all do, we're going to write it."
-                  </p>
+                  <div className="mb-4 text-cyan-400">
+                    <TypewriterText 
+                      text="&quot;Privacy is not secrecy. A private matter is something one doesn't want the whole world to know, but a secret matter is something one doesn't want anybody to know. Privacy is the power to selectively reveal oneself to the world.&quot;"
+                      speed={30}
+                      delay={500}
+                    />
+                  </div>
+                  <div className="text-cyan-400">
+                    <TypewriterText 
+                      text="&quot;Cypherpunks write code. We know that someone has to write software to defend privacy, and since we can't get privacy unless we all do, we're going to write it.&quot;"
+                      speed={30}
+                      delay={4000}
+                    />
+                  </div>
                 </div>
                 
                 <p>
