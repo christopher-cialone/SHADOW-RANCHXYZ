@@ -59,9 +59,7 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
           <Link href="/">
             <div className="flex items-center space-x-2 sm:space-x-4 cursor-pointer touch-target">
               <span className="text-cyan-400 text-lg sm:text-2xl animate-pulse">🏜️</span>
-              <h1 className="font-space-gothic text-cyan-400 text-lg sm:text-xl md:text-2xl lg:text-[30px] leading-tight hover:text-cyan-300 transition-colors">
-                brb: shadow ranch
-              </h1>
+              <h1 className="font-space-gothic text-lg sm:text-xl md:text-2xl lg:text-[30px] leading-tight hover:text-cyan-300 transition-colors text-[#67e8f9]">shadowranch.xyz</h1>
             </div>
           </Link>
           
@@ -87,7 +85,6 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
           </div>
         </div>
       </header>
-
       {/* Mobile navigation overlay */}
       {isMobileMenuOpen && (
         <div 
@@ -95,7 +92,6 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
           onClick={closeMobileMenu}
         />
       )}
-
       {/* Mobile navigation sidebar */}
       <nav className={cn(
         "mobile-sidebar md:hidden",
