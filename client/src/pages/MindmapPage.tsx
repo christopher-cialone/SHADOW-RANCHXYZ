@@ -22,14 +22,64 @@ interface MindmapLink {
 }
 
 const mindmapData = {
-  id: 'solana',
-  title: 'Solana',
-  blurb: 'A high-performance blockchain designed for scalability, speed, and low transaction costs, building upon decades of cryptographic and network research.',
-  link: 'https://solana.com/',
+  id: 'internet',
+  title: 'History of the Internet',
+  blurb: 'The evolution from a decentralized military project (ARPANET) to a centralized, corporate-dominated network (Web 2.0), setting the stage for the Web3 movement.',
+  link: 'https://en.wikipedia.org/wiki/History_of_the_Internet',
   children: [
     {
+      id: 'arpanet',
+      title: 'ARPANET (1960s)',
+      blurb: 'The precursor to the modern internet, designed as a resilient, decentralized network for the US military.',
+      link: 'https://en.wikipedia.org/wiki/ARPANET',
+    },
+    {
+      id: 'web1',
+      title: 'Web 1.0 (1990s)',
+      blurb: 'The "read-only" web of static websites. Decentralized protocols (HTTP, SMTP) dominated, but user interaction was limited.',
+      link: 'https://en.wikipedia.org/wiki/Web_1.0',
+      children: [
+        { id: 'netscape', title: 'Rise & Fall of Netscape', blurb: 'Netscape Navigator was the dominant browser of the early web, but lost the "first browser war" to Microsoft\'s Internet Explorer, a key moment in centralization.', link: 'https://en.wikipedia.org/wiki/Browser_wars#First_Browser_War'},
+        { id: 'cda_230', title: 'CDA Section 230 (1996)', blurb: 'A pivotal piece of US legislation that granted online platforms immunity for their users\' content, enabling the rise of social media.', link: 'https://www.eff.org/issues/cda230'},
+      ]
+    },
+    {
+      id: 'web2',
+      title: 'Web 2.0 (2000s-Present)',
+      blurb: 'The "read-write" web of centralized platforms (Google, Facebook, etc.) where user data became the primary product, leading to the problems the Cypherpunks predicted.',
+      link: 'https://en.wikipedia.org/wiki/Web2',
+      children: [
+        { id: 'google_facebook', title: 'Rise of Big Tech', blurb: 'Companies like Google and Facebook created massive, centralized databases of user information, pioneering the business model of surveillance capitalism.', link: 'https://en.wikipedia.org/wiki/Surveillance_capitalism'},
+      ]
+    },
+    {
+      id: 'cryptography',
+      title: 'Cryptography',
+      blurb: 'The science of secure communication. It provides the mathematical foundation for all blockchain technology and secure internet protocols.',
+      link: 'https://en.wikipedia.org/wiki/Cryptography',
+      children: [
+        {
+          id: 'pkc',
+          title: 'Public-Key Cryptography',
+          blurb: 'A revolutionary concept from the 1970s allowing for secure communication without pre-sharing a secret key. It is the basis for all crypto wallets.',
+          link: 'https://en.wikipedia.org/wiki/Public-key_cryptography',
+          children: [
+            { id: 'diffie_hellman', title: 'Diffie & Hellman', blurb: 'Whitfield Diffie and Martin Hellman published the first paper on public-key cryptography in 1976, making widespread secure communication possible.', link: 'https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange'},
+            { id: 'pgp', title: 'PGP (Pretty Good Privacy)', blurb: 'Created by Phil Zimmermann in 1991, PGP was a powerful encryption software released for free, sparking the "Crypto Wars."', link: 'https://en.wikipedia.org/wiki/Pretty_Good_Privacy'},
+          ]
+        },
+        {
+          id: 'legislation_crypto',
+          title: 'Legislation: The Crypto Wars',
+          blurb: 'The 1990s conflict between the US government, which wanted to control encryption (classifying it as a munition), and activists fighting for public access.',
+          link: 'https://en.wikipedia.org/wiki/Crypto_Wars',
+        },
+        { id: 'david_chaum_crypto', title: 'David Chaum', blurb: 'The "godfather of digital cash." His 1980s work on blind signatures and the DigiCash system was a crucial early experiment in private digital transactions.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
+      ]
+    },
+    {
       id: 'cypherpunks',
-      title: 'The Cypherpunks',
+      title: 'The Cypherpunk Movement',
       blurb: 'A movement from the late 1980s advocating for privacy and social change through the use of strong cryptography. They are the philosophical architects of Web3.',
       link: 'https://www.activism.net/cypherpunk/manifesto.html',
       children: [
@@ -39,7 +89,6 @@ const mindmapData = {
           blurb: 'The core thinkers and builders who drove the movement.',
           link: 'https://en.wikipedia.org/wiki/Cypherpunk#Noteworthy_cypherpunks',
           children: [
-            { id: 'david_chaum', title: 'David Chaum', blurb: 'The "godfather of digital cash." His 1980s work on blind signatures and the DigiCash system was a direct precursor to the pursuit of anonymous transactions.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
             { id: 'tim_may', title: 'Timothy May', blurb: 'Author of "The Crypto Anarchist Manifesto," a foundational text outlining a vision of society transformed by cryptography.', link: 'https://nakamotoinstitute.org/crypto-anarchist-manifesto/'},
             { id: 'eric_hughes', title: 'Eric Hughes', blurb: 'Author of "A Cypherpunk\'s Manifesto," famously stating "Cypherpunks write code."', link: 'https://www.activism.net/cypherpunk/manifesto.html'},
             { id: 'wei_dai', title: 'Wei Dai', blurb: 'Creator of "b-money," an early proposal for an anonymous, distributed electronic cash system, cited in the Bitcoin whitepaper.', link: 'http://www.weidai.com/bmoney.txt'},
@@ -79,6 +128,12 @@ const mindmapData = {
             { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain, allowing developers to build and deploy any decentralized application (dApp).', link: 'https://ethereum.org/'},
             { id: 'dao_hack', title: 'The DAO Hack', blurb: 'The first major philosophical crisis of the smart contract era, forcing a fork of Ethereum and a confrontation with the "code is law" principle.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)'},
           ]
+        },
+        {
+          id: 'solana_node',
+          title: 'Solana',
+          blurb: 'A high-performance blockchain designed to solve the Scalability Trilemma with innovations like Proof of History.',
+          link: 'https://solana.com/'
         }
       ]
     },
@@ -299,12 +354,18 @@ export default function MindmapPage() {
     });
 
     // Initial highlight of center node
-    const centerNode = nodes.find(n => n.id === 'solana');
+    const centerNode = nodes.find(n => n.id === 'internet');
     if (centerNode) {
       setSelectedNode(centerNode);
     }
 
   }, [nodes, links]);
+
+  const handleSuggestAddition = () => {
+    const subject = "Mindmap Suggestion";
+    const body = "Please provide the following information for your suggestion:\n\n- Suggested Node Title:\n- Blurb (a brief explanation):\n- Source Link (must be a verifiable source):\n- Connection (which existing node should this connect to?):";
+    window.location.href = `mailto:contributions@shadowranch.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -312,7 +373,7 @@ export default function MindmapPage() {
         <div className="mb-8">
           <div className="text-center">
             <h1 className="font-space-gothic text-4xl md:text-5xl text-cyan-400 mb-4">
-              An Interactive History of Web3
+              History of the Internet: A Living Document
             </h1>
             <p className="text-gray-400 font-mono text-sm">
               Click and drag nodes to explore the network • Click on nodes to learn more
@@ -381,6 +442,22 @@ export default function MindmapPage() {
                 <li>• Zoom and pan to navigate</li>
                 <li>• Paths highlight automatically</li>
               </ul>
+            </div>
+
+            {/* Community Contribution */}
+            <div className="mt-6 bg-gray-900/50 border border-gray-700/50 rounded-lg p-4">
+              <h4 className="font-space-gothic text-cyan-400 text-lg mb-3">
+                Living Document
+              </h4>
+              <p className="text-gray-300 text-sm mb-4 font-mono">
+                Help expand this comprehensive Web3 history with sourced contributions.
+              </p>
+              <button
+                onClick={handleSuggestAddition}
+                className="w-full bg-gray-800 hover:bg-gray-700 text-cyan-400 hover:text-cyan-300 font-mono py-3 px-4 rounded-lg text-sm border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-200"
+              >
+                Suggest an Addition
+              </button>
             </div>
           </div>
         </div>

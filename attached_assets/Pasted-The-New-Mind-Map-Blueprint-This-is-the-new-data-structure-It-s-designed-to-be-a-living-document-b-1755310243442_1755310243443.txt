@@ -1,0 +1,103 @@
+The New Mind Map Blueprint
+This is the new data structure. It's designed to be a "living document" by providing a source for every point of data, setting a standard for future user contributions.
+
+Central Node: History of the Internet
+
+This is the new starting point, tracing the evolution from a decentralized ideal to a centralized reality.
+
+Branches:
+
+ARPANET (1960s): The decentralized, resilient military project that started it all.
+
+Web 1.0 (1990s): The "read-only" era of open protocols, featuring key milestones like the Rise & Fall of Netscape and the pivotal CDA Section 230 legislation.
+
+Web 2.0 (2000s-Present): The "read-write" era of corporate dominance, leading to the Rise of Big Tech and the business model of Surveillance Capitalism.
+
+Primary Branch: Cryptography
+
+This branch now connects directly to the history of the internet, showing how secure communication evolved.
+
+Sub-branches:
+
+Public-Key Cryptography: Featuring pioneers Diffie & Hellman and Phil Zimmermann's PGP, which sparked the Crypto Wars.
+
+Key Individuals: Now includes David Chaum, the "godfather of digital cash," whose work on DigiCash was a crucial early experiment.
+
+Primary Branch: The Cypherpunk Movement
+
+This branch emerges from the intersection of early internet culture and the fight for cryptography.
+
+Sub-branches:
+
+Key Individuals: Features Timothy May, Eric Hughes, and Wei Dai, whose "b-money" directly influenced Bitcoin.
+
+Bitcoin: Presented as the direct culmination of the Cypherpunk dream for anonymous digital cash.
+
+Primary Branch: The Smart Contract Revolution
+
+This represents the next major evolutionary step, growing out of the possibilities unlocked by Bitcoin.
+
+Sub-branches:
+
+Key Individuals: Now a comprehensive list including Nick Szabo (the originator of the smart contract concept), Vitalik Buterin (the visionary behind Ethereum), and Gavin Wood (the technical architect of the EVM).
+
+Core Concepts: Ethereum and its major philosophical test, The DAO Hack.
+
+Primary Branch: The Intelligence Connection
+
+This critical branch connects the dots between technological development and state-level interests.
+
+Sub-branches:
+
+DARPA's Dual Legacy: Explores its role in creating both the decentralized ARPANET and surveillance tools.
+
+Whitney Webb's Research: A dedicated node linking to her work on the ties between intelligence, tech, and crypto.
+
+"Total Information Awareness": The post-9/11 program that laid the groundwork for mass surveillance.
+
+Primary Branch: The Legal Battlefield
+
+This branch details the ongoing fight to define the future of decentralization in the courts.
+
+Sub-branches:
+
+Roman Storm (Tornado Cash): The pivotal case for developer liability.
+
+Roger Ver ("Bitcoin Jesus"): Highlighting the conflict between sovereign individuals and nation-states.
+
+The "Code is Speech" Debate: The central legal argument defending open-source development.
+
+Primary Branch: Corporate Co-option vs. Ethos
+
+This branch addresses the internal struggle for the soul of Web3.
+
+Sub-branches:
+
+The Rise of CEXs and the cautionary tale of the FTX Collapse.
+
+"Fake Decentralization" and the influence of Venture Capital.
+
+Now, here is the prompt for your Replit agent to implement this final, comprehensive version of the mind map.
+
+Prompt for Replit Agent (Final Mind Map Overhaul)
+Agent, your final task for the mind map is to completely overhaul it with a new, deeply-researched, and restructured data set. The goal is to create a comprehensive, living document that serves as a central educational resource for the entire application.
+
+Please execute the following instructions:
+
+1. Restructure the Mind Map's Core Logic:
+* The central, root node of the mind map must now be the "History of the Internet."
+* All other major topics (Cryptography, The Cypherpunks, etc.) should be reconfigured as primary branches stemming from this new center.
+
+2. Replace the Entire Data Set:
+* You must delete the entire existing mindmapData object.
+* Replace it with the new, final, and fully expanded mindmapData object provided below. This new object contains numerous new nodes, individuals, concepts, and a sourced link for every single entry.
+
+3. Implement a User Contribution Feature:
+* Add a new, non-interactive element to the UI, such as a button or link at the bottom of the page labeled "Suggest an Addition."
+* This button should link to a pre-filled mailto: link that opens the user's email client. The email should be addressed to contributions@shadowranch.xyz with a subject line like "Mindmap Suggestion" and a body that provides a template for users to fill out (e.g., "Suggested Node Title:", "Blurb:", "Source Link:"). This creates a simple, effective way to gather community contributions for this living document.
+
+4. Verify Final Implementation:
+* Ensure the mind map renders correctly with the "History of the Internet" at its center.
+* Confirm that every node is clickable and that the info panel correctly displays the new, detailed blurbs and functional links for each.
+* Verify that the new "Suggest an Addition" button is present and functional.
+

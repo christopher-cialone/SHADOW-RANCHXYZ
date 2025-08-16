@@ -112,20 +112,23 @@ The application implements a flexible storage interface pattern:
 
 ```
 Changelog:
-- August 16, 2025: Comprehensive Mindmap Expansion - Critical Web3 History
-  - Completely replaced mindmap data with comprehensive critical analysis structure
-  - Added three major new top-level branches analyzing Web3's complexities:
-    * The Intelligence Connection (DARPA's dual legacy, Whitney Webb's research)
-    * The Legal Battlefield (Roman Storm/Tornado Cash, Roger Ver cases)
-    * Corporate Co-option vs. Ethos (CEX centralization, VC influence critique)
-  - Restructured existing branches for cleaner narrative flow:
-    * Streamlined Cypherpunks branch (removed redundant concepts, elevated David Chaum)
-    * Refined Smart Contract Revolution with Nick Szabo, Vitalik Buterin, Gavin Wood
-    * Removed separate Cryptography and Internet History branches to focus on core story
-  - Enhanced critical perspective on Web3's internal contradictions and external pressures
-  - Maintained all interactive D3.js features: force-directed layout, path highlighting, drag controls
-  - Applied consistent Blueshift theme with cyan highlighting throughout expanded network
-  - Created comprehensive historical document spanning from 1980s digital cash to modern legal battles
+- August 16, 2025: Complete Mind Map Restructure - "History of the Internet" as Central Node
+  - Fundamentally restructured mindmap with "History of the Internet" as central starting point
+  - Reorganized all major topics as primary branches stemming from internet evolution:
+    * ARPANET (1960s) - decentralized military origins
+    * Web 1.0 (1990s) - read-only era with Netscape and CDA Section 230
+    * Web 2.0 (2000s-Present) - centralized platforms and surveillance capitalism
+    * Cryptography - mathematical foundations with Public-Key Crypto, Crypto Wars, David Chaum
+    * The Cypherpunk Movement - philosophical architects with key individuals and Bitcoin
+    * The Smart Contract Revolution - Ethereum era with Nick Szabo, Vitalik, Gavin Wood, Solana
+    * The Intelligence Connection - DARPA's dual legacy, Whitney Webb, Total Information Awareness
+    * The Legal Battlefield - Roman Storm, Roger Ver, "Code is Speech" debate
+    * Corporate Co-option vs. Ethos - CEX centralization, fake decentralization, VC influence
+  - Implemented user contribution system with "Suggest an Addition" feature
+  - Created mailto functionality for community-sourced expansion (contributions@shadowranch.xyz)
+  - Enhanced as comprehensive living document with verifiable sources for all data points
+  - Updated page title to "History of the Internet: A Living Document"
+  - Maintained all D3.js interactive features with new central node structure
 - August 15, 2025: Complete Typography Migration to SpaceGothic Font
   - Migrated all heading elements (h1, h2, h3) from Data70 font to SpaceGothic font
   - Updated header branding text to use consistent "brb: shadow ranch" with SpaceGothic styling
