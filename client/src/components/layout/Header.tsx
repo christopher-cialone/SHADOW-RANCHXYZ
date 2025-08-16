@@ -58,9 +58,12 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
 
           {/* Logo - responsive sizing */}
           <Link href="/">
-            <div className="flex items-center space-x-2 sm:space-x-4 cursor-pointer touch-target">
-              <span className="text-cyan-400 text-lg sm:text-2xl animate-pulse">🏜️</span>
-              <h1 className="font-space-gothic text-lg sm:text-xl md:text-2xl lg:text-[30px] leading-tight hover:text-cyan-300 transition-colors text-[#4ab7d4]">@shadowranch.xyz</h1>
+            <div className="flex items-center cursor-pointer touch-target">
+              <img 
+                src="/shadow-ranch-logo.png" 
+                alt="@shadow ranch.xyz" 
+                className="h-8 sm:h-10 md:h-12 w-auto hover:opacity-80 transition-opacity"
+              />
             </div>
           </Link>
           
