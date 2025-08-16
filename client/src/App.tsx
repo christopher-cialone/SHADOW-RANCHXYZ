@@ -17,6 +17,7 @@ import CypherpunkModule1 from "@/pages/CypherpunkModule1";
 import CypherpunkModule2 from "@/pages/CypherpunkModule2";
 import CypherpunkModule3 from "@/pages/CypherpunkModule3";
 import CypherpunkModule4 from "@/pages/CypherpunkModule4";
+import MindmapPage from "@/pages/MindmapPage";
 import { WalletTest } from "@/pages/WalletTest";
 
 
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/ranch" component={Ranch} />
       <Route path="/playground" component={Playground} />
       <Route path="/cypherpunks-ethos" component={CypherpunksEthos} />
+      <Route path="/mindmap" component={MindmapPage} />
       <Route path="/cypherpunk-module-1" component={CypherpunkModule1} />
       <Route path="/cypherpunk-module-2" component={CypherpunkModule2} />
       <Route path="/cypherpunk-module-3" component={CypherpunkModule3} />

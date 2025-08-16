@@ -1,0 +1,36 @@
+Agent, your next task is to create a new, dedicated "Mindmap" page within the existing application. This page will feature the detailed, interactive mind map we have designed, but with an improved visual layout.
+
+Please implement the following changes and features:
+
+1. Add a New Page and Navigation:
+* In the main Header component, add a new navigation link titled "Mindmap" alongside "Home," "Ethos," etc.
+* Clicking this "Mindmap" link should render a new page component, MindmapPage.
+* Update the main application router/state to handle the display of this new page.
+
+2. Create the MindmapPage.js Component:
+* This component will be responsible for displaying the interactive mind map.
+* It should have a title at the top, such as "An Interactive History of Web3."
+
+3. Integrate the Mind Map Content:
+* Use the large, detailed mindmapData JavaScript object from our previous session. This object contains all the nodes, blurbs, and links.
+
+4. Implement a "Spider's Web" Visual Layout:
+* Use a Force-Directed Graph: Instead of the previous simple radial layout, you must implement a force-directed graph to create a more organic, "spider's web" appearance. This is the most critical part of the task.
+* Node Repulsion: Nodes should push away from each other to avoid overlap.
+* Link Attraction: Links should act like springs, pulling connected nodes closer together.
+* Centering Force: The entire graph should gently gravitate toward the center of the screen.
+* Recommendation: Use a library like D3.js (d3-force module) to handle the physics simulation, as it is the industry standard for this task. You can load it via a script tag.
+
+5. Re-implement the Interactive Elements:
+* Rendering: Render the nodes as circles and the links as lines using SVG, driven by the positions calculated by the force simulation.
+* Interactivity:
+* Clicking a node should highlight it and its path back to the central "Solana" node.
+* The information panel on the right should display the title, blurb, and link for the currently selected node.
+* The nodes should be draggable with the mouse to allow the user to manually adjust the layout.
+
+6. Styling and User Experience:
+* Maintain the application's established dark theme, with cyan highlights for active nodes and paths.
+* Ensure the force simulation is stable and visually pleasing.
+* Include a small instruction on the screen for the user, such as "Click and drag nodes to explore the network."
+
+Please generate the complete code for the new MindmapPage component and show the necessary modifications to the main App and Header components to integrate this new page.
