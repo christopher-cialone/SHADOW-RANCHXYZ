@@ -363,7 +363,12 @@ export default function MindmapPage() {
 
   const handleSuggestAddition = () => {
     const subject = "Mindmap Suggestion";
-    const body = "Please provide the following information for your suggestion:\n\n- Suggested Node Title:\n- Blurb (a brief explanation):\n- Source Link (must be a verifiable source):\n- Connection (which existing node should this connect to?):";
+    const body = `Please provide the following information for your suggestion:
+
+      - Suggested Node Title:
+      - Blurb (a brief, neutral explanation):
+      - Source Link (must be a verifiable source):
+      - Connection (which existing node should this connect to?):`;
     window.location.href = `mailto:contributions@shadowranch.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
