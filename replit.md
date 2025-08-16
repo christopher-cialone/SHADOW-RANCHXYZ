@@ -114,7 +114,8 @@ The application implements a flexible storage interface pattern:
 Changelog:
 - August 16, 2025: Updated Shadow Ranch Transparent Logo Implementation
   - Replaced all branding assets with new transparent "@shadow ranch.xyz" logo
-  - Updated Open Graph image, Twitter image, header logo, and home page hero with full branding
+  - Updated Open Graph image, Twitter image, and home page hero with full branding
+  - Updated header navigation with compact "@sr" logo for clean menu display
   - Updated favicon with compact "@sr" logo for browser address bar visibility
   - Maintained consistent branding across all touchpoints with transparent backgrounds
   - Enhanced social media sharing with professional logo presentation

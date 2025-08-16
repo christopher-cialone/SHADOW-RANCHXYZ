@@ -60,8 +60,8 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
           <Link href="/">
             <div className="flex items-center cursor-pointer touch-target">
               <img 
-                src="/shadow-ranch-logo.png" 
-                alt="@shadow ranch.xyz" 
+                src="/sr-logo.png" 
+                alt="@sr" 
                 className="h-8 sm:h-10 md:h-12 w-auto hover:opacity-80 transition-opacity"
               />
             </div>
