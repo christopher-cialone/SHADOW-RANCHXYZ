@@ -462,7 +462,7 @@ export default function MindmapPage() {
             </div>
 
             {/* Community Contribution */}
-            <div className="mt-6 bg-gray-900/50 border border-gray-700/50 rounded-lg p-4">
+            <div className="mt-6 bg-gray-900/50 border border-gray-700/50 rounded-lg p-4 relative z-10">
               <h4 className="font-space-gothic text-cyan-400 text-lg mb-3">
                 Living Document
               </h4>
@@ -470,13 +470,16 @@ export default function MindmapPage() {
                 Help expand this comprehensive Web3 history with sourced contributions.
               </p>
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log('Button click event triggered');
-                  handleSuggestAddition();
-                }}
-                className="w-full bg-gray-800 hover:bg-gray-700 text-cyan-400 hover:text-cyan-300 font-mono py-3 px-4 rounded-lg text-sm border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-200 cursor-pointer"
+                onClick={handleSuggestAddition}
+                onMouseEnter={() => console.log('Button mouse enter')}
+                onMouseLeave={() => console.log('Button mouse leave')}
+                className="w-full bg-gray-800 hover:bg-gray-700 text-cyan-400 hover:text-cyan-300 font-mono py-3 px-4 rounded-lg text-sm border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-200 cursor-pointer relative z-10"
                 type="button"
+                style={{ 
+                  pointerEvents: 'auto',
+                  position: 'relative',
+                  zIndex: 10
+                }}
               >
                 Suggest an Addition
               </button>
