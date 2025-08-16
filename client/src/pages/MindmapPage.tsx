@@ -362,9 +362,6 @@ export default function MindmapPage() {
   }, [nodes, links]);
 
   const handleSuggestAddition = () => {
-    console.log('Suggest Addition button clicked!');
-    alert('Button clicked! Check console for details.');
-    
     const subject = "Mindmap Suggestion";
     const body = `Please provide the following information for your suggestion:
 
@@ -374,13 +371,29 @@ export default function MindmapPage() {
       - Connection (which existing node should this connect to?):`;
     
     const mailtoLink = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    console.log('Opening mailto link:', mailtoLink);
     
+    // Try to open email client
     try {
-      window.location.href = mailtoLink;
+      // Create a temporary link and click it programmatically
+      const tempLink = document.createElement('a');
+      tempLink.href = mailtoLink;
+      tempLink.target = '_blank';
+      tempLink.style.display = 'none';
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      
+      console.log('Email client should now open with pre-filled template');
     } catch (error) {
       console.error('Error opening mailto link:', error);
-      alert('Error opening email client. Please check console for details.');
+      
+      // Fallback: copy email details to clipboard
+      const fallbackText = `Email: chris@bullrunboost.xyz\nSubject: ${subject}\n\nBody:\n${body}`;
+      navigator.clipboard?.writeText(fallbackText).then(() => {
+        alert('Email client failed to open. Email details copied to clipboard!');
+      }).catch(() => {
+        alert(`Email client failed to open. Please manually email:\n\nTo: chris@bullrunboost.xyz\nSubject: ${subject}\n\n${body}`);
+      });
     }
   };
 
