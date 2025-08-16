@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { BackButton } from '@/components/ui/BackButton';
+
 
 interface MindmapNode {
   id: string;
@@ -43,6 +43,7 @@ const mindmapData = {
             { id: 'eric_hughes', title: 'Eric Hughes', blurb: 'Author of "A Cypherpunk\'s Manifesto," famously stating "Cypherpunks write code."', link: 'https://www.activism.net/cypherpunk/manifesto.html'},
             { id: 'john_gilmore', title: 'John Gilmore', blurb: 'Co-founder of the Cypherpunks mailing list and the Electronic Frontier Foundation (EFF).', link: 'https://en.wikipedia.org/wiki/John_Gilmore_(activist)'},
             { id: 'wei_dai', title: 'Wei Dai', blurb: 'Creator of "b-money," an early proposal for an anonymous, distributed electronic cash system, cited in the Bitcoin whitepaper.', link: 'http://www.weidai.com/bmoney.txt'},
+            { id: 'david_chaum', title: 'David Chaum', blurb: 'The "godfather of digital cash" who created DigiCash using blind signatures, pioneering anonymous digital transactions in the 1980s.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
           ]
         },
         {
@@ -123,6 +124,35 @@ const mindmapData = {
           link: 'https://en.wikipedia.org/wiki/Web2',
           children: [
             { id: 'google_facebook', title: 'Rise of Big Tech', blurb: 'Companies like Google and Facebook created massive, centralized databases of user information, pioneering the business model of surveillance capitalism.', link: 'https://en.wikipedia.org/wiki/Surveillance_capitalism'},
+          ]
+        }
+      ]
+    },
+    {
+      id: 'smart_contracts',
+      title: 'The Smart Contract Revolution',
+      blurb: 'The evolution from simple cryptocurrencies to programmable blockchains that can execute complex logic and enable decentralized applications.',
+      link: 'https://ethereum.org/en/smart-contracts/',
+      children: [
+        {
+          id: 'smart_contract_individuals',
+          title: 'Key Individuals',
+          blurb: 'The visionaries who brought programmable blockchains to life.',
+          link: 'https://ethereum.org/en/history/',
+          children: [
+            { id: 'vitalik_buterin', title: 'Vitalik Buterin', blurb: 'Creator of Ethereum and author of the Ethereum whitepaper. He identified the Scalability Trilemma - the challenge of achieving decentralization, security, and scalability simultaneously.', link: 'https://ethereum.org/en/whitepaper/'},
+            { id: 'gavin_wood', title: 'Gavin Wood', blurb: 'Co-founder of Ethereum who wrote the EVM Yellow Paper, created the Solidity programming language, and later founded Polkadot for blockchain interoperability.', link: 'https://gavwood.com/'},
+            { id: 'nick_szabo', title: 'Nick Szabo', blurb: 'Computer scientist who pioneered the concept of smart contracts in the 1990s, long before blockchain technology existed, laying the theoretical foundation for programmable money.', link: 'https://nakamotoinstitute.org/the-idea-of-smart-contracts/'},
+          ]
+        },
+        {
+          id: 'smart_contract_concepts',
+          title: 'Core Concepts',
+          blurb: 'The fundamental innovations that enabled programmable blockchains.',
+          link: 'https://ethereum.org/en/developers/docs/',
+          children: [
+            { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain platform that enabled developers to build decentralized applications (dApps) using smart contracts, revolutionizing what was possible with blockchain technology.', link: 'https://ethereum.org/'},
+            { id: 'dao_hack', title: 'The DAO Hack', blurb: 'A 2016 exploit that drained $60 million from The DAO smart contract, leading to a philosophical crisis about immutability and the controversial hard fork that split Ethereum into ETH and ETC.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)'},
           ]
         }
       ]
@@ -333,7 +363,6 @@ export default function MindmapPage() {
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <BackButton />
           <div className="text-center">
             <h1 className="font-space-gothic text-4xl md:text-5xl text-cyan-400 mb-4">
               An Interactive History of Web3

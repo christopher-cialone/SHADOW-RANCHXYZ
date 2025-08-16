@@ -112,6 +112,23 @@ The application implements a flexible storage interface pattern:
 
 ```
 Changelog:
+- August 16, 2025: Interactive Mindmap Page with Force-Directed Graph Implementation
+  - Created new MindmapPage component using D3.js for dynamic network visualization
+  - Added "Mindmap" navigation link in header alongside existing pages
+  - Implemented comprehensive Web3 history mindmap with 5 major branches:
+    * The Cypherpunks (philosophical foundations)
+    * Cryptography (technical foundations) 
+    * History of the Internet (infrastructure evolution)
+    * The Smart Contract Revolution (NEW - programmable blockchain era)
+    * Solana's Innovations (current high-performance solutions)
+  - Expanded mindmap data with new Smart Contract Revolution branch containing:
+    * Key Individuals: Vitalik Buterin, Gavin Wood, Nick Szabo
+    * Core Concepts: Ethereum, The DAO Hack
+  - Added David Chaum to Cypherpunks Key Individuals as "godfather of digital cash"
+  - Built interactive features: click to highlight paths, drag nodes, zoom/pan controls
+  - Applied force-directed physics simulation for organic "spider's web" layout
+  - Maintained consistent Blueshift theme with cyan highlighting and dark backgrounds
+  - Created responsive information panel with detailed node descriptions and external links
 - August 15, 2025: Complete Typography Migration to SpaceGothic Font
   - Migrated all heading elements (h1, h2, h3) from Data70 font to SpaceGothic font
   - Updated header branding text to use consistent "brb: shadow ranch" with SpaceGothic styling
