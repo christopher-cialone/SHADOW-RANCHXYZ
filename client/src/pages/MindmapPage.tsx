@@ -39,22 +39,10 @@ const mindmapData = {
           blurb: 'The core thinkers and builders who drove the movement.',
           link: 'https://en.wikipedia.org/wiki/Cypherpunk#Noteworthy_cypherpunks',
           children: [
+            { id: 'david_chaum', title: 'David Chaum', blurb: 'The "godfather of digital cash." His 1980s work on blind signatures and the DigiCash system was a direct precursor to the pursuit of anonymous transactions.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
             { id: 'tim_may', title: 'Timothy May', blurb: 'Author of "The Crypto Anarchist Manifesto," a foundational text outlining a vision of society transformed by cryptography.', link: 'https://nakamotoinstitute.org/crypto-anarchist-manifesto/'},
             { id: 'eric_hughes', title: 'Eric Hughes', blurb: 'Author of "A Cypherpunk\'s Manifesto," famously stating "Cypherpunks write code."', link: 'https://www.activism.net/cypherpunk/manifesto.html'},
-            { id: 'john_gilmore', title: 'John Gilmore', blurb: 'Co-founder of the Cypherpunks mailing list and the Electronic Frontier Foundation (EFF).', link: 'https://en.wikipedia.org/wiki/John_Gilmore_(activist)'},
             { id: 'wei_dai', title: 'Wei Dai', blurb: 'Creator of "b-money," an early proposal for an anonymous, distributed electronic cash system, cited in the Bitcoin whitepaper.', link: 'http://www.weidai.com/bmoney.txt'},
-            { id: 'david_chaum', title: 'David Chaum', blurb: 'The "godfather of digital cash" who created DigiCash using blind signatures, pioneering anonymous digital transactions in the 1980s.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
-          ]
-        },
-        {
-          id: 'concepts_cypherpunks',
-          title: 'Core Concepts',
-          blurb: 'The philosophical pillars of the Cypherpunk movement.',
-          link: '#',
-          children: [
-            { id: 'privacy', title: 'Privacy', blurb: 'The belief that privacy is a fundamental right necessary for an open society in the electronic age.', link: '#'},
-            { id: 'decentralization', title: 'Decentralization', blurb: 'The idea of building systems without central points of control or failure to resist censorship and coercion.', link: '#'},
-            { id: 'digital_cash', title: 'Anonymous Digital Cash', blurb: 'The "holy grail" for Cypherpunks: a peer-to-peer, private form of money for the internet.', link: '#'},
           ]
         },
         {
@@ -66,106 +54,65 @@ const mindmapData = {
       ]
     },
     {
-      id: 'cryptography',
-      title: 'Cryptography',
-      blurb: 'The science of secure communication. It provides the mathematical foundation for all blockchain technology and secure internet protocols.',
-      link: 'https://en.wikipedia.org/wiki/Cryptography',
-      children: [
-        {
-          id: 'pkc',
-          title: 'Public-Key Cryptography',
-          blurb: 'A revolutionary concept from the 1970s allowing for secure communication without pre-sharing a secret key. It is the basis for all crypto wallets.',
-          link: 'https://en.wikipedia.org/wiki/Public-key_cryptography',
-          children: [
-            { id: 'diffie_hellman', title: 'Diffie & Hellman', blurb: 'Whitfield Diffie and Martin Hellman published the first paper on public-key cryptography in 1976, making widespread secure communication possible.', link: 'https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange'},
-            { id: 'pgp', title: 'PGP (Pretty Good Privacy)', blurb: 'Created by Phil Zimmermann in 1991, PGP was a powerful encryption software released for free, sparking the "Crypto Wars."', link: 'https://en.wikipedia.org/wiki/Pretty_Good_Privacy'},
-          ]
-        },
-        {
-          id: 'hashing',
-          title: 'Hash Functions',
-          blurb: 'Algorithms that create a unique, fixed-size "fingerprint" of data. Essential for data integrity and form the backbone of the "chain" in blockchain.',
-          link: 'https://en.wikipedia.org/wiki/Cryptographic_hash_function',
-        },
-        {
-          id: 'legislation_crypto',
-          title: 'Legislation: The Crypto Wars',
-          blurb: 'The 1990s conflict between the US government, which wanted to control encryption (classifying it as a munition), and activists fighting for public access.',
-          link: 'https://en.wikipedia.org/wiki/Crypto_Wars',
-        }
-      ]
-    },
-    {
-      id: 'internet',
-      title: 'History of the Internet',
-      blurb: 'The evolution from a decentralized military project (ARPANET) to a centralized, corporate-dominated network (Web 2.0), setting the stage for the Web3 movement.',
-      link: 'https://en.wikipedia.org/wiki/History_of_the_Internet',
-      children: [
-        {
-          id: 'arpanet',
-          title: 'ARPANET (1960s)',
-          blurb: 'The precursor to the modern internet, designed as a resilient, decentralized network for the US military.',
-          link: 'https://en.wikipedia.org/wiki/ARPANET',
-        },
-        {
-          id: 'web1',
-          title: 'Web 1.0 (1990s)',
-          blurb: 'The "read-only" web of static websites. Decentralized protocols (HTTP, SMTP) dominated, but user interaction was limited.',
-          link: 'https://en.wikipedia.org/wiki/Web_1.0',
-          children: [
-            { id: 'netscape', title: 'Rise & Fall of Netscape', blurb: 'Netscape Navigator was the dominant browser of the early web, but lost the "first browser war" to Microsoft\'s Internet Explorer, a key moment in centralization.', link: 'https://en.wikipedia.org/wiki/Browser_wars#First_Browser_War'},
-            { id: 'cda_230', title: 'CDA Section 230 (1996)', blurb: 'A pivotal piece of US legislation that granted online platforms immunity for their users\' content, enabling the rise of social media.', link: 'https://en.wikipedia.org/wiki/Section_230'},
-          ]
-        },
-        {
-          id: 'web2',
-          title: 'Web 2.0 (2000s-Present)',
-          blurb: 'The "read-write" web of centralized platforms (Google, Facebook, etc.) where user data became the primary product, leading to the problems the Cypherpunks predicted.',
-          link: 'https://en.wikipedia.org/wiki/Web2',
-          children: [
-            { id: 'google_facebook', title: 'Rise of Big Tech', blurb: 'Companies like Google and Facebook created massive, centralized databases of user information, pioneering the business model of surveillance capitalism.', link: 'https://en.wikipedia.org/wiki/Surveillance_capitalism'},
-          ]
-        }
-      ]
-    },
-    {
       id: 'smart_contracts',
       title: 'The Smart Contract Revolution',
-      blurb: 'The evolution from simple cryptocurrencies to programmable blockchains that can execute complex logic and enable decentralized applications.',
-      link: 'https://ethereum.org/en/smart-contracts/',
+      blurb: 'The evolutionary leap after Bitcoin, generalizing the blockchain concept from just money to a global, decentralized computer.',
+      link: 'https://ethereum.org/en/whitepaper/',
       children: [
         {
-          id: 'smart_contract_individuals',
+          id: 'people_smart_contracts',
           title: 'Key Individuals',
-          blurb: 'The visionaries who brought programmable blockchains to life.',
-          link: 'https://ethereum.org/en/history/',
+          blurb: 'The visionaries who imagined and built programmable blockchains.',
+          link: '#',
           children: [
-            { id: 'vitalik_buterin', title: 'Vitalik Buterin', blurb: 'Creator of Ethereum and author of the Ethereum whitepaper. He identified the Scalability Trilemma - the challenge of achieving decentralization, security, and scalability simultaneously.', link: 'https://ethereum.org/en/whitepaper/'},
-            { id: 'gavin_wood', title: 'Gavin Wood', blurb: 'Co-founder of Ethereum who wrote the EVM Yellow Paper, created the Solidity programming language, and later founded Polkadot for blockchain interoperability.', link: 'https://gavwood.com/'},
-            { id: 'nick_szabo', title: 'Nick Szabo', blurb: 'Computer scientist who pioneered the concept of smart contracts in the 1990s, long before blockchain technology existed, laying the theoretical foundation for programmable money.', link: 'https://nakamotoinstitute.org/the-idea-of-smart-contracts/'},
+            { id: 'nick_szabo', title: 'Nick Szabo', blurb: 'Pioneered the concept of "smart contracts" in the 1990s, laying the theoretical groundwork for Ethereum long before blockchain existed.', link: 'https://en.wikipedia.org/wiki/Nick_Szabo'},
+            { id: 'vitalik_buterin', title: 'Vitalik Buterin', blurb: 'Co-founder of Ethereum. His 2013 whitepaper proposed a Turing-complete blockchain, and he framed the "Scalability Trilemma" that projects like Solana aim to solve.', link: 'https://en.wikipedia.org/wiki/Vitalik_Buterin'},
+            { id: 'gavin_wood', title: 'Gavin Wood', blurb: 'Co-founder of Ethereum, wrote the technical "Yellow Paper" specifying the EVM, and created Solidity. Later founded Polkadot.', link: 'https://en.wikipedia.org/wiki/Gavin_Wood'},
           ]
         },
         {
-          id: 'smart_contract_concepts',
+          id: 'concepts_smart_contracts',
           title: 'Core Concepts',
-          blurb: 'The fundamental innovations that enabled programmable blockchains.',
-          link: 'https://ethereum.org/en/developers/docs/',
+          blurb: 'The key ideas that enabled the explosion of dApps.',
+          link: '#',
           children: [
-            { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain platform that enabled developers to build decentralized applications (dApps) using smart contracts, revolutionizing what was possible with blockchain technology.', link: 'https://ethereum.org/'},
-            { id: 'dao_hack', title: 'The DAO Hack', blurb: 'A 2016 exploit that drained $60 million from The DAO smart contract, leading to a philosophical crisis about immutability and the controversial hard fork that split Ethereum into ETH and ETC.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)'},
+            { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain, allowing developers to build and deploy any decentralized application (dApp).', link: 'https://ethereum.org/'},
+            { id: 'dao_hack', title: 'The DAO Hack', blurb: 'The first major philosophical crisis of the smart contract era, forcing a fork of Ethereum and a confrontation with the "code is law" principle.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)'},
           ]
         }
       ]
     },
     {
-      id: 'solana_tech',
-      title: 'Solana\'s Innovations',
-      blurb: 'The key technical breakthroughs that allow Solana to achieve high performance.',
-      link: 'https://solana.com/news/proof-of-history-a-stark-improvement-on-block-time',
+      id: 'intelligence_connection',
+      title: 'The Intelligence Connection',
+      blurb: 'Explores the documented interest of intelligence agencies and their research arms (like DARPA) in the technologies that both enable and threaten privacy.',
+      link: 'https://unlimitedhangout.com/',
       children: [
-        { id: 'poh', title: 'Proof of History (PoH)', blurb: 'A cryptographic clock that provides a verifiable order of events, allowing for extremely fast transaction processing without waiting for traditional consensus.', link: 'https://solana.com/news/proof-of-history-a-stark-improvement-on-block-time'},
-        { id: 'sealevel', title: 'Sealevel', blurb: 'A parallel transaction processing engine, allowing Solana to process tens of thousands of smart contracts at once, unlike single-threaded blockchains.', link: 'https://solana.com/news/sealevel--parallel-processing-thousands-of-smart-contracts'},
-        { id: 'yakovenko', title: 'Anatoly Yakovenko', blurb: 'Founder of Solana, who drew on his background in distributed systems at Qualcomm to architect a new type of blockchain focused on raw performance.', link: 'https://en.wikipedia.org/wiki/Anatoly_Yakovenko'},
+        { id: 'darpa', title: "DARPA's Dual Legacy", blurb: 'The agency that created the decentralized ARPANET has also funded projects aimed at surveillance and breaking encryption, a fundamental conflict.', link: 'https://www.darpa.mil/about-us/timeline/arpanet'},
+        { id: 'whitney_webb', title: "Whitney Webb's Research", blurb: 'Investigative journalist who documents deep ties between intelligence agencies, Silicon Valley, and figures in the crypto space.', link: 'https://unlimitedhangout.com/'},
+        { id: 'total_info', title: '"Total Information Awareness"', blurb: 'A post-9/11 DARPA program for mass data collection that, while defunded, influenced the architecture of Web 2.0 surveillance.', link: 'https://en.wikipedia.org/wiki/Total_Information_Awareness'},
+      ]
+    },
+    {
+      id: 'legal_battlefield',
+      title: 'The Legal Battlefield',
+      blurb: 'The ongoing fight to define the legal boundaries of code, privacy, and decentralization in the courts.',
+      link: '#',
+      children: [
+        { id: 'roman_storm', title: 'Roman Storm (Tornado Cash)', blurb: 'His indictment for creating a non-custodial privacy tool is a pivotal case for developer liability and the "code is speech" debate.', link: 'https://www.coindesk.com/policy/2023/08/23/tornado-cash-founders-charged-with-money-laundering-and-sanctions-violations/'},
+        { id: 'roger_ver', title: 'Roger Ver ("Bitcoin Jesus")', blurb: 'His tax evasion case highlights the conflict between sovereign individuals and nation-states over financial control in a digital economy.', link: 'https://www.justice.gov/opa/pr/early-bitcoin-investor-charged-tax-fraud'},
+        { id: 'code_is_speech', title: 'The "Code is Speech" Debate', blurb: 'The central legal argument that writing and publishing open-source software is a form of protected speech under the First Amendment.', link: 'https://www.eff.org/deeplinks/2023/10/code-speech-and-tornado-cash-case'},
+      ]
+    },
+    {
+      id: 'corporate_cooption',
+      title: 'Corporate Co-option vs. Ethos',
+      blurb: 'The internal struggle against the centralizing forces of venture capital, profit motives, and dishonest marketing within Web3.',
+      link: '#',
+      children: [
+        { id: 'cexs', title: 'The Rise of CEXs', blurb: 'Centralized exchanges like Coinbase and the defunct FTX reintroduced central points of failure, as shown by the FTX collapse.', link: 'https://en.wikipedia.org/wiki/Collapse_of_FTX'},
+        { id: 'fake_decentralization', title: '"Fake Decentralization"', blurb: 'A critique of projects that use a blockchain but maintain centralized control, often masked by clever marketing.', link: '#'},
+        { id: 'vc_influence', title: 'The VC Influence', blurb: 'Venture capital has accelerated innovation but also introduced pressures for profit over principle, sometimes at the expense of true decentralization.', link: '#'},
       ]
     }
   ]

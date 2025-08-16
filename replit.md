@@ -112,23 +112,20 @@ The application implements a flexible storage interface pattern:
 
 ```
 Changelog:
-- August 16, 2025: Interactive Mindmap Page with Force-Directed Graph Implementation
-  - Created new MindmapPage component using D3.js for dynamic network visualization
-  - Added "Mindmap" navigation link in header alongside existing pages
-  - Implemented comprehensive Web3 history mindmap with 5 major branches:
-    * The Cypherpunks (philosophical foundations)
-    * Cryptography (technical foundations) 
-    * History of the Internet (infrastructure evolution)
-    * The Smart Contract Revolution (NEW - programmable blockchain era)
-    * Solana's Innovations (current high-performance solutions)
-  - Expanded mindmap data with new Smart Contract Revolution branch containing:
-    * Key Individuals: Vitalik Buterin, Gavin Wood, Nick Szabo
-    * Core Concepts: Ethereum, The DAO Hack
-  - Added David Chaum to Cypherpunks Key Individuals as "godfather of digital cash"
-  - Built interactive features: click to highlight paths, drag nodes, zoom/pan controls
-  - Applied force-directed physics simulation for organic "spider's web" layout
-  - Maintained consistent Blueshift theme with cyan highlighting and dark backgrounds
-  - Created responsive information panel with detailed node descriptions and external links
+- August 16, 2025: Comprehensive Mindmap Expansion - Critical Web3 History
+  - Completely replaced mindmap data with comprehensive critical analysis structure
+  - Added three major new top-level branches analyzing Web3's complexities:
+    * The Intelligence Connection (DARPA's dual legacy, Whitney Webb's research)
+    * The Legal Battlefield (Roman Storm/Tornado Cash, Roger Ver cases)
+    * Corporate Co-option vs. Ethos (CEX centralization, VC influence critique)
+  - Restructured existing branches for cleaner narrative flow:
+    * Streamlined Cypherpunks branch (removed redundant concepts, elevated David Chaum)
+    * Refined Smart Contract Revolution with Nick Szabo, Vitalik Buterin, Gavin Wood
+    * Removed separate Cryptography and Internet History branches to focus on core story
+  - Enhanced critical perspective on Web3's internal contradictions and external pressures
+  - Maintained all interactive D3.js features: force-directed layout, path highlighting, drag controls
+  - Applied consistent Blueshift theme with cyan highlighting throughout expanded network
+  - Created comprehensive historical document spanning from 1980s digital cash to modern legal battles
 - August 15, 2025: Complete Typography Migration to SpaceGothic Font
   - Migrated all heading elements (h1, h2, h3) from Data70 font to SpaceGothic font
   - Updated header branding text to use consistent "brb: shadow ranch" with SpaceGothic styling

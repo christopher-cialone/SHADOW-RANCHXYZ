@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mind Map: The Roots of Web3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,000&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #111827; /* bg-gray-900 */
+        }
+        .font-mono {
+            font-family: 'Inconsolata', monospace;
+        }
+        .node {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .node:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px #22d3ee);
+        }
+        .line {
+            transition: all 0.3s ease;
+        }
+        .active .line {
+            stroke-width: 4;
+            stroke: #22d3ee;
+        }
+        .active .node-circle {
+            stroke-width: 4;
+            stroke: #22d3ee;
+        }
+        .info-panel {
+            background-color: rgba(31, 41, 55, 0.7); /* bg-gray-800 with opacity */
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="relative w-full h-screen" id="mindmap-container">
+        <svg id="mindmap-svg" class="w-full h-full"></svg>
+        
+        <div id="info-panel" class="info-panel absolute top-4 right-4 w-full max-w-md p-6 border border-gray-700 rounded-xl shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none">
+            <h3 id="info-title" class="text-2xl font-bold text-cyan-400 font-mono"></h3>
+            <p id="info-blurb" class="text-gray-300 mt-2"></p>
+            <a id="info-link" href="#" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-cyan-200 mt-4 inline-block">Learn More &rarr;</a>
+        </div>
+
+        <div class="absolute bottom-4 left-4 text-gray-500 text-sm">
+            Click on a node to explore. Pan and zoom to navigate.
+        </div>
+    </div>
+
+    <script>
+        const mindmapData = {
+            id: 'solana',
+            title: 'Solana',
+            blurb: 'A high-performance blockchain designed for scalability, speed, and low transaction costs, building upon decades of cryptographic and network research.',
+            link: 'https://solana.com/',
+            children: [
+                {
+                    id: 'cypherpunks',
+                    title: 'The Cypherpunks',
+                    blurb: 'A movement from the late 1980s advocating for privacy and social change through the use of strong cryptography. They are the philosophical architects of Web3.',
+                    link: 'https://www.activism.net/cypherpunk/manifesto.html',
+                    children: [
+                        {
+                            id: 'people_cypherpunks',
+                            title: 'Key Individuals',
+                            blurb: 'The core thinkers and builders who drove the movement.',
+                            link: 'https://en.wikipedia.org/wiki/Cypherpunk#Noteworthy_cypherpunks',
+                            children: [
+                                { id: 'david_chaum', title: 'David Chaum', blurb: 'The "godfather of digital cash." His 1980s work on blind signatures and the DigiCash system was a direct precursor to the pursuit of anonymous transactions.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
+                                { id: 'tim_may', title: 'Timothy May', blurb: 'Author of "The Crypto Anarchist Manifesto," a foundational text outlining a vision of society transformed by cryptography.', link: 'https://nakamotoinstitute.org/crypto-anarchist-manifesto/'},
+                                { id: 'eric_hughes', title: 'Eric Hughes', blurb: 'Author of "A Cypherpunk\'s Manifesto," famously stating "Cypherpunks write code."', link: 'https://www.activism.net/cypherpunk/manifesto.html'},
+                                { id: 'wei_dai', title: 'Wei Dai', blurb: 'Creator of "b-money," an early proposal for an anonymous, distributed electronic cash system, cited in the Bitcoin whitepaper.', link: 'http://www.weidai.com/bmoney.txt'},
+                            ]
+                        },
+                        {
+                            id: 'bitcoin',
+                            title: 'Bitcoin',
+                            blurb: 'The first successful decentralized electronic cash system, created by the anonymous Satoshi Nakamoto. It was the culmination of the Cypherpunks\' dream of private, digital money.',
+                            link: 'https://bitcoin.org/bitcoin.pdf',
+                        },
+                    ]
+                },
+                {
+                    id: 'smart_contracts',
+                    title: 'The Smart Contract Revolution',
+                    blurb: 'The evolutionary leap after Bitcoin, generalizing the blockchain concept from just money to a global, decentralized computer.',
+                    link: 'https://ethereum.org/en/whitepaper/',
+                    children: [
+                        {
+                            id: 'people_smart_contracts',
+                            title: 'Key Individuals',
+                            blurb: 'The visionaries who imagined and built programmable blockchains.',
+                            link: '#',
+                            children: [
+                                { id: 'nick_szabo', title: 'Nick Szabo', blurb: 'Pioneered the concept of "smart contracts" in the 1990s, laying the theoretical groundwork for Ethereum long before blockchain existed.', link: 'https://en.wikipedia.org/wiki/Nick_Szabo'},
+                                { id: 'vitalik_buterin', title: 'Vitalik Buterin', blurb: 'Co-founder of Ethereum. His 2013 whitepaper proposed a Turing-complete blockchain, and he framed the "Scalability Trilemma" that projects like Solana aim to solve.', link: 'https://en.wikipedia.org/wiki/Vitalik_Buterin'},
+                                { id: 'gavin_wood', title: 'Gavin Wood', blurb: 'Co-founder of Ethereum, wrote the technical "Yellow Paper" specifying the EVM, and created Solidity. Later founded Polkadot.', link: 'https://en.wikipedia.org/wiki/Gavin_Wood'},
+                            ]
+                        },
+                        {
+                            id: 'concepts_smart_contracts',
+                            title: 'Core Concepts',
+                            blurb: 'The key ideas that enabled the explosion of dApps.',
+                            link: '#',
+                            children: [
+                                { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain, allowing developers to build and deploy any decentralized application (dApp).', link: 'https://ethereum.org/'},
+                                { id: 'dao_hack', title: 'The DAO Hack', blurb: 'The first major philosophical crisis of the smart contract era, forcing a fork of Ethereum and a confrontation with the "code is law" principle.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)'},
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'intelligence_connection',
+                    title: 'The Intelligence Connection',
+                    blurb: 'Explores the documented interest of intelligence agencies and their research arms (like DARPA) in the technologies that both enable and threaten privacy.',
+                    link: 'https://unlimitedhangout.com/',
+                    children: [
+                        { id: 'darpa', title: "DARPA's Dual Legacy", blurb: 'The agency that created the decentralized ARPANET has also funded projects aimed at surveillance and breaking encryption, a fundamental conflict.', link: 'https://www.darpa.mil/about-us/timeline/arpanet'},
+                        { id: 'whitney_webb', title: "Whitney Webb's Research", blurb: 'Investigative journalist who documents deep ties between intelligence agencies, Silicon Valley, and figures in the crypto space.', link: 'https://unlimitedhangout.com/'},
+                        { id: 'total_info', title: '"Total Information Awareness"', blurb: 'A post-9/11 DARPA program for mass data collection that, while defunded, influenced the architecture of Web 2.0 surveillance.', link: 'https://en.wikipedia.org/wiki/Total_Information_Awareness'},
+                    ]
+                },
+                {
+                    id: 'legal_battlefield',
+                    title: 'The Legal Battlefield',
+                    blurb: 'The ongoing fight to define the legal boundaries of code, privacy, and decentralization in the courts.',
+                    link: '#',
+                    children: [
+                        { id: 'roman_storm', title: 'Roman Storm (Tornado Cash)', blurb: 'His indictment for creating a non-custodial privacy tool is a pivotal case for developer liability and the "code is speech" debate.', link: 'https://www.coindesk.com/policy/2023/08/23/tornado-cash-founders-charged-with-money-laundering-and-sanctions-violations/'},
+                        { id: 'roger_ver', title: 'Roger Ver ("Bitcoin Jesus")', blurb: 'His tax evasion case highlights the conflict between sovereign individuals and nation-states over financial control in a digital economy.', link: 'https://www.justice.gov/opa/pr/early-bitcoin-investor-charged-tax-fraud'},
+                        { id: 'code_is_speech', title: 'The "Code is Speech" Debate', blurb: 'The central legal argument that writing and publishing open-source software is a form of protected speech under the First Amendment.', link: 'https://www.eff.org/deeplinks/2023/10/code-speech-and-tornado-cash-case'},
+                    ]
+                },
+                {
+                    id: 'corporate_cooption',
+                    title: 'Corporate Co-option vs. Ethos',
+                    blurb: 'The internal struggle against the centralizing forces of venture capital, profit motives, and dishonest marketing within Web3.',
+                    link: '#',
+                    children: [
+                        { id: 'cexs', title: 'The Rise of CEXs', blurb: 'Centralized exchanges like Coinbase and the defunct FTX reintroduced central points of failure, as shown by the FTX collapse.', link: 'https://en.wikipedia.org/wiki/Collapse_of_FTX'},
+                        { id: 'fake_decentralization', title: '"Fake Decentralization"', blurb: 'A critique of projects that use a blockchain but maintain centralized control, often masked by clever marketing.', link: '#'},
+                        { id: 'vc_influence', title: 'The VC Influence', blurb: 'Venture capital has accelerated innovation but also introduced pressures for profit over principle, sometimes at the expense of true decentralization.', link: '#'},
+                    ]
+                }
+            ]
+        };
+
+        const container = document.getElementById('mindmap-container');
+        const svg = document.getElementById('mindmap-svg');
+        const infoPanel = document.getElementById('info-panel');
+        const infoTitle = document.getElementById('info-title');
+        const infoBlurb = document.getElementById('info-blurb');
+        const infoLink = document.getElementById('info-link');
+
+        let nodes = {};
+        let links = [];
+        let maxDepth = 0;
+
+        function flattenData(node, parent = null, depth = 0) {
+            nodes[node.id] = { ...node, children: null, parent: parent ? parent.id : null, depth };
+            maxDepth = Math.max(maxDepth, depth);
+            if (parent) {
+                links.push({ source: parent.id, target: node.id });
+            }
+            if (node.children) {
+                node.children.forEach(child => flattenData(child, node, depth + 1));
+            }
+        }
+
+        flattenData(mindmapData);
+
+        const nodeElements = {};
+        const lineElements = {};
+
+        function drawMindmap() {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            svg.innerHTML = ''; // Clear previous render
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radiusStep = Math.min(width, height) / (2 * (maxDepth + 1.5));
+
+            const nodesByDepth = {};
+            for (let i = 0; i <= maxDepth; i++) {
+                nodesByDepth[i] = Object.values(nodes).filter(n => n.depth === i);
+            }
+
+            // Position root
+            nodes[mindmapData.id].x = centerX;
+            nodes[mindmapData.id].y = centerY;
+
+            // Position other nodes
+            for (let depth = 1; depth <= maxDepth; depth++) {
+                const parentNodes = nodesByDepth[depth - 1];
+                parentNodes.forEach(parent => {
+                    const children = Object.values(nodes).filter(n => n.parent === parent.id);
+                    const parentAngle = Math.atan2(parent.y - centerY, parent.x - centerX);
+                    children.forEach((child, i) => {
+                        const angleSpread = 1.2; // Radians
+                        const angle = parentAngle + (i - (children.length - 1) / 2) * angleSpread / children.length;
+                        const radius = depth * radiusStep * 1.5;
+                        
+                        // For depth 1, use full circle
+                        if (depth === 1) {
+                            const totalAtDepth1 = nodesByDepth[1].length;
+                            const nodeIndex = nodesByDepth[1].findIndex(n => n.id === child.id);
+                            const circleAngle = (nodeIndex / totalAtDepth1) * 2 * Math.PI;
+                            child.x = centerX + radius * Math.cos(circleAngle);
+                            child.y = centerY + radius * Math.sin(circleAngle);
+                        } else {
+                             child.x = parent.x + radiusStep * Math.cos(angle);
+                             child.y = parent.y + radiusStep * Math.sin(angle);
+                        }
+                    });
+                });
+            }
+
+            links.forEach(link => {
+                const source = nodes[link.source];
+                const target = nodes[link.target];
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', source.x);
+                line.setAttribute('y1', source.y);
+                line.setAttribute('x2', target.x);
+                line.setAttribute('y2', target.y);
+                line.setAttribute('stroke', '#4A5568'); // gray-700
+                line.setAttribute('stroke-width', '2');
+                line.classList.add('line');
+                svg.appendChild(line);
+                lineElements[`${link.source}-${link.target}`] = line;
+            });
+
+            Object.values(nodes).forEach(node => {
+                const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                g.setAttribute('transform', `translate(${node.x}, ${node.y})`);
+                g.classList.add('node');
+                g.dataset.id = node.id;
+
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                const radius = 12 - node.depth * 1.5;
+                circle.setAttribute('r', Math.max(6, radius));
+                circle.setAttribute('fill', '#1F2937'); // gray-800
+                circle.setAttribute('stroke', '#4A5568'); // gray-700
+                circle.setAttribute('stroke-width', '2');
+                circle.classList.add('node-circle');
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.textContent = node.title;
+                text.setAttribute('fill', '#E5E7EB'); // gray-200
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dy', `${Math.max(6, radius) + 12}px`);
+                const fontSize = 14 - node.depth * 1;
+                text.setAttribute('font-size', `${Math.max(10, fontSize)}px`);
+                text.classList.add('font-mono');
+
+                g.appendChild(circle);
+                g.appendChild(text);
+                svg.appendChild(g);
+                nodeElements[node.id] = g;
+            });
+        }
+
+        function setActiveNode(nodeId) {
+            Object.values(nodeElements).forEach(el => el.classList.remove('active'));
+            Object.values(lineElements).forEach(el => el.classList.remove('active'));
+
+            if (!nodeId) {
+                infoPanel.classList.add('opacity-0', 'pointer-events-none');
+                return;
+            }
+            
+            const node = nodes[nodeId];
+            const el = nodeElements[nodeId];
+            el.classList.add('active');
+
+            let current = node;
+            while (current.parent) {
+                const parentEl = nodeElements[current.parent];
+                parentEl.classList.add('active');
+                const line = lineElements[`${current.parent}-${current.id}`];
+                if(line) line.classList.add('active');
+                current = nodes[current.parent];
+            }
+
+            infoTitle.textContent = node.title;
+            infoBlurb.textContent = node.blurb;
+            infoLink.href = node.link;
+            infoPanel.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        svg.addEventListener('click', (e) => {
+            const g = e.target.closest('.node');
+            if (g) {
+                setActiveNode(g.dataset.id);
+            } else {
+                setActiveNode(null);
+            }
+        });
+
+        window.addEventListener('resize', drawMindmap);
+        drawMindmap();
+        setActiveNode('solana');
+    </script>
+</body>
+</html>
