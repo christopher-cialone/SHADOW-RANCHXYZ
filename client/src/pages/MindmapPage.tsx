@@ -363,6 +363,8 @@ export default function MindmapPage() {
 
   const handleSuggestAddition = () => {
     console.log('Suggest Addition button clicked!');
+    alert('Button clicked! Check console for details.');
+    
     const subject = "Mindmap Suggestion";
     const body = `Please provide the following information for your suggestion:
 
@@ -370,9 +372,16 @@ export default function MindmapPage() {
       - Blurb (a brief, neutral explanation):
       - Source Link (must be a verifiable source):
       - Connection (which existing node should this connect to?):`;
+    
     const mailtoLink = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     console.log('Opening mailto link:', mailtoLink);
-    window.location.href = mailtoLink;
+    
+    try {
+      window.location.href = mailtoLink;
+    } catch (error) {
+      console.error('Error opening mailto link:', error);
+      alert('Error opening email client. Please check console for details.');
+    }
   };
 
   return (

@@ -1,0 +1,51 @@
+Of course. Here is the exact JavaScript snippet you need and instructions on where to place it.
+
+This code finds the "Suggest an Addition" button and attaches a click event to it, which then opens the user's email client with the pre-filled template.
+
+Code Snippet
+JavaScript
+
+suggestAdditionBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const subject = "Mindmap Suggestion";
+    const body = "Please provide the following information for your suggestion:\n\n- Suggested Node Title:\n- Blurb (a brief, neutral explanation):\n- Source Link (must be a verifiable source):\n- Connection (which existing node should this connect to?):";
+    window.location.href = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
+Where to Place It
+In the history_mind_map_final_code artifact, scroll to the very bottom. Place this snippet inside the <script> tag, right after the existing svg.addEventListener(...) block and just before the window.addEventListener('resize', drawMindmap); line.
+
+Here's how it will look in context:
+
+JavaScript
+
+        // ... existing code ...
+
+        svg.addEventListener('click', (e) => {
+            const g = e.target.closest('.node');
+            if (g) {
+                setActiveNode(g.dataset.id);
+            } else {
+                setActiveNode(null);
+            }
+        });
+        
+        // PASTE THE NEW SNIPPET HERE
+        suggestAdditionBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const subject = "Mindmap Suggestion";
+            const body = "Please provide the following information for your suggestion:\n\n- Suggested Node Title:\n- Blurb (a brief, neutral explanation):\n- Source Link (must be a verifiable source):\n- Connection (which existing node should this connect to?):";
+            window.location.href = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+
+        window.addEventListener('resize', drawMindmap);
+        drawMindmap();
+        setActiveNode('internet');
+    </script>
+</body>
+</html>
+
+
+
+
+
+
