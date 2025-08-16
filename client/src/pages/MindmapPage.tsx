@@ -372,28 +372,29 @@ export default function MindmapPage() {
     
     const mailtoLink = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
-    // Try to open email client
+    // Try multiple methods to open email client
     try {
-      // Create a temporary link and click it programmatically
-      const tempLink = document.createElement('a');
-      tempLink.href = mailtoLink;
-      tempLink.target = '_blank';
-      tempLink.style.display = 'none';
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-      
+      // Method 1: Direct window.location
+      window.location.href = mailtoLink;
       console.log('Email client should now open with pre-filled template');
     } catch (error) {
-      console.error('Error opening mailto link:', error);
+      console.error('Method 1 failed, trying alternative:', error);
       
-      // Fallback: copy email details to clipboard
-      const fallbackText = `Email: chris@bullrunboost.xyz\nSubject: ${subject}\n\nBody:\n${body}`;
-      navigator.clipboard?.writeText(fallbackText).then(() => {
-        alert('Email client failed to open. Email details copied to clipboard!');
-      }).catch(() => {
-        alert(`Email client failed to open. Please manually email:\n\nTo: chris@bullrunboost.xyz\nSubject: ${subject}\n\n${body}`);
-      });
+      try {
+        // Method 2: window.open
+        window.open(mailtoLink);
+        console.log('Tried opening email via window.open');
+      } catch (error2) {
+        console.error('Method 2 also failed:', error2);
+        
+        // Fallback: copy email details to clipboard
+        const fallbackText = `Email: chris@bullrunboost.xyz\nSubject: ${subject}\n\nBody:\n${body}`;
+        navigator.clipboard?.writeText(fallbackText).then(() => {
+          alert('Email client failed to open. Email details copied to clipboard!');
+        }).catch(() => {
+          alert(`Email client failed to open. Please manually email:\n\nTo: chris@bullrunboost.xyz\nSubject: ${subject}\n\n${body}`);
+        });
+      }
     }
   };
 
