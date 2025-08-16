@@ -362,6 +362,7 @@ export default function MindmapPage() {
   }, [nodes, links]);
 
   const handleSuggestAddition = () => {
+    console.log('handleSuggestAddition called');
     const subject = "Mindmap Suggestion";
     const body = `Please provide the following information for your suggestion:
 
@@ -371,31 +372,35 @@ export default function MindmapPage() {
       - Connection (which existing node should this connect to?):`;
     
     const mailtoLink = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    console.log('Constructed mailto link:', mailtoLink);
     
-    // Try multiple methods to open email client
-    try {
-      // Method 1: Direct window.location
-      window.location.href = mailtoLink;
-      console.log('Email client should now open with pre-filled template');
-    } catch (error) {
-      console.error('Method 1 failed, trying alternative:', error);
-      
-      try {
-        // Method 2: window.open
-        window.open(mailtoLink);
-        console.log('Tried opening email via window.open');
-      } catch (error2) {
-        console.error('Method 2 also failed:', error2);
-        
-        // Fallback: copy email details to clipboard
+    // Create and trigger anchor element
+    const anchor = document.createElement('a');
+    anchor.href = mailtoLink;
+    anchor.style.display = 'none';
+    
+    // Add to DOM, click, then remove
+    document.body.appendChild(anchor);
+    console.log('About to click anchor element');
+    anchor.click();
+    document.body.removeChild(anchor);
+    
+    console.log('Anchor clicked and removed');
+    
+    // Show confirmation to user
+    setTimeout(() => {
+      if (confirm('Did your email client open? Click OK if yes, Cancel to copy details to clipboard.')) {
+        console.log('User confirmed email client opened');
+      } else {
+        // Copy to clipboard as fallback
         const fallbackText = `Email: chris@bullrunboost.xyz\nSubject: ${subject}\n\nBody:\n${body}`;
         navigator.clipboard?.writeText(fallbackText).then(() => {
-          alert('Email client failed to open. Email details copied to clipboard!');
+          alert('Email details copied to clipboard!');
         }).catch(() => {
-          alert(`Email client failed to open. Please manually email:\n\nTo: chris@bullrunboost.xyz\nSubject: ${subject}\n\n${body}`);
+          alert(`Please manually email:\n\nTo: chris@bullrunboost.xyz\nSubject: ${subject}\n\n${body}`);
         });
       }
-    }
+    }, 1000);
   };
 
   return (
