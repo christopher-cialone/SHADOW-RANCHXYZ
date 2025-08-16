@@ -362,6 +362,7 @@ export default function MindmapPage() {
   }, [nodes, links]);
 
   const handleSuggestAddition = () => {
+    console.log('Suggest Addition button clicked!');
     const subject = "Mindmap Suggestion";
     const body = `Please provide the following information for your suggestion:
 
@@ -369,7 +370,9 @@ export default function MindmapPage() {
       - Blurb (a brief, neutral explanation):
       - Source Link (must be a verifiable source):
       - Connection (which existing node should this connect to?):`;
-    window.location.href = `mailto:contributions@shadowranch.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:chris@bullrunboost.xyz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    console.log('Opening mailto link:', mailtoLink);
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -458,8 +461,13 @@ export default function MindmapPage() {
                 Help expand this comprehensive Web3 history with sourced contributions.
               </p>
               <button
-                onClick={handleSuggestAddition}
-                className="w-full bg-gray-800 hover:bg-gray-700 text-cyan-400 hover:text-cyan-300 font-mono py-3 px-4 rounded-lg text-sm border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-200"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Button click event triggered');
+                  handleSuggestAddition();
+                }}
+                className="w-full bg-gray-800 hover:bg-gray-700 text-cyan-400 hover:text-cyan-300 font-mono py-3 px-4 rounded-lg text-sm border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-200 cursor-pointer"
+                type="button"
               >
                 Suggest an Addition
               </button>
