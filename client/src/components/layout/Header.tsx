@@ -18,6 +18,7 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
     { href: "/mindmap", label: "Mindmap" },
     { href: "/lessons", label: "Lessons" },
     { href: "/ranch", label: "My Ranch" },
+    { href: "/profile", label: "Profile" },
   ];
 
   const toggleMobileMenu = () => {
