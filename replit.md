@@ -1,234 +1,63 @@
 # Shadow Ranch - Solana Learning Game
 
 ## Overview
+Shadow Ranch is a gamified educational platform designed to teach Solana blockchain development within an immersive Western-themed environment. It enables users to learn Rust, Anchor, and Solana development concepts by completing coding challenges, earning rewards, and building a virtual ranch. The project aims to combine full-stack web architecture with engaging game mechanics to provide an interactive learning experience. Key capabilities include interactive coding lessons with a Monaco editor, real-time code validation, a virtual ranch management system, and NFT reward collection.
 
-Shadow Ranch is a gamified educational platform that teaches Solana blockchain development through an immersive Western-themed experience. Students complete coding challenges, earn rewards, and build their virtual ranch while learning Rust, Anchor, and Solana development concepts.
-
-The application combines a full-stack web architecture with game mechanics, featuring:
-- Interactive coding lessons with Monaco editor
-- Real-time code validation and feedback
-- Virtual ranch management system
-- NFT reward collection
-- Progressive skill building
+## User Preferences
+Preferred communication style: Simple, everyday language.
 
 ## System Architecture
+The application features a full-stack architecture with distinct frontend and backend components.
 
 ### Frontend Architecture
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite for fast development and optimized builds
-- **Routing**: Wouter for lightweight client-side routing
-- **State Management**: Zustand for global state (lessons, game data, ranch)
-- **UI Framework**: Custom Western-themed components built on Radix UI primitives
-- **Styling**: Tailwind CSS with custom Western and tech themes
-- **Code Editor**: Monaco Editor for in-browser code editing
+-   **Framework**: React 18 with TypeScript.
+-   **Build Tool**: Vite.
+-   **Routing**: Wouter.
+-   **State Management**: Zustand for global state.
+-   **UI Framework**: Custom Western-themed components built on Radix UI primitives.
+-   **Styling**: Tailwind CSS with custom themes.
+-   **Code Editor**: Monaco Editor for in-browser code editing.
 
 ### Backend Architecture
-- **Runtime**: Node.js with Express.js
-- **Language**: TypeScript with ES modules
-- **API Pattern**: RESTful APIs for lesson and progress management
-- **Development**: Hot reloading with Vite middleware integration
+-   **Runtime**: Node.js with Express.js.
+-   **Language**: TypeScript with ES modules.
+-   **API Pattern**: RESTful APIs for lesson and progress management.
 
 ### Data Storage Strategy
-The application implements a flexible storage interface pattern:
-- **Interface**: `IStorage` defines all data operations
-- **Current Implementation**: In-memory storage with Zustand persistence
-- **Future Ready**: Prepared for PostgreSQL with Drizzle ORM
-- **Firebase Integration**: Partial Firestore implementation available
-- **Schema**: Comprehensive database schema defined in `shared/schema.ts`
+-   **Interface**: `IStorage` for data operations.
+-   **Current Implementation**: In-memory storage with Zustand persistence.
+-   **Future Ready**: Prepared for PostgreSQL with Drizzle ORM.
+-   **Schema**: Defined in `shared/schema.ts`.
 
-## Key Components
+### Key Components
+-   **Lesson System**: Multi-step coding challenges with content stored in TypeScript data files, featuring pattern-matching validation and progress tracking.
+-   **Game Mechanics**: Includes virtual ranch management, a ranch coin currency system, experience points (XP) with leveling, and visual effects for achievements.
+-   **Code Editor Integration**: Monaco Editor with syntax highlighting for Rust and Python, real-time validation, and code templates.
+-   **UI/UX Design**: Dual theming (Western aesthetic + tech styling), responsive design, accessibility built on Radix UI, and custom CSS animations.
 
-### Lesson System
-- **Structure**: Multi-step coding challenges with progressive difficulty
-- **Content**: Lessons stored in TypeScript data files for easy modification
-- **Validation**: Pattern-matching for code completion verification
-- **Progress Tracking**: Step-by-step completion with attempt counting
+### Data Flow
+Lessons are loaded from static files, user code is validated, progress is updated to persistent storage, rewards are distributed, and the ranch state is updated based on purchases.
 
-### Game Mechanics
-- **Ranch Management**: Virtual ranch with buildings, characters, and resources
-- **Currency System**: Ranch coins earned through lesson completion
-- **Experience Points**: XP system with leveling mechanics
-- **Visual Effects**: Animated feedback for achievements and interactions
-
-### Code Editor Integration
-- **Monaco Editor**: Full-featured code editor with syntax highlighting
-- **Language Support**: Rust and Python with extensible template system
-- **Real-time Validation**: Immediate feedback on code submission
-- **Code Templates**: Pre-built starting points for each lesson
-
-### UI/UX Design
-- **Theming**: Dual theme system (Western aesthetic + tech styling)
-- **Responsive**: Mobile-friendly design with adaptive layouts
-- **Accessibility**: Built on Radix UI for screen reader support
-- **Animations**: Custom CSS animations for engagement
-
-## Data Flow
-
-1. **Lesson Loading**: Lessons loaded from static data files, progress retrieved from storage
-2. **Code Execution**: User code validated against expected patterns, results processed
-3. **Progress Updates**: Completion status saved to persistent storage
-4. **Reward Distribution**: Game state updated with coins, XP, and unlocked content
-5. **Ranch Updates**: Building/character purchases modify ranch state
+### Deployment Strategy
+-   **Replit Configuration**: Node.js 20 and PostgreSQL 16 modules enabled. `npm run dev` for concurrent frontend/backend development.
+-   **Build Process**: Vite compiles the frontend, ESBuild bundles the Express server, and the production server serves static assets.
+-   **Database Migration**: Drizzle Kit handles schema migrations using `DATABASE_URL` environment variable.
 
 ## External Dependencies
 
 ### Core Libraries
-- **React Ecosystem**: React 18, React DOM, React Query for server state
-- **Development**: Vite, TypeScript, ESBuild for production builds
-- **UI Foundation**: Radix UI primitives, Tailwind CSS, Lucide icons
-- **Code Editor**: Monaco Editor with syntax highlighting
+-   **React Ecosystem**: React 18, React DOM, React Query.
+-   **Development**: Vite, TypeScript, ESBuild.
+-   **UI Foundation**: Radix UI primitives, Tailwind CSS, Lucide icons.
+-   **Code Editor**: Monaco Editor.
 
 ### Database & Storage
-- **Drizzle ORM**: Type-safe database queries (PostgreSQL ready)
-- **Neon Database**: Serverless PostgreSQL driver configured
-- **Firebase**: Optional Firestore integration available
-- **Zustand**: Client-side state persistence
+-   **Drizzle ORM**: Type-safe database queries.
+-   **Neon Database**: Serverless PostgreSQL driver.
+-   **Firebase**: Optional Firestore integration.
+-   **Zustand**: Client-side state persistence.
 
 ### Development Tools
-- **Hot Reloading**: Vite dev server with Express integration
-- **Type Safety**: Strict TypeScript configuration
-- **Path Aliases**: Configured for clean imports (`@/`, `@shared/`)
-
-## Deployment Strategy
-
-### Replit Configuration
-- **Environment**: Node.js 20, PostgreSQL 16 modules enabled
-- **Development**: `npm run dev` starts concurrent frontend/backend
-- **Production**: Build process creates optimized static assets and server bundle
-- **Port Configuration**: Backend serves on port 5000, Vite dev on 5173
-
-### Build Process
-1. **Frontend Build**: Vite compiles React app to `dist/public`
-2. **Backend Build**: ESBuild bundles Express server to `dist/index.js`
-3. **Static Serving**: Production server serves built frontend assets
-4. **API Routes**: Backend handles `/api/*` requests
-
-### Database Migration
-- **Schema Management**: Drizzle Kit handles database migrations
-- **Environment Variables**: `DATABASE_URL` required for PostgreSQL connection
-- **Push Command**: `npm run db:push` applies schema changes
-
-## Changelog
-
-```
-Changelog:
-- August 17, 2025: Production-Level User Profile System Implementation
-  - Built comprehensive Firebase Firestore-based user profile system with persistence
-  - Created responsive ProfilePage with mobile-first design and desktop layouts
-  - Implemented ProfileHeader component with avatar, wallet address, and bio display
-  - Built AchievementGallery with responsive grid system and rarity-based badge display
-  - Created ProfileEditorModal with Firebase Storage integration for profile image uploads
-  - Added complete NFT badge system with 6 default achievement types and SVG assets
-  - Enhanced Firebase integration with user profile management and storage functions
-  - Integrated profile routing (/profile/:publicKey) into main application navigation
-  - Applied consistent Blueshift aesthetic with dark themes and cyan accents throughout
-  - Implemented production-ready error handling, loading states, and user feedback systems
-- August 17, 2025: Lightning-Fast Local Storage Performance Optimization
-  - Implemented high-speed local storage fallback system for instant profile operations
-  - Created LocalProfileStorage class with millisecond-level response times
-  - Added FastProfile wrapper for seamless instant profile CRUD operations
-  - Built performance monitoring with SpeedTestButton for real-time speed demonstrations
-  - Created PerformanceNotice component to inform users of lightning-fast operations
-  - Developed useFastProfile hook for instant profile state management
-  - Resolved Firebase transport errors by providing local-first architecture
-  - All profile operations (create, read, update, image upload, badge unlock) now instant
-- August 16, 2025: Updated Shadow Ranch Transparent Logo Implementation
-  - Replaced all branding assets with new transparent "@shadow ranch.xyz" logo
-  - Updated Open Graph image, Twitter image, and home page hero with full branding
-  - Updated header navigation with neon cyan "@sr" logo for clean menu display
-  - Updated favicon with high-contrast white "@sr" logo on black for maximum browser visibility
-  - Maintained consistent branding across all touchpoints with transparent backgrounds
-  - Enhanced social media sharing with professional logo presentation
-- August 16, 2025: Complete Mind Map Restructure - "History of the Internet" as Central Node
-  - Fundamentally restructured mindmap with "History of the Internet" as central starting point
-  - Reorganized all major topics as primary branches stemming from internet evolution:
-    * ARPANET (1960s) - decentralized military origins
-    * Web 1.0 (1990s) - read-only era with Netscape and CDA Section 230
-    * Web 2.0 (2000s-Present) - centralized platforms and surveillance capitalism
-    * Cryptography - mathematical foundations with Public-Key Crypto, Crypto Wars, David Chaum
-    * The Cypherpunk Movement - philosophical architects with key individuals and Bitcoin
-    * The Smart Contract Revolution - Ethereum era with Nick Szabo, Vitalik, Gavin Wood, Solana
-    * The Intelligence Connection - DARPA's dual legacy, Whitney Webb, Total Information Awareness
-    * The Legal Battlefield - Roman Storm, Roger Ver, "Code is Speech" debate
-    * Corporate Co-option vs. Ethos - CEX centralization, fake decentralization, VC influence
-  - Implemented user contribution system with "Suggest an Addition" feature
-  - Created mailto functionality for community-sourced expansion (contributions@shadowranch.xyz)
-  - Enhanced as comprehensive living document with verifiable sources for all data points
-  - Updated page title to "History of the Internet: A Living Document"
-  - Maintained all D3.js interactive features with new central node structure
-- August 15, 2025: Complete Typography Migration to SpaceGothic Font
-  - Migrated all heading elements (h1, h2, h3) from Data70 font to SpaceGothic font
-  - Updated header branding text to use consistent "brb: shadow ranch" with SpaceGothic styling
-  - Replaced font-data70, font-tech, font-titulo, and font-deputy classes with font-space-gothic
-  - Applied changes across 30+ components and pages for complete visual consistency
-  - Maintained Blueshift aesthetic with black backgrounds and cyan/purple accents
-  - Enhanced typography hierarchy with SpaceGothic for all major headings and branding elements
-- August 2, 2025: Mobile-First Ethos Page Redesign with Accordion Navigation
-  - Completely redesigned CypherpunksEthos page with mobile-optimized accordion system
-  - Implemented responsive design: collapsible accordions for mobile, card layout for desktop
-  - Added sticky tabbed navigation with smooth scrolling and active section highlighting
-  - Created touch-friendly controls with proper tap targets (44px minimum) for mobile accessibility
-  - Enhanced video player with disabled autoplay and elegant play button overlay
-  - Built intelligent accordion system with expand/collapse animations and visual feedback
-  - Added responsive tab navigation with horizontal scrolling on mobile devices
-  - Maintained Blueshift aesthetic with black backgrounds and cyan/purple accents
-  - Fixed TypeScript errors and improved cross-browser compatibility
-- August 2, 2025: Enhanced Crypto Wars Timeline UX with Automated Progression
-  - Completely rebuilt CryptoWarsTimeline component with automated progression and mobile responsiveness
-  - Added intelligent control panel with play/pause, navigation, and progress tracking
-  - Implemented smooth scrolling and progressive revelation of timeline events
-  - Enhanced mobile layout with responsive design and touch-friendly controls
-  - Added visual effects: active event highlighting, pulse animations, and fade-in transitions
-  - Integrated completion callbacks for seamless module progression
-  - Expanded timeline with additional historical crypto events (SSL, AES)
-  - Applied consistent Blueshift design aesthetic with black backgrounds and cyan accents
-- August 1, 2025: Enhanced Wallet Integration to MVP Standards
-  - Created comprehensive WalletConnectButton component matching MVP requirements
-  - Added wallet selection modal with Phantom, Solflare, and Ledger options
-  - Implemented proper error handling and user feedback systems
-  - Enhanced UI with truncated address display and responsive design
-  - Updated header navigation to use improved wallet component
-  - Application now fully meets and exceeds MVP specifications for Solana wallet integration
-- July 27, 2025: Module 3 "From Mailing List to Mainnet" Implementation
-  - Created comprehensive Module 3 connecting cypherpunk philosophy to Bitcoin's creation
-  - Built interactive educational components with declassified archive aesthetic:
-    * Double-spend problem demonstration with animated coin duplication attack
-    * Satoshi Nakamoto's original mailing list message with decryption animation
-    * "Connecting the Dots" game linking cypherpunk concepts to Bitcoin features
-    * DAO Hack dilemma exploring governance tensions with reflective exercise
-  - Enhanced progress tracking to support 6-module curriculum structure
-  - Updated dashboard navigation for Module 3 integration (50% completion)
-  - Maintained consistent cyber-punk tech aesthetic throughout all components
-- July 26, 2025: Dual-Track Learning System with Module 2 Implementation
-  - Split lessons into two distinct tracks: "The Cypherpunk Legacy" and "Solana Corps of Engineers"
-  - Implemented comprehensive progress tracking system with Zustand persistence
-  - Created Module 2: "The Pillars of a Free Internet" with interactive components:
-    * Privacy scenario simulation with real-world journalism case study
-    * Anonymous remailer demonstration with visual message routing
-    * Network decentralization comparison (centralized vs. mesh networks)
-    * Interactive failure simulations showing resilience differences
-  - Enhanced dashboard with dynamic progress bars and track completion indicators
-  - Added intelligent module routing based on user progress
-  - Maintained consistent tech aesthetic with cyan/purple gradient themes
-- June 18, 2025: Enhanced V6 Interactive Ethos Implementation Complete
-  - Rebuilt comprehensive cypherpunk ethos curriculum (Modules 0-3)
-  - Added interactive quiz system with multiple question types (text-input, multiple-choice, true-false)
-  - Enhanced lesson interface with video embedding capability
-  - Fixed TypeScript errors and code template system
-  - Implemented proper quiz validation and feedback system
-  - Added visual enhancements for narrative-based learning
-  - Completed comprehensive code templates for all ethos lessons
-- June 17, 2025: Implemented comprehensive cypherpunk ethos and history curriculum
-  - Added foundational lessons (Modules 0-3) covering digital freedom philosophy
-  - Created narrative-based learning system with non-coding steps
-  - Enhanced lesson interface to support both coding and philosophical content
-  - Added new visual effects and code templates for ethos lessons
-  - Restructured lesson progression: ethos foundations → technical implementation
-- June 15, 2025. Initial setup
-```
-
-## User Preferences
-
-```
-Preferred communication style: Simple, everyday language.
-```
+-   **Hot Reloading**: Vite dev server.
+-   **Type Safety**: Strict TypeScript configuration.
+-   **Path Aliases**: Configured for clean imports.
