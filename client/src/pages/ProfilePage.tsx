@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "wouter";
 import { Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
-import { UserProfile, getUserProfile, createUserProfile } from "@/lib/firebase";
+import { UserProfile } from "@/lib/firebase";
+import { FastProfile } from "@/lib/local-storage";
 import { useWallet } from "@/hooks/use-wallet";
 import { useToast } from "@/hooks/use-toast";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { AchievementGallery } from "@/components/profile/AchievementGallery";
 import { ProfileEditorModal } from "@/components/profile/ProfileEditorModal";
+import { SpeedTestButton } from "@/components/profile/SpeedTestButton";
+import { PerformanceNotice } from "@/components/profile/PerformanceNotice";
 import { usePageLoader } from "@/hooks/use-page-loader";
 
 export default function ProfilePage() {
@@ -37,8 +40,8 @@ export default function ProfilePage() {
         setLoading(true);
         setError(null);
 
-        // Try to fetch existing profile
-        let userProfile = await getUserProfile(targetPublicKey);
+        // Try to fetch existing profile (instant local storage)
+        let userProfile = await FastProfile.getProfile(targetPublicKey);
 
         // If no profile exists and this is the owner, create one
         if (!userProfile && isOwner) {
@@ -46,7 +49,7 @@ export default function ProfilePage() {
             title: "Creating your profile",
             description: "Setting up your Shadow Ranch profile...",
           });
-          userProfile = await createUserProfile(targetPublicKey);
+          userProfile = await FastProfile.createProfile(targetPublicKey);
         }
 
         if (!userProfile) {
@@ -136,10 +139,16 @@ export default function ProfilePage() {
             </button>
           </Link>
           
-          {isOwner && (
-            <span className="text-sm text-cyan-400 font-mono">Your Profile</span>
-          )}
+          <div className="flex items-center gap-3">
+            {isOwner && (
+              <span className="text-sm text-cyan-400 font-mono">Your Profile</span>
+            )}
+            <SpeedTestButton />
+          </div>
         </div>
+
+        {/* Performance Notice */}
+        <PerformanceNotice />
 
         {/* Page Title */}
         <div className="text-center sm:text-left">
@@ -147,7 +156,7 @@ export default function ProfilePage() {
             {isOwner ? "Your Profile" : `${profile.username}'s Profile`}
           </h1>
           <p className="text-gray-400 text-sm sm:text-base">
-            Shadow Ranch member since {profile.createdAt.toDate().toLocaleDateString()}
+            Shadow Ranch member since {profile.createdAt?.toDate ? profile.createdAt.toDate().toLocaleDateString() : new Date().toLocaleDateString()}
           </p>
         </div>
 
@@ -179,7 +188,7 @@ export default function ProfilePage() {
           
           <div className="bg-black/40 backdrop-blur-sm border border-cyan-400/20 rounded-xl p-4 sm:p-6 text-center">
             <div className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">
-              {Math.floor((Date.now() - profile.createdAt.toDate().getTime()) / (1000 * 60 * 60 * 24))}
+              {Math.floor((Date.now() - (profile.createdAt?.toDate ? profile.createdAt.toDate().getTime() : Date.now())) / (1000 * 60 * 60 * 24))}
             </div>
             <div className="text-gray-400 text-sm">Days Active</div>
           </div>

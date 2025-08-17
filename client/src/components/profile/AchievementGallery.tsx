@@ -115,7 +115,7 @@ export function AchievementGallery({ badges }: AchievementGalleryProps) {
               <div className="text-gray-300 text-xs mt-1">{badge.description}</div>
               {badge.unlocked && badge.unlockedAt && (
                 <div className="text-cyan-400 text-xs mt-1">
-                  Unlocked: {badge.unlockedAt.toDate().toLocaleDateString()}
+                  Unlocked: {badge.unlockedAt?.toDate ? badge.unlockedAt.toDate().toLocaleDateString() : 'Recently'}
                 </div>
               )}
               {/* Tooltip Arrow */}
