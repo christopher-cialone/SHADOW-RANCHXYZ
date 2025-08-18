@@ -3,6 +3,7 @@ import { TechButton } from "@/components/ui/TechButton";
 import { TechCard } from "@/components/ui/TechCard";
 import { usePageLoader } from "@/hooks/use-page-loader";
 import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
+import { solanaCodingLessons } from '@/data/lessons';
 
 export default function Lessons() {
   const [, setLocation] = useLocation();
@@ -144,18 +145,12 @@ export default function Lessons() {
               </p>
 
               <div className="space-y-3 mb-8">
-                <div className="flex items-center text-sm text-gray-400">
-                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
-                  Rust Fundamentals
-                </div>
-                <div className="flex items-center text-sm text-gray-400">
-                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
-                  Anchor Framework
-                </div>
-                <div className="flex items-center text-sm text-gray-400">
-                  <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
-                  Program Development
-                </div>
+                {solanaCodingLessons.map(lesson => (
+                  <div key={lesson.id} className="flex items-center text-sm text-gray-400">
+                    <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+                    {lesson.title}
+                  </div>
+                ))}
               </div>
 
               <div className="flex justify-between items-center mb-6">

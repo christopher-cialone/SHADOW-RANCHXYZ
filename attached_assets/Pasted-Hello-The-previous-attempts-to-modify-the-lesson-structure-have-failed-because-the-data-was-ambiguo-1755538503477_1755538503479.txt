@@ -1,0 +1,88 @@
+Hello! The previous attempts to modify the lesson structure have failed because the data was ambiguous. This prompt provides the exact code needed to fix the problem. Please follow these instructions carefully.
+
+Task 1: Replace the Lesson Data Logic
+The root of the problem is in the lesson data file. We will replace the existing structure with a new, unambiguous one.
+
+Navigate to the file where the lesson data is stored, which is likely src/data/lessons.ts.
+
+Delete the entire contents of this file.
+
+Replace it with the following code. This code adds a track property to each lesson, then creates a clean, re-indexed array containing only the Solana coding lessons.
+
+TypeScript
+
+// PASTE THIS ENTIRE CODE BLOCK INTO src/data/lessons.ts
+
+export interface Lesson {
+  id: number;
+  title: string;
+  track: 'cypherpunk' | 'solana-ethos' | 'solana-code'; // Explicit track identifier
+  // Add any other properties your lessons have, like 'content', 'description', etc.
+}
+
+// This is the master list of all lessons
+export const allLessons: Lesson[] = [
+  // --- IMPORTANT ---
+  // You must add your Cypherpunk track lessons here with 'track: "cypherpunk"'
+  // Example: { id: 101, title: "Cypherpunk Ethos 1", track: 'cypherpunk', ... },
+
+  // SOLANA TRACK LESSONS (OLD STRUCTURE)
+  { id: 1, title: "The Digital Frontier's Code of Honor", track: 'solana-ethos' },
+  { id: 2, title: "Echoes from the Old World", track: 'solana-ethos' },
+  { id: 3, title: "Principles of Privacy", track: 'solana-ethos' },
+  { id: 4, title: "Decentralized Identity", track: 'solana-ethos' },
+  { id: 5, title: "Rust Fundamentals", track: 'solana-code' },
+  { id: 6, title: "Anchor Framework Basics", track: 'solana-code' },
+  { id: 7, title: "Program Development", track: 'solana-code' },
+  // Add any other original Solana lessons here...
+];
+
+// Filter for ONLY the solana-code lessons
+const solanaCodingLessonsRaw = allLessons.filter(lesson => lesson.track === 'solana-code');
+
+// Re-index the filtered lessons so their IDs start from 1
+export const solanaCodingLessons = solanaCodingLessonsRaw.map((lesson, index) => ({
+  ...lesson,
+  id: index + 1, // This makes the old lesson 5 become the new lesson 1
+}));
+
+// Filter for the Cypherpunk lessons
+export const cypherpunkLessons = allLessons.filter(lesson => lesson.track === 'cypherpunk');
+
+// Combine the final, cleaned arrays into one export for the app to use
+export const lessons = [...cypherpunkLessons, ...solanaCodingLessons];
+
+Task 2: Update the Lessons Page UI
+Now, we will update the UI to display this new, clean list of Solana lessons dynamically.
+
+Navigate to the file src/pages/Lessons.tsx.
+
+Find the div for the "Solana Program Development" card.
+
+Locate the hardcoded list of lessons (the bullet points for "Rust Fundamentals," etc.).
+
+Delete that entire hardcoded list.
+
+Replace it with the following JSX code snippet, which will render the list dynamically from our new data source.
+
+TypeScript
+
+// PASTE THIS SNIPPET INTO THE SOLANA CARD in src/pages/Lessons.tsx
+
+// First, make sure to import the new data at the top of the file
+import { solanaCodingLessons } from '@/data/lessons';
+
+
+// Then, find the right place inside the TechCard and insert this block
+<div className="space-y-3 mb-8">
+  {solanaCodingLessons.map(lesson => (
+    <div key={lesson.id} className="flex items-center text-sm text-gray-400">
+      <span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+      {lesson.title}
+    </div>
+  ))}
+</div>
+Task 3: Final Verification
+While still in src/pages/Lessons.tsx, find the "START SOLANA TRACK" button.
+
+Ensure its onClick handler navigates to the first lesson of our new, clean list. The navigation path should be /lessons/1 (or whatever the ID is for the first lesson in the solanaCodingLessons array).

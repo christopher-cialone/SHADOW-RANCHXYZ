@@ -13,7 +13,7 @@ import { useLessonStore } from "@/hooks/use-lesson-store";
 import { useGameStore } from "@/hooks/use-enhanced-game-store";
 import { useToast } from "@/hooks/use-toast";
 import { formatRanchCoin } from "@/lib/utils";
-import { lessons, type LessonData } from "@/data/lessons";
+import { solanaCodingLessons, type Lesson } from "@/data/lessons";
 import { usePageLoader } from "@/hooks/use-page-loader";
 import nftRobotUrl from "@assets/brb-nft-ai-robot.png";
 
@@ -32,7 +32,7 @@ export default function LessonDetail() {
   const hintCharacterRef = useRef<HintCharacterRef>(null);
 
   // Get lesson from client-side data
-  const lesson = lessons.find(l => l.id === lessonId);
+  const lesson = solanaCodingLessons.find(l => l.id === lessonId);
 
   const { getLessonProgress, updateLessonAttempt, completeLesson, completeStep, isStepCompleted, setCurrentLesson } = useLessonStore();
   const { 
