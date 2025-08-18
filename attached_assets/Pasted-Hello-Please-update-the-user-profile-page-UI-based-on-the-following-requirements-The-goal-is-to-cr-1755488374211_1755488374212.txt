@@ -1,0 +1,32 @@
+Hello! Please update the user profile page UI based on the following requirements. The goal is to create a cleaner, more professional, and user-friendly experience by removing outdated testing elements and redesigning the achievements section.
+
+1. Remove All Testing and Debugging Elements:
+The profile page currently contains several elements that were used for testing and troubleshooting. These are no longer needed and should be removed completely from the user's view.
+
+Remove the "Server-Side Firebase Architecture" Banner: Delete the entire notification banner at the top of the content area that explains the backend architecture. This is developer information and not relevant to the user.
+
+Remove the "Speed Test" Button: Delete the "Speed Test" button and its associated icon located in the top-right corner, next to the user's profile dropdown.
+
+Remove Redundant User ID: The user's full ID (CTzd...KbdF) is displayed twice. Remove the instance located directly under the main "User_CTzdKU" heading. The ID in the top-right navigation bar is sufficient.
+
+2. Redesign the "Achievements" Card:
+The current achievements card is cluttered and the icons overlap, making it difficult to read. Let's redesign it for clarity and better visual appeal, using a grid layout.
+
+Layout: Change the layout to a clean 2x3 grid. This will provide ample space for each achievement, prevent overlap, and create a structured look.
+
+Achievement Item Design:
+
+Each item in the grid should consist of an icon and its name displayed directly below it.
+
+Locked State: For achievements the user has not unlocked, the icon should be grayed out (e.g., opacity: 0.4) and display a "lock" symbol. The name text should also be grayed out.
+
+Unlocked State: For unlocked achievements, the icon should be fully colored (using our theme's primary or accent color) and the name text should be bright and clear.
+
+Spacing: Ensure there is adequate padding within the card and consistent spacing between each grid item to give the design room to breathe.
+
+Title: Keep the "Achievements" title and the "X/6 Unlocked" counter as they are, but ensure they are aligned cleanly with the new grid container.
+
+Please apply these changes to create a more polished and intuitive profile page for our users."
+
+This prompt clearly outlines the "what" and the "why" for each change, which should give the agent everything it needs to execute the vision. Let me know what you think!
+

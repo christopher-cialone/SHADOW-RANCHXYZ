@@ -69,6 +69,13 @@ export function ProfileHeader({ profile, isOwner, onEditClick }: ProfileHeaderPr
             {profile.username}
           </h1>
 
+          {/* Bio */}
+          {profile.bio && (
+            <p className="text-gray-300 text-sm sm:text-base mb-3 max-w-md">
+              {profile.bio}
+            </p>
+          )}
+
           {/* Wallet Address */}
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2 mb-3">
             <span className="font-mono text-sm sm:text-base text-gray-300">

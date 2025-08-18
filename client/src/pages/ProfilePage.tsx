@@ -9,8 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { AchievementGallery } from "@/components/profile/AchievementGallery";
 import { ProfileEditorModal } from "@/components/profile/ProfileEditorModal";
-import { SpeedTestButton } from "@/components/profile/SpeedTestButton";
-import { PerformanceNotice } from "@/components/profile/PerformanceNotice";
+
 import { usePageLoader } from "@/hooks/use-page-loader";
 
 export default function ProfilePage() {
@@ -139,16 +138,10 @@ export default function ProfilePage() {
             </button>
           </Link>
           
-          <div className="flex items-center gap-3">
-            {isOwner && (
-              <span className="text-sm text-cyan-400 font-mono">Your Profile</span>
-            )}
-            <SpeedTestButton />
-          </div>
+          {isOwner && (
+            <span className="text-sm text-cyan-400 font-mono">Your Profile</span>
+          )}
         </div>
-
-        {/* Performance Notice */}
-        <PerformanceNotice />
 
         {/* Page Title */}
         <div className="text-center sm:text-left">
