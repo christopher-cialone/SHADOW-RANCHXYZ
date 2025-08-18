@@ -6,7 +6,7 @@ import { NarrativeBox } from "@/components/lessons/NarrativeBox";
 import { LessonLayout } from "@/components/lessons/LessonLayout";
 import { QuizStep } from "@/components/lessons/QuizStep";
 import { CodingStep } from "@/components/lessons/CodingStep";
-
+import { HintCharacter, type HintCharacterRef } from "@/components/lessons/HintCharacter";
 import { ChallengeReward } from "@/components/game/ChallengeReward";
 import { GameCanvas } from "@/components/game/GameCanvas";
 import { useLessonStore } from "@/hooks/use-lesson-store";
@@ -29,7 +29,7 @@ export default function LessonDetail() {
   
   usePageLoader();
   
-
+  const hintCharacterRef = useRef<HintCharacterRef>(null);
 
   // Get lesson from client-side data
   const lesson = lessons.find(l => l.id === lessonId);
@@ -66,7 +66,13 @@ export default function LessonDetail() {
       setStepCompleted(false);
       setValidationResults(null);
 
-
+      // Proactive Hint for Lesson 1, Step 1 (onboarding assistance)
+      if (lesson.id === 1 && currentStep === 1) {
+        const initialHint = lesson.content.steps[0].hintMessage || "Welcome! Let's get started on your Solana Adventure!";
+        setTimeout(() => {
+          hintCharacterRef.current?.showHint(initialHint);
+        }, 1000); // Show hint after 1 second delay for better UX
+      }
     }
   }, [lesson, lessonId, currentStep, language]);
 
@@ -129,7 +135,10 @@ export default function LessonDetail() {
     triggerSparkleAnimation();
     triggerCoinFall();
     
-
+    // Enhanced success feedback with hint character
+    hintCharacterRef.current?.showHint(
+      `Excellent work! You've completed ${lesson?.title} - Step ${currentStep}. Moving to the next challenge!`
+    );
     
     toast({
       title: "Step Completed!",
@@ -299,7 +308,22 @@ export default function LessonDetail() {
                     </div>
                   </NarrativeBox>
 
-
+                  {currentStepData.hintMessage && (
+                    <div className="bg-gradient-to-r from-tech-pink-800/30 to-tech-pink-700/30 border border-tech-pink-600 p-4 rounded-lg">
+                      <TechButton 
+                        variant="accent"
+                        className="w-full"
+                        onClick={() => {
+                          if (currentStepData.hintMessage) {
+                            hintCharacterRef.current?.showHint(currentStepData.hintMessage);
+                          }
+                        }}
+                      >
+                        <span className="mr-2">🤖</span>
+                        REQUEST AI ASSISTANCE
+                      </TechButton>
+                    </div>
+                  )}
                 </>
               )}
             </div>
@@ -361,7 +385,12 @@ export default function LessonDetail() {
         </div>
       </div>
 
-
+      {/* Hint Character */}
+      <HintCharacter 
+        ref={hintCharacterRef} 
+        stepHints={currentStepData?.hintMessage ? [currentStepData.hintMessage] : []}
+        currentStep={currentStep}
+      />
       
       {/* Challenge Reward Overlay */}
       <ChallengeReward
