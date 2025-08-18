@@ -1,0 +1,38 @@
+"Hello! We need to restructure the Solana Developer Track to improve user experience and focus on the core coding lessons. This involves removing the first four introductory lessons and re-indexing the remaining lessons.
+
+1. Modify Lesson Data Source:
+
+Locate the file where the lesson data is stored (likely src/data/lessons.ts or a similar file).
+
+In the lessons array, find the objects corresponding to the Solana track.
+
+Delete the first four lesson objects from this array (the ones that were previously lessons 1, 2, 3, and 4).
+
+Update the id property of the remaining Solana lessons. The lesson that was originally id: 5 should now be id: 1, the one that was id: 6 should be id: 2, and so on. Ensure the IDs are sequential and correct.
+
+2. Update Navigation in Lessons.tsx:
+
+Open the src/pages/Lessons.tsx file.
+
+Find the "Solana Program Development" card.
+
+Locate the onClick handler for the "START SOLANA TRACK" button.
+
+The current navigation is likely setLocation('/lessons/1') or similar. Confirm this directs to the new first lesson of the Solana track. Since we've re-indexed the lessons, this might already be correct, but it's crucial to verify the id it's pointing to is now the new lesson 1 (the old lesson 5). If the old lessons had different IDs (e.g., starting from a higher number), update the navigation to point to the correct new starting ID.
+
+3. Ensure LessonDetail.tsx Handles New IDs:
+
+Open the src/pages/LessonDetail.tsx file.
+
+Review the logic that fetches the lesson data: const lesson = lessons.find(l => l.id === lessonId);. This logic is dynamic and should work correctly with the new IDs without any changes.
+
+However, pay close attention to the handleNext function. The logic window.location.href = \/lessons/${lessonId + 1}`;` assumes that all lesson IDs are sequential. After your changes, this should hold true, but it's a key area to double-check to prevent future navigation bugs.
+
+4. Reset User Progress (Important):
+
+Because we are fundamentally changing the lesson structure, existing user progress for the Solana track will be invalid.
+
+Open the store responsible for lesson progress (likely src/hooks/use-lesson-store.ts or similar).
+
+Add a function to reset or clear the progress specifically for the old, now-deleted lesson IDs. You can call this once manually or build logic to clear it for users to ensure no one is stuck on a non-existent lesson. A simple approach is to clear all lesson progress from local storage to start fresh.
+
