@@ -63,16 +63,14 @@ export function LessonLayout({
           </div>
         </div>
       </div>
-
       {/* Main Content - Scrollable with proper padding */}
       <main className="flex-grow overflow-y-auto pt-[120px] pb-[80px]">
         <div className="container mx-auto px-4 py-6">
           {children}
         </div>
       </main>
-
       {/* Bottom Navigation - Transparent Background */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 w-full">
+      <div className="fixed bottom-0 left-0 right-0 z-30 w-full pl-[0px] pr-[0px] pt-[10px] pb-[10px] mt-[60px] mb-[60px]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <TechButton
