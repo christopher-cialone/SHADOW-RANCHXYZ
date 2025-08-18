@@ -1,0 +1,45 @@
+We're encountering a looping issue in our lesson progression, specifically in the Solana track. Please perform the following tasks to fix the bug and improve the code structure.
+
+1. Fix the Step Progression Logic:
+
+The primary issue is that after a user successfully completes step 1 of a lesson (a quiz), they are not able to proceed to step 2. This is likely due to a state management problem in LessonDetail.tsx.
+
+In LessonDetail.tsx, modify the handleQuizValidate function:
+
+After a correct answer is submitted and completeStep(lessonId, currentStep) is called, ensure the UI state updates immediately to reflect that the step is complete.
+
+Set a new state variable, let's call it stepCompleted, to true within this function. This will ensure that the component re-renders with the correct state.
+
+Update the canGoToNextStep logic:
+
+Modify the canGoToNextStep variable to also check the new stepCompleted state. This will ensure that the "Next Step" button becomes active as soon as the quiz is passed.
+
+2. Refactor LessonDetail.tsx for Better Structure:
+
+The LessonDetail.tsx component is handling too many responsibilities. Let's break it down into smaller, more manageable components.
+
+Create a new component src/components/lessons/QuizStep.tsx:
+
+This component will be responsible for rendering and handling the logic for quiz steps.
+
+Move all quiz-related state (quizAnswer, selectedOption, quizSubmitted) and the handleQuizValidate function from LessonDetail.tsx into this new component.
+
+QuizStep.tsx should accept currentStepData, lessonId, and onStepComplete as props. When a quiz is successfully completed, it should call the onStepComplete callback.
+
+Create a new component src/components/lessons/CodingStep.tsx:
+
+This component will handle the logic for coding challenges.
+
+Move the MonacoEditor and related logic (handleCodeRun, handleCodeValidate) into this component.
+
+It should accept props similar to QuizStep.tsx.
+
+Update LessonDetail.tsx to use the new components:
+
+In the main return function of LessonDetail.tsx, use conditional rendering to display either <QuizStep /> or <CodingStep /> based on currentStepData.isCodingChallenge.
+
+The onStepComplete callback passed to these components will call completeStep(lessonId, currentStep) and update the necessary state to enable navigation to the next step.
+
+This refactoring will make the code more modular, easier to understand, and prevent similar state management issues in the future."
+
+This prompt provides the agent with a clear, step-by-step guide to not only fix the immediate problem but also to improve the overall architecture of your lesson system. Let me know if you have any questions!

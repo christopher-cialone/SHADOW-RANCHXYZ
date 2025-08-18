@@ -4,7 +4,8 @@ import { TechCard } from "@/components/ui/TechCard";
 import { TechButton } from "@/components/ui/TechButton";
 import { NarrativeBox } from "@/components/lessons/NarrativeBox";
 import { LessonLayout } from "@/components/lessons/LessonLayout";
-import { MonacoEditor } from "@/components/editor/MonacoEditor";
+import { QuizStep } from "@/components/lessons/QuizStep";
+import { CodingStep } from "@/components/lessons/CodingStep";
 import { HintCharacter, type HintCharacterRef } from "@/components/lessons/HintCharacter";
 import { ChallengeReward } from "@/components/game/ChallengeReward";
 import { GameCanvas } from "@/components/game/GameCanvas";
@@ -14,7 +15,6 @@ import { useToast } from "@/hooks/use-toast";
 import { formatRanchCoin } from "@/lib/utils";
 import { lessons, type LessonData } from "@/data/lessons";
 import { usePageLoader } from "@/hooks/use-page-loader";
-import { codeTemplates } from "@/data/code-templates";
 import nftRobotUrl from "@assets/brb-nft-ai-robot.png";
 
 export default function LessonDetail() {
@@ -23,12 +23,9 @@ export default function LessonDetail() {
   
   const [currentStep, setCurrentStep] = useState(1);
   const [language, setLanguage] = useState("rust");
-  const [code, setCode] = useState("");
   const [hintVisible, setHintVisible] = useState(false);
   const [validationResults, setValidationResults] = useState<any>(null);
-  const [quizAnswer, setQuizAnswer] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [stepCompleted, setStepCompleted] = useState(false);
   
   usePageLoader();
   
@@ -64,15 +61,10 @@ export default function LessonDetail() {
       if (savedProgress && savedProgress.currentStep > 0) {
         setCurrentStep(savedProgress.currentStep);
       }
-      
-      // Set starter code from templates if available
-      const step = lesson.content.steps.find((s: any) => s.id === currentStep);
-      if (step?.initialCodeTemplateKey) {
-        const template = codeTemplates[step.initialCodeTemplateKey];
-        if (template) {
-          setCode(template[language as keyof typeof template] || '');
-        }
-      }
+
+      // Reset step completion state when step changes
+      setStepCompleted(false);
+      setValidationResults(null);
 
       // Proactive Hint for Lesson 1, Step 1 (onboarding assistance)
       if (lesson.id === 1 && currentStep === 1) {
@@ -93,17 +85,17 @@ export default function LessonDetail() {
   const progressPercentage = lesson ? (currentStep / lesson.content.steps.length) * 100 : 0;
   const currentStepCompleted = isStepCompleted(lessonId, currentStep);
   
-  // Calculate navigation logic
+  // Calculate navigation logic - Updated to include stepCompleted state
   const totalStepsInCurrentLesson = lesson?.content.steps.length || 0;
   const isLastStepOfCurrentLesson = currentStep === totalStepsInCurrentLesson;
-  const canGoToNextStep = currentStep < totalStepsInCurrentLesson && currentStepCompleted;
-  const canGoToNextLesson = isLastStepOfCurrentLesson && currentStepCompleted;
+  const canGoToNextStep = currentStep < totalStepsInCurrentLesson && (currentStepCompleted || stepCompleted);
+  const canGoToNextLesson = isLastStepOfCurrentLesson && (currentStepCompleted || stepCompleted);
   
   const hasPrevious = currentStep > 1;
   const hasNext = canGoToNextStep || canGoToNextLesson;
   const nextButtonText = canGoToNextStep ? "Next Step" : (canGoToNextLesson ? "Next Lesson" : "Next");
-  const canGoNext = currentStepCompleted || validationResults?.success || false;
-  const isCompleted = isLastStepOfCurrentLesson && currentStepCompleted;
+  const canGoNext = currentStepCompleted || stepCompleted || validationResults?.success || false;
+  const isCompleted = isLastStepOfCurrentLesson && (currentStepCompleted || stepCompleted);
 
   const handleCodeRun = (data: any) => {
     if (data.success) {
@@ -113,106 +105,45 @@ export default function LessonDetail() {
     setValidationResults(data);
   };
 
-  const validateQuiz = (stepData: any) => {
-    if (!stepData.quiz) return false;
+  // Handle step completion - this will be called by child components
+  const handleStepComplete = () => {
+    updateLessonAttempt(lessonId, currentStep);
+    completeStep(lessonId, currentStep);
+    setStepCompleted(true); // Update local state immediately
     
-    const { type, correctAnswer } = stepData.quiz;
-    
-    switch (type) {
-      case 'text-input':
-        return quizAnswer.toLowerCase().trim() === String(correctAnswer).toLowerCase().trim();
-      case 'multiple-choice':
-        return selectedOption === correctAnswer;
-      case 'true-false':
-        return selectedOption === String(correctAnswer);
-      default:
-        return false;
+    // Trigger visual effects
+    if (currentStepData?.visualEffectTrigger) {
+      triggerSparkleAnimation();
     }
-  };
-
-  const handleQuizValidate = () => {
-    if (!currentStepData) return;
     
-    const isCorrect = validateQuiz(currentStepData);
+    const rewardNftUrl = lessonId === 2 && currentStep === 3 
+      ? "/assets/images/purple-box-nft.png" 
+      : nftRobotUrl;
     
-    if (isCorrect) {
-      updateLessonAttempt(lessonId, currentStep);
-      completeStep(lessonId, currentStep);
-      
-      // Trigger visual effects based on the step's configuration
-      if (currentStepData.visualEffectTrigger) {
-        triggerSparkleAnimation();
-      }
-      
-      const rewardNftUrl = nftRobotUrl;
-      triggerChallengeReward(
-        rewardNftUrl,
-        lessonId,
-        `${lesson?.title} - Step ${currentStep} Completion Badge`
-      );
-      
-      setValidationResults({
-        success: true,
-        message: currentStepData.successMessage
-      });
-      setQuizSubmitted(true);
-      
-      toast({
-        title: "Knowledge Check Complete!",
-        description: "Your understanding of cypherpunk principles is growing stronger.",
-      });
-    } else {
-      setValidationResults({
-        success: false,
-        message: currentStepData.failureMessage
-      });
-      
-      toast({
-        title: "Not Quite Right",
-        description: "Take another moment to consider the cypherpunk perspective.",
-        variant: "destructive"
-      });
+    // Trigger special data stream animation for PDA lesson
+    if (lessonId === 2 && currentStep === 3) {
+      triggerDataStreamAnimation();
     }
-  };
-
-  const handleCodeValidate = (data: any) => {
-    setValidationResults(data);
-    if (data.success) {
-      updateLessonAttempt(lessonId, currentStep);
-      completeStep(lessonId, currentStep); // Mark this step as completed
-      
-      // Trigger challenge reward animation for successful completion
-      const rewardNftUrl = lessonId === 2 && currentStep === 3 
-        ? "/assets/images/purple-box-nft.png" 
-        : nftRobotUrl;
-      
-      // Trigger special data stream animation for PDA lesson
-      if (lessonId === 2 && currentStep === 3) {
-        triggerDataStreamAnimation();
-      }
-      
-      triggerChallengeReward(
-        rewardNftUrl,
-        lessonId,
-        `${lesson?.title} - Step ${currentStep} Completion Badge`
-      );
-      
-      // Enhanced success feedback with hint character
-      hintCharacterRef.current?.showHint(
-        `Excellent work! You've completed ${lesson?.title} - Step ${currentStep}. Moving to the next challenge!`
-      );
-      
-      toast({
-        title: "Challenge Completed!",
-        description: "Step validated successfully. NFT reward unlocked!",
-      });
-    } else {
-      // Progressive hint system for failed attempts
-      const attemptCount = (progress?.attempts || 0) + 1;
-      if (attemptCount >= 2) {
-        hintCharacterRef.current?.showProgressiveHint(attemptCount);
-      }
-    }
+    
+    triggerChallengeReward(
+      rewardNftUrl,
+      lessonId,
+      `${lesson?.title} - Step ${currentStep} Completion Badge`
+    );
+    
+    // Always trigger sparkles and coin fall for successful completion
+    triggerSparkleAnimation();
+    triggerCoinFall();
+    
+    // Enhanced success feedback with hint character
+    hintCharacterRef.current?.showHint(
+      `Excellent work! You've completed ${lesson?.title} - Step ${currentStep}. Moving to the next challenge!`
+    );
+    
+    toast({
+      title: "Step Completed!",
+      description: "Great progress! Step completed successfully.",
+    });
   };
 
   const handleNext = () => {
@@ -222,17 +153,7 @@ export default function LessonDetail() {
       setCurrentStep(nextStep);
       setValidationResults(null);
       setHintVisible(false);
-      
-      // Load starter code for next step
-      const stepData = lesson?.content.steps.find((s: any) => s.id === nextStep);
-      if (stepData?.initialCodeTemplateKey) {
-        const template = codeTemplates[stepData.initialCodeTemplateKey];
-        if (template) {
-          setCode(template[language as keyof typeof template] || '');
-        }
-      } else {
-        setCode("");
-      }
+      setStepCompleted(false); // Reset step completion for new step
     } else if (canGoToNextLesson) {
       // Navigate to next lesson
       window.location.href = `/lessons/${lessonId + 1}`;
@@ -245,15 +166,7 @@ export default function LessonDetail() {
       setCurrentStep(prevStep);
       setValidationResults(null);
       setHintVisible(false);
-      
-      // Load starter code for previous step
-      const stepData = lesson?.content.steps.find((s: any) => s.id === prevStep);
-      if (stepData?.initialCodeTemplateKey) {
-        const template = codeTemplates[stepData.initialCodeTemplateKey];
-        if (template) {
-          setCode(template[language as keyof typeof template] || '');
-        }
-      }
+      setStepCompleted(false); // Reset step completion for previous step
     }
   };
 
@@ -302,137 +215,29 @@ export default function LessonDetail() {
         {/* Primary Content: Code Editor or Narrative Display */}
         <div className="xl:col-span-3 space-y-8">
           {currentStepData?.isCodingChallenge ? (
-            <>
-              <TechCard variant="cyan" className="h-full">
-                <div className="p-6 h-full">
-                  <MonacoEditor
-                    value={code}
-                    onChange={setCode}
-                    language={language}
-                    onLanguageChange={setLanguage}
-                    height="700px"
-                    onRun={handleCodeRun}
-                    onValidate={handleCodeValidate}
-                    lessonId={lessonId}
-                    currentStep={currentStep}
-                  />
-                </div>
-              </TechCard>
-
-              {/* Validation Results */}
-              {validationResults && (
-                <TechCard variant={validationResults.success ? "neutral" : "pink"} className="p-4">
-                  <div className={`text-sm font-code ${
-                    validationResults.success 
-                      ? 'text-green-300'
-                      : 'text-red-300'
-                  }`}>
-                    <div className="flex items-center mb-2">
-                      <span className="mr-2">{validationResults.success ? '✅' : '❌'}</span>
-                      {validationResults.message}
-                    </div>
-                    {validationResults.errors && validationResults.errors.length > 0 && (
-                      <ul className="text-xs space-y-1 ml-6">
-                        {validationResults.errors.map((error: string, index: number) => (
-                          <li key={index}>• {error}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </TechCard>
-              )}
-            </>
+            <CodingStep
+              currentStepData={currentStepData}
+              lessonId={lessonId}
+              currentStep={currentStep}
+              language={language}
+              onStepComplete={handleStepComplete}
+              onCodeRun={handleCodeRun}
+            />
           ) : (
             /* Narrative Content Display for Ethos Lessons */
             <TechCard variant="cyan" className="h-full">
               <div className="p-8 h-full overflow-y-auto">
                 <div className="prose prose-invert prose-cyan max-w-none">
-                  <div className="text-sm font-code text-cyan-300 mb-4">
-                    {code}
-                  </div>
+                  {/* Content will be rendered by components based on step data */}
                   
                   {/* Quiz Section for Narrative Lessons */}
                   {currentStepData?.quiz && (
-                    <div className="mt-8 p-6 bg-gradient-to-r from-purple-900/30 to-cyan-900/30 rounded-lg border border-cyan-500/30">
-                      <h3 className="text-lg font-bold text-cyan-300 mb-4">{currentStepData.quiz.question}</h3>
-                      
-                      {currentStepData.quiz.type === 'text-input' && (
-                        <div className="space-y-4">
-                          <input
-                            type="text"
-                            value={quizAnswer}
-                            onChange={(e) => setQuizAnswer(e.target.value)}
-                            className="w-full p-3 bg-black/50 border border-cyan-500/30 rounded-lg text-cyan-300 placeholder-gray-500 focus:border-cyan-500 focus:outline-none"
-                            placeholder="Type your answer here..."
-                          />
-                          <TechButton 
-                            onClick={handleQuizValidate}
-                            className="w-full"
-                          >
-                            Submit Answer
-                          </TechButton>
-                        </div>
-                      )}
-                      
-                      {currentStepData.quiz.type === 'multiple-choice' && (
-                        <div className="space-y-4">
-                          {currentStepData.quiz.options?.map((option, index) => (
-                            <button
-                              key={index}
-                              onClick={() => setSelectedOption(option)}
-                              className={`w-full p-3 text-left rounded-lg border transition-all ${
-                                selectedOption === option
-                                  ? 'bg-cyan-900/50 border-cyan-400 text-cyan-300'
-                                  : 'bg-black/30 border-gray-600 text-gray-300 hover:border-cyan-500/50'
-                              }`}
-                            >
-                              {option}
-                            </button>
-                          ))}
-                          <TechButton 
-                            onClick={handleQuizValidate}
-                            disabled={!selectedOption}
-                            className="w-full"
-                          >
-                            Submit Answer
-                          </TechButton>
-                        </div>
-                      )}
-                      
-                      {currentStepData.quiz.type === 'true-false' && (
-                        <div className="space-y-4">
-                          <div className="flex space-x-4">
-                            <button
-                              onClick={() => setSelectedOption("true")}
-                              className={`flex-1 p-3 rounded-lg border transition-all ${
-                                selectedOption === "true"
-                                  ? 'bg-green-900/50 border-green-400 text-green-300'
-                                  : 'bg-black/30 border-gray-600 text-gray-300 hover:border-green-500/50'
-                              }`}
-                            >
-                              True
-                            </button>
-                            <button
-                              onClick={() => setSelectedOption("false")}
-                              className={`flex-1 p-3 rounded-lg border transition-all ${
-                                selectedOption === "false"
-                                  ? 'bg-red-900/50 border-red-400 text-red-300'
-                                  : 'bg-black/30 border-gray-600 text-gray-300 hover:border-red-500/50'
-                              }`}
-                            >
-                              False
-                            </button>
-                          </div>
-                          <TechButton 
-                            onClick={handleQuizValidate}
-                            disabled={!selectedOption}
-                            className="w-full"
-                          >
-                            Submit Answer
-                          </TechButton>
-                        </div>
-                      )}
-                    </div>
+                    <QuizStep
+                      currentStepData={currentStepData}
+                      lessonId={lessonId}
+                      currentStep={currentStep}
+                      onStepComplete={handleStepComplete}
+                    />
                   )}
 
                   {/* Deploy Button for Non-Quiz Narrative Steps */}
@@ -449,7 +254,7 @@ export default function LessonDetail() {
                             message: currentStepData?.successMessage || "Understanding confirmed!",
                             errors: []
                           });
-                          completeStep(lessonId, currentStep);
+                          handleStepComplete();
                         }}
                         variant="primary"
                         className="w-full"
