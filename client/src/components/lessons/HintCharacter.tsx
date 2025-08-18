@@ -123,28 +123,7 @@ const HintCharacter = forwardRef<HintCharacterRef, HintCharacterProps>((props, r
               </div>
             </motion.div>
 
-            {/* Character Image/Avatar */}
-            <motion.div
-              animate={{ 
-                rotate: [0, 2, -2, 0],
-                scale: [1, 1.05, 1]
-              }}
-              transition={{
-                rotate: {
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                },
-                scale: {
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
-              className="w-16 h-16 bg-gradient-to-br from-tech-purple-600 to-tech-cyan-600 rounded-full flex items-center justify-center shadow-lg border-2 border-tech-cyan-400"
-            >
-              <span className="text-2xl">🤖</span>
-            </motion.div>
+            
 
             {/* Floating particles around character */}
             <motion.div
