@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "wouter";
 import { Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
-import { UserProfile, getUserProfile, createUserProfile } from "@/lib/firebase";
+import { UserProfile } from "@/lib/firebase";
+import { FastProfile } from "@/lib/local-storage";
 import { useWallet } from "@/hooks/use-wallet";
 import { useToast } from "@/hooks/use-toast";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
@@ -39,8 +40,8 @@ export default function ProfilePage() {
         setLoading(true);
         setError(null);
 
-        // Try to fetch existing profile (now using fixed Firebase)
-        let userProfile = await getUserProfile(targetPublicKey);
+        // Use local storage for instant response while Firebase Functions are set up
+        let userProfile = await FastProfile.getProfile(targetPublicKey);
 
         // If no profile exists and this is the owner, create one
         if (!userProfile && isOwner) {
@@ -48,7 +49,7 @@ export default function ProfilePage() {
             title: "Creating your profile",
             description: "Setting up your Shadow Ranch profile...",
           });
-          userProfile = await createUserProfile(targetPublicKey);
+          userProfile = await FastProfile.createProfile(targetPublicKey);
         }
 
         if (!userProfile) {

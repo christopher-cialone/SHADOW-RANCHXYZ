@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { unlockBadge } from "@/lib/firebase";
+import { FastProfile } from "@/lib/local-storage";
 import { useWallet } from "@/hooks/use-wallet";
 import { useToast } from "@/hooks/use-toast";
 
@@ -24,20 +24,20 @@ export function SpeedTestButton() {
     const startTime = performance.now();
 
     try {
-      // Test Firebase badge unlock with new configuration
-      await unlockBadge(connectedAddress, 'wallet-connected');
+      // Test instant local storage with background sync architecture
+      await FastProfile.unlockBadge(connectedAddress, 'wallet-connected');
       
       const endTime = performance.now();
       const duration = Math.round(endTime - startTime);
 
       toast({
-        title: "Firebase Connected!",
-        description: `Badge unlocked in ${duration}ms - Firebase long-polling works!`,
+        title: "Lightning Fast!",
+        description: `Badge unlocked in ${duration}ms - Local storage + server sync!`,
       });
     } catch (error) {
       toast({
-        title: "Connection Test Failed",
-        description: "Firebase connectivity issue detected",
+        title: "Speed Test Failed",
+        description: "Could not complete test",
         variant: "destructive",
       });
     } finally {
@@ -61,7 +61,7 @@ export function SpeedTestButton() {
       ) : (
         <>
           <Zap size={16} className="mr-2" />
-          Firebase Test
+          Speed Test
         </>
       )}
     </Button>
