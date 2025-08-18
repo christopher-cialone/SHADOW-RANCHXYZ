@@ -1,0 +1,92 @@
+## Fixing the Lesson Loop 🐛
+The looping issue in lessonsdetail.tsx is caused by a conflict between two different "sources of truth" for step completion.
+
+isStepCompleted: This comes from your persistent useLessonStore(), which is correct.
+
+stepCompleted: This is a local useState variable inside the component.
+
+The problem is that the "Next" button is enabled by the local stepCompleted state, but as soon as you click it, the handleNext function immediately resets that same local state to false, effectively disabling the "Next" button for the next step before you even get there.
+
+The solution is to remove the redundant local stepCompleted state and rely entirely on the persistent isStepCompleted from your global store.
+
+Required Code Changes in lessonsdetail.tsx
+Here are the specific changes to make in src/pages/lessonsdetail.tsx:
+
+1. Delete the Local State Variable:
+
+Find and delete this line:
+
+TypeScript
+
+const [stepCompleted, setStepCompleted] = useState(false);
+2. Simplify the Navigation Logic:
+
+Replace this line:
+
+TypeScript
+
+const canGoToNextStep = currentStep < totalStepsInCurrentLesson && (currentStepCompleted || stepCompleted);
+With this simplified version:
+
+TypeScript
+
+const canGoToNextStep = currentStep < totalStepsInCurrentLesson && currentStepCompleted;
+Do the same for canGoToNextLesson and isCompleted to remove any mention of stepCompleted.
+
+3. Update the handleStepComplete Function:
+
+Find and delete this line from inside the function. It's no longer needed.
+
+TypeScript
+
+setStepCompleted(true); // Update local state immediately
+4. Update the handleNext and handlePrevious Functions:
+
+Find and delete all instances of setStepCompleted(false); from these two functions.
+
+These changes make your useLessonStore the single source of truth for progress, which will resolve the loop and allow users to advance correctly.
+
+## New Lessons for the Solana Track 🚀
+Here is a proposed curriculum that builds sequentially on the user's knowledge, starting from the basics and moving to more complex, real-world applications.
+
+Lesson 1: The Anchor Gauntlet - Your First Program
+Concept: Introduction to the Anchor framework and the basic structure of a Solana program.
+
+Challenge: Write a simple "initialize" instruction that logs a "Hello, World!" message to the program logs. The user will learn about declaring a program ID, defining a context, and writing a basic instruction.
+
+Key Learnings: Program structure, declare_id!, the #[program] macro, Context, and msg!.
+
+Lesson 2: The Accountant's Ledger - State Management
+Concept: Creating and managing on-chain data using account space.
+
+Challenge: Create a program with a Counter account. The user will write an initialize instruction to create the account and a increment instruction to increase a number stored in the account's state.
+
+Key Learnings: Defining an #[account], initializing account space, and modifying on-chain state.
+
+Lesson 3: The Sheriff's Decree - Program Derived Addresses (PDAs)
+Concept: Understanding PDAs as program-owned accounts for secure, predictable state management.
+
+Challenge: Refactor the Counter program from Lesson 2 to store the counter data in a PDA derived from the user's public key. This ensures each user gets their own unique, secure counter.
+
+Key Learnings: The purpose of PDAs, deriving PDA addresses with seeds, and initializing PDA accounts.
+
+Lesson 4: The Client-Side Connection - Interacting with TypeScript
+Concept: Using a TypeScript client to call instructions on your on-chain program.
+
+Challenge: Write a TypeScript script (using @solana/web3.js and @project-serum/anchor) that connects to a local validator, finds the PDA from Lesson 3, and calls the increment instruction.
+
+Key Learnings: Setting up a Provider, finding a program's address, building an instruction transaction, and sending/confirming transactions.
+
+Lesson 5: The Ranch Mint - Creating Your Own Token
+Concept: Using the SPL Token Program to create a custom cryptocurrency.
+
+Challenge: Write an instruction that uses a Cross-Program Invocation (CPI) to the Token Program to mint a new supply of "RANCH_COIN" tokens to a user's token account.
+
+Key Learnings: Cross-Program Invocations (CPIs), interacting with the SPL Token Program, and understanding Mint and Token accounts.
+
+Lesson 6: The Bounty Board - A Stateful dApp
+Concept: Combining all previous concepts to build a simple, interactive dApp.
+
+Challenge: Create a "Bounty Board" program. Users can post a "bounty" (a string message) stored in a PDA. The client-side TypeScript should be able to create new bounties and fetch/display a list of all existing bounties.
+
+Key Learnings: Managing multiple accounts, fetching and deserializing on-chain data, and building a full-stack dApp loop.

@@ -25,7 +25,7 @@ export default function LessonDetail() {
   const [language, setLanguage] = useState("rust");
   const [hintVisible, setHintVisible] = useState(false);
   const [validationResults, setValidationResults] = useState<any>(null);
-  const [stepCompleted, setStepCompleted] = useState(false);
+
   
   usePageLoader();
   
@@ -62,8 +62,7 @@ export default function LessonDetail() {
         setCurrentStep(savedProgress.currentStep);
       }
 
-      // Reset step completion state when step changes
-      setStepCompleted(false);
+      // Reset validation results when step changes
       setValidationResults(null);
 
       // Proactive Hint for Lesson 1, Step 1 (onboarding assistance)
@@ -88,14 +87,14 @@ export default function LessonDetail() {
   // Calculate navigation logic - Updated to include stepCompleted state
   const totalStepsInCurrentLesson = lesson?.content.steps.length || 0;
   const isLastStepOfCurrentLesson = currentStep === totalStepsInCurrentLesson;
-  const canGoToNextStep = currentStep < totalStepsInCurrentLesson && (currentStepCompleted || stepCompleted);
-  const canGoToNextLesson = isLastStepOfCurrentLesson && (currentStepCompleted || stepCompleted);
+  const canGoToNextStep = currentStep < totalStepsInCurrentLesson && currentStepCompleted;
+  const canGoToNextLesson = isLastStepOfCurrentLesson && currentStepCompleted;
   
   const hasPrevious = currentStep > 1;
   const hasNext = canGoToNextStep || canGoToNextLesson;
   const nextButtonText = canGoToNextStep ? "Next Step" : (canGoToNextLesson ? "Next Lesson" : "Next");
-  const canGoNext = currentStepCompleted || stepCompleted || validationResults?.success || false;
-  const isCompleted = isLastStepOfCurrentLesson && (currentStepCompleted || stepCompleted);
+  const canGoNext = currentStepCompleted || validationResults?.success || false;
+  const isCompleted = isLastStepOfCurrentLesson && currentStepCompleted;
 
   const handleCodeRun = (data: any) => {
     if (data.success) {
@@ -109,7 +108,7 @@ export default function LessonDetail() {
   const handleStepComplete = () => {
     updateLessonAttempt(lessonId, currentStep);
     completeStep(lessonId, currentStep);
-    setStepCompleted(true); // Update local state immediately
+
     
     // Trigger visual effects
     if (currentStepData?.visualEffectTrigger) {
@@ -153,7 +152,7 @@ export default function LessonDetail() {
       setCurrentStep(nextStep);
       setValidationResults(null);
       setHintVisible(false);
-      setStepCompleted(false); // Reset step completion for new step
+
     } else if (canGoToNextLesson) {
       // Navigate to next lesson
       window.location.href = `/lessons/${lessonId + 1}`;
@@ -166,7 +165,7 @@ export default function LessonDetail() {
       setCurrentStep(prevStep);
       setValidationResults(null);
       setHintVisible(false);
-      setStepCompleted(false); // Reset step completion for previous step
+
     }
   };
 
