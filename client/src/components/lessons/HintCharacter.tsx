@@ -104,18 +104,6 @@ const HintCharacter = forwardRef<HintCharacterRef, HintCharacterProps>((props, r
               className="absolute bottom-20 right-0 mb-2 mr-4 max-w-sm"
             >
               <div className={`relative ${getBubbleColor().split(' ')[0]} border-2 border-tech-cyan-600/50 shadow-2xl rounded-lg`}>
-                <div className="p-4">
-                  <div className="flex items-start space-x-2">
-                    <span className="text-lg flex-shrink-0 mt-0.5">{getCharacterEmoji()}</span>
-                    <div>
-                      <div className="text-xs font-tech text-tech-cyan-300 uppercase tracking-wider mb-1">
-                        {hintType === 'contextual' ? 'CONTEXTUAL HINT' : 
-                         hintType === 'progressive' ? 'PROGRESSIVE HINT' : 'AI ASSISTANT'}
-                      </div>
-                      <p className="text-sm font-code leading-relaxed text-white">{message}</p>
-                    </div>
-                  </div>
-                </div>
                 {/* Enhanced Speech bubble tail */}
                 <div className="absolute bottom-0 right-8 transform translate-y-full">
                   <div className={`w-0 h-0 border-x-8 border-t-8 border-solid border-transparent ${getBubbleColor().split(' ')[1]}`}></div>
