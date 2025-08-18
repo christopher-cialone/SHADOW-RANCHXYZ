@@ -8,14 +8,14 @@ export function PerformanceNotice() {
           <Zap size={16} className="text-cyan-400" />
         </div>
         <div className="flex-1">
-          <h3 className="font-medium text-cyan-400 mb-1">Lightning Fast Performance</h3>
+          <h3 className="font-medium text-cyan-400 mb-1">Firebase Connectivity Restored</h3>
           <p className="text-sm text-gray-300 leading-relaxed">
-            Profile system now uses instant local storage for maximum speed. 
-            All operations (profile editing, image uploads, badge unlocks) happen in <strong className="text-cyan-400">milliseconds</strong> instead of seconds.
+            Profile system now uses optimized Firebase configuration with long-polling for reliable connectivity. 
+            All data persists to <strong className="text-cyan-400">Firebase Cloud</strong> and syncs across devices.
           </p>
           <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
             <Info size={12} />
-            <span>Data persists locally - connect wallet to sync across devices</span>
+            <span>Cross-device sync enabled - your progress follows you everywhere</span>
           </div>
         </div>
       </div>

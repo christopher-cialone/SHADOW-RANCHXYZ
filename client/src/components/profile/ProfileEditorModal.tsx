@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { X, Upload, Loader2, User, FileText } from "lucide-react";
-import { UserProfile } from "@/lib/firebase";
-import { FastProfile } from "@/lib/local-storage";
+import { UserProfile, updateUserProfile, uploadProfileImage } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -85,10 +84,10 @@ export function ProfileEditorModal({
     try {
       let profileImageUrl = profile.profileImageUrl;
 
-      // Upload new image if selected (instant local storage)
+      // Upload new image if selected (now using fixed Firebase)
       if (imageFile) {
         setIsUploading(true);
-        profileImageUrl = await FastProfile.uploadImage(
+        profileImageUrl = await uploadProfileImage(
           imageFile,
           profile.publicKey,
           (progress) => setUploadProgress(progress)
@@ -96,14 +95,14 @@ export function ProfileEditorModal({
         setIsUploading(false);
       }
 
-      // Update profile instantly
+      // Update profile with Firebase
       const updates = {
         username: formData.username.trim(),
         bio: formData.bio.trim(),
         profileImageUrl,
       };
 
-      await FastProfile.updateProfile(profile.publicKey, updates);
+      await updateUserProfile(profile.publicKey, updates);
       
       // Update local state
       onProfileUpdate(updates);

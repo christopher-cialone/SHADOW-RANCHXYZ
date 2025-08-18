@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged, User } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, addDoc, updateDoc, collection, query, where, getDocs, orderBy, Timestamp } from 'firebase/firestore';
+import { initializeFirestore, doc, getDoc, setDoc, addDoc, updateDoc, collection, query, where, getDocs, orderBy, Timestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -15,7 +15,12 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+// Initialize Firestore with Replit-compatible settings
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+});
+
 export const storage = getStorage(app);
 
 // Authentication helper
@@ -161,6 +166,32 @@ export const uploadProfileImage = async (
     }
   } catch (error) {
     console.error('Error uploading profile image:', error);
+    throw error;
+  }
+};
+
+// Unlock badge function
+export const unlockBadge = async (publicKey: string, badgeId: string): Promise<void> => {
+  try {
+    const profile = await getUserProfile(publicKey);
+    if (!profile) {
+      throw new Error('Profile not found');
+    }
+
+    const updatedBadges = profile.nftBadges.map(badge => {
+      if (badge.id === badgeId) {
+        return {
+          ...badge,
+          unlocked: true,
+          unlockedAt: Timestamp.now()
+        };
+      }
+      return badge;
+    });
+
+    await updateUserProfile(publicKey, { nftBadges: updatedBadges });
+  } catch (error) {
+    console.error('Error unlocking badge:', error);
     throw error;
   }
 };
