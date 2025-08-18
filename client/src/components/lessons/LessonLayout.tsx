@@ -45,32 +45,22 @@ export function LessonLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Fixed Header */}
-      <div className="fixed top-0 left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-sm border-b border-cyan-400/20">
-        <div className="container mx-auto px-4 py-4">
-          <TechCard variant="cyan" className="bg-gray-900/60 border-cyan-400/30">
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h1 className="font-space-gothic text-2xl text-cyan-400">
-                  {title}
-                </h1>
-                <TechButton
-                  variant="secondary"
-                  size="sm"
-                  onClick={handleExit}
-                  className="text-gray-400 hover:text-white"
-                >
-                  <span className="text-lg">✕</span>
-                </TechButton>
-              </div>
-              
-              <LessonProgress
-                currentStep={currentStep}
-                totalSteps={totalSteps}
-                progress={progress}
-              />
-            </div>
-          </TechCard>
+      {/* Simplified Top Bar - Removed Progress Container */}
+      <div className="fixed top-0 left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex items-center justify-between">
+            <h1 className="font-space-gothic text-xl text-cyan-400">
+              {title}
+            </h1>
+            <TechButton
+              variant="secondary"
+              size="sm"
+              onClick={handleExit}
+              className="text-gray-400 hover:text-white bg-transparent"
+            >
+              <span className="text-lg">✕</span>
+            </TechButton>
+          </div>
         </div>
       </div>
 
@@ -81,52 +71,49 @@ export function LessonLayout({
         </div>
       </main>
 
-      {/* Bottom Navigation - Fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 w-full bg-black/80 backdrop-blur-sm border-t border-cyan-400/20">
+      {/* Bottom Navigation - Transparent Background */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 w-full">
         <div className="container mx-auto px-4 py-4">
-          <TechCard variant="cyan" className="bg-gray-900/60 border-cyan-400/30">
-            <div className="p-3">
-              <div className="flex items-center justify-between">
-                <TechButton
-                  variant="secondary"
-                  onClick={onPrevious}
-                  disabled={!hasPrevious}
-                  size="sm"
-                >
-                  <span className="mr-2">←</span>
-                  PREVIOUS
-                </TechButton>
-                
-                <div className="flex items-center space-x-4">
-                  <div className="text-center">
-                    <div className="font-tech text-xs text-gray-400 uppercase tracking-wider">STEP</div>
-                    <div className="font-code text-sm text-cyan-400">{currentStep} / {totalSteps}</div>
-                  </div>
-                  
-                  {isCompleted ? (
-                    <TechButton
-                      variant="accent"
-                      onClick={onComplete}
-                      size="sm"
-                    >
-                      <span className="mr-2">⭐</span>
-                      COMPLETE LESSON
-                    </TechButton>
-                  ) : (
-                    <TechButton
-                      variant="primary"
-                      onClick={onNext}
-                      disabled={!canGoNext}
-                      size="sm"
-                    >
-                      {nextButtonText.toUpperCase()}
-                      <span className="ml-2">→</span>
-                    </TechButton>
-                  )}
-                </div>
-              </div>
+          <div className="flex items-center justify-between">
+            <TechButton
+              variant="secondary"
+              onClick={onPrevious}
+              disabled={!hasPrevious}
+              size="sm"
+              className="bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800"
+            >
+              <span className="mr-2">←</span>
+              PREVIOUS
+            </TechButton>
+            
+            <div className="text-center">
+              <div className="font-tech text-xs text-gray-400 uppercase tracking-wider">STEP</div>
+              <div className="font-code text-sm text-cyan-400">{currentStep} / {totalSteps}</div>
             </div>
-          </TechCard>
+            
+            {isCompleted ? (
+              <TechButton
+                variant="accent"
+                onClick={onComplete}
+                size="sm"
+                className="bg-transparent border-green-600 text-green-400 hover:bg-green-800"
+              >
+                <span className="mr-2">⭐</span>
+                COMPLETE LESSON
+              </TechButton>
+            ) : (
+              <TechButton
+                variant="primary"
+                onClick={onNext}
+                disabled={!canGoNext}
+                size="sm"
+                className="bg-transparent border-cyan-600 text-cyan-400 hover:bg-cyan-800"
+              >
+                {nextButtonText.toUpperCase()}
+                <span className="ml-2">→</span>
+              </TechButton>
+            )}
+          </div>
         </div>
       </div>
     </div>

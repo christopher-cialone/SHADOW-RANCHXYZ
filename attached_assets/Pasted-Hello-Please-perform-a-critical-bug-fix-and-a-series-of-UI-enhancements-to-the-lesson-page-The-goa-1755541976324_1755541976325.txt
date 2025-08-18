@@ -1,0 +1,52 @@
+Hello! Please perform a critical bug fix and a series of UI enhancements to the lesson page. The goal is to create a functional, clean, and focused learning environment.
+
+## Part 1: Critical Bug Fix - Resolving the Lesson Loop 🛠️
+The lesson progression is stuck in a loop. This is a high-priority bug caused by a state management conflict. We will resolve this by removing redundant code.
+
+Navigate to the file: src/pages/lessonsdetail.tsx.
+
+Delete the Redundant State: Find and delete the entire line that declares the stepCompleted state variable:
+
+TypeScript
+
+const [stepCompleted, setStepCompleted] = useState(false);
+Simplify Navigation Logic: Find every variable that uses stepCompleted (like canGoToNextStep, canGoToNextLesson, isCompleted, and canGoNext) and remove || stepCompleted from the logic. For example:
+
+Change this: const canGoToNextStep = currentStep < totalStepsInCurrentLesson && (currentStepCompleted || stepCompleted);
+
+To this: const canGoToNextStep = currentStep < totalStepsInCurrentLesson && currentStepCompleted;
+
+Remove State Calls: Find and delete all calls to setStepCompleted(...) within the file. They are located in the handleStepComplete, handleNext, and handlePrevious functions.
+
+## Part 2: UI/UX Enhancements - Cleaning the Lesson View ✨
+The current UI has several large, distracting elements. We will remove them to improve focus.
+
+1. Remove the Top "Rust Fundamentals" Progress Bar Container:
+
+This element is likely in the layout component. Navigate to src/components/lessons/LessonLayout.tsx.
+
+Find the JSX that renders the header containing the lesson title (title) and the LessonProgress component. It will look something like a <div> or <header> element at the top.
+
+Delete this entire container block to remove it from the view.
+
+2. Remove the "Solana Lab" Card:
+
+Navigate to the file src/pages/lessonsdetail.tsx.
+
+In the JSX for the side panel, find the <TechCard> component that contains the "SOLANA LAB" title and the purple lab graphic.
+
+Delete this entire <TechCard> component block to completely remove it.
+
+3. Redesign the Bottom Navigation Bar:
+
+This element is also likely in src/components/lessons/LessonLayout.tsx.
+
+Find the <footer> or <div> element at the bottom that acts as a container for the "PREVIOUS" and "NEXT STEP" buttons.
+
+Remove the background and border styling from this parent container, making it invisible.
+
+Modify the buttons themselves. They should remain, but their background should be made transparent. You can achieve this by adding a class like bg-transparent.
+
+Ensure the buttons remain properly aligned at the bottom of the screen (e.g., one on the far left, one on the far right).
+
+After completing these tasks, the lesson page should be fully functional, allowing users to progress between steps, and the UI will be significantly cleaner and more focused on the central challenge.

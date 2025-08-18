@@ -329,58 +329,7 @@ export default function LessonDetail() {
           </TechCard>
 
           {/* Lab Status */}
-          <TechCard variant="cyan" className="p-6">
-            <h3 className="font-tech text-xl text-tech-cyan-400 mb-4 flex items-center uppercase tracking-wider">
-              <span className="mr-2">🔬</span>
-              SOLANA LAB
-            </h3>
-            
-            {/* Mock lab scene */}
-            <div className="bg-gradient-to-b from-tech-purple-800 to-tech-purple-900 rounded-lg h-64 relative overflow-hidden border-2 border-tech-cyan-600 mb-6">
-              <div className="absolute inset-0 bg-gradient-to-b from-tech-cyan-400/20 to-transparent" />
-              
-              {/* Lab equipment */}
-              <div className="absolute bottom-4 left-4 w-16 h-12 bg-tech-purple-700 rounded border border-tech-purple-600">
-                <div className="w-full h-3 bg-tech-cyan-600 rounded-t" />
-              </div>
-              <div className="absolute bottom-4 right-4 w-20 h-16 bg-tech-cyan-700 rounded border border-tech-cyan-600">
-                <div className="w-full h-4 bg-tech-cyan-500 rounded-t" />
-              </div>
-              
-              {/* Character */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-6 h-8 bg-tech-purple-600 rounded-full">
-                <div className="w-4 h-4 bg-tech-cyan-600 rounded-full mx-auto mt-1" />
-              </div>
-              
-              {/* Status overlay */}
-              <div className="absolute top-4 left-4 bg-black/70 rounded px-2 py-1">
-                <div className="text-xs text-tech-cyan-400 font-code">SOL Tokens: {formatRanchCoin(ranchData.coins)}</div>
-                <div className="text-xs text-tech-purple-400 font-code">XP: {ranchData.experience}</div>
-              </div>
-              
-              {/* Success animation area */}
-              {validationResults?.success && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-green-500/90 text-white px-4 py-2 rounded-lg font-tech animate-bounce">
-                    <span className="mr-2">✅</span>
-                    CODE VALIDATED SUCCESSFULLY!
-                  </div>
-                </div>
-              )}
-            </div>
 
-            {/* Lab Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-r from-tech-purple-800/50 to-tech-purple-700/50 p-3 rounded border border-tech-purple-600">
-                <div className="text-xs text-tech-purple-400 font-code mb-1">MODULES</div>
-                <div className="text-lg font-tech text-white">{buildings.length}</div>
-              </div>
-              <div className="bg-gradient-to-r from-tech-cyan-800/50 to-tech-cyan-700/50 p-3 rounded border border-tech-cyan-600">
-                <div className="text-xs text-tech-cyan-400 font-code mb-1">AGENTS</div>
-                <div className="text-lg font-tech text-white">{characters.length}</div>
-              </div>
-            </div>
-          </TechCard>
         </div>
       </div>
 
