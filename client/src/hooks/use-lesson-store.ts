@@ -25,6 +25,7 @@ interface LessonStore {
   isLessonUnlocked: (lessonId: number, requiredLessons: number[]) => boolean;
   getCompletedLessonsCount: () => number;
   setCurrentLesson: (lessonId: number | null) => void;
+  clearInvalidSolanaProgress: () => void;
 }
 
 export const useLessonStore = create<LessonStore>()(
@@ -137,6 +138,21 @@ export const useLessonStore = create<LessonStore>()(
 
       setCurrentLesson: (lessonId: number | null) => {
         set({ currentLesson: lessonId });
+      },
+
+      // Clear invalid Solana lesson progress (lessons 5-8 that were removed)
+      clearInvalidSolanaProgress: () => {
+        set((state) => {
+          const { progress } = state;
+          const cleanedProgress = { ...progress };
+          
+          // Remove progress for old Solana lessons that no longer exist
+          [5, 6, 7, 8].forEach(lessonId => {
+            delete cleanedProgress[lessonId];
+          });
+          
+          return { progress: cleanedProgress };
+        });
       }
     }),
     {

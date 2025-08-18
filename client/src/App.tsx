@@ -1,4 +1,5 @@
 import { Switch, Route } from "wouter";
+import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -6,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { WalletProvider } from "@/components/wallet/WalletProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ThemeProvider } from "next-themes";
+import { useLessonStore } from "@/hooks/use-lesson-store";
 import NotFound from "@/pages/not-found";
 import HomeMobile from "@/pages/HomeMobile";
 import Lessons from "@/pages/Lessons";
@@ -46,6 +48,13 @@ function Router() {
 }
 
 function App() {
+  const { clearInvalidSolanaProgress } = useLessonStore();
+
+  // Clear invalid Solana lesson progress on app startup
+  useEffect(() => {
+    clearInvalidSolanaProgress();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
