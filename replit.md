@@ -3,6 +3,14 @@
 ## Overview
 Shadow Ranch is a gamified educational platform designed to teach Solana blockchain development within an immersive Western-themed environment. It enables users to learn Rust, Anchor, and Solana development concepts by completing coding challenges, earning rewards, and building a virtual ranch. The project aims to combine full-stack web architecture with engaging game mechanics to provide an interactive learning experience. Key capabilities include interactive coding lessons with a Monaco editor, real-time code validation, a virtual ranch management system, and NFT reward collection.
 
+## Recent Changes (August 2025)
+### Critical Bug Resolution: Lesson Progression Loop
+- **Issue**: Infinite looping in lesson progression caused by conflicting state management
+- **Root Cause**: Dual state systems (`stepCompleted` local state vs `isStepCompleted` persistent store)
+- **Solution**: Unified state management using only useLessonStore as single source of truth
+- **Impact**: Smooth lesson progression now enabled for Solana track
+- **Date**: August 18, 2025
+
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
@@ -28,9 +36,10 @@ The application features a full-stack architecture with distinct frontend and ba
 -   **Current Implementation**: In-memory storage with Zustand persistence.
 -   **Future Ready**: Prepared for PostgreSQL with Drizzle ORM.
 -   **Schema**: Defined in `shared/schema.ts`.
+-   **Lesson Data**: Restructured with explicit track categorization (`cypherpunk`, `solana-ethos`, `solana-code`).
 
 ### Key Components
--   **Lesson System**: Multi-step coding challenges with content stored in TypeScript data files, featuring pattern-matching validation and progress tracking.
+-   **Lesson System**: Multi-step coding challenges with content stored in TypeScript data files, featuring pattern-matching validation and unified progress tracking via useLessonStore.
 -   **Game Mechanics**: Includes virtual ranch management, a ranch coin currency system, experience points (XP) with leveling, and visual effects for achievements.
 -   **Code Editor Integration**: Monaco Editor with syntax highlighting for Rust and Python, real-time validation, and code templates.
 -   **UI/UX Design**: Dual theming (Western aesthetic + tech styling), responsive design, accessibility built on Radix UI, and custom CSS animations.
