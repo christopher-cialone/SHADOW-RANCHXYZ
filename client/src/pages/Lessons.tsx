@@ -171,17 +171,28 @@ export default function Lessons() {
               </div>
 
               {trackProgress >= 17 ? (
-                <TechButton 
-                  variant="accent" 
-                  className="w-full"
-                  onClick={() => {
-                    console.log('Navigating to Solana track - lesson 1');
-                    setLocation('/lessons/1');
-                  }}
-                >
-                  <span className="mr-2">⚡</span>
-                  START SOLANA TRACK
-                </TechButton>
+                <div className="space-y-3">
+                  <TechButton 
+                    variant="accent" 
+                    className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 border-purple-400"
+                    onClick={() => setLocation('/solana-challenges/1')}
+                  >
+                    <span className="mr-2">🔧</span>
+                    START CODING CHALLENGES
+                  </TechButton>
+                  
+                  <TechButton 
+                    variant="secondary" 
+                    className="w-full"
+                    onClick={() => {
+                      console.log('Navigating to Solana track - lesson 1');
+                      setLocation('/lessons/1');
+                    }}
+                  >
+                    <span className="mr-2">⚡</span>
+                    START SOLANA TRACK
+                  </TechButton>
+                </div>
               ) : (
                 <TechButton 
                   variant="secondary" 

@@ -1,0 +1,90 @@
+Prompt for Replit Agent (Solana Coding Challenges Implementation)
+Agent, your next major task is to build the core experience of the "Solana Corps of Engineers" track. You will create a new, interactive coding challenge page that guides users through the first 10 sequential lessons of Solana program development.
+
+Please implement the following features, adhering to the existing file structure, design principles, and component-based architecture of the application.
+
+1. Create the Core Coding Challenge UI:
+* New Page: In the client/src/pages directory, create a new file CodingChallengePage.tsx. This page will manage the state for all 10 challenges.
+* New Layout: In client/src/components/lessons, create a new CodingChallengeLayout.tsx. This component will define the responsive layout for the challenges:
+* On desktop, it should be a three-panel layout:
+1.  Left Panel (Instructions): Contains the narrative text and the specific task list for the current challenge.
+2.  Center Panel (Code Editor): This will be the user's primary workspace, using the existing MonacoEditor.tsx component.
+3.  Right Panel (Visual Feedback): A dedicated area where the success animations will play.
+* On mobile, these panels should stack vertically in a logical order.
+
+2. Implement the UI Components:
+* NarrativeBox.tsx: In client/src/components/lessons, modify the existing NarrativeBox.tsx (or create a new version) to include a typewriter animation effect for displaying the "Reading" text of each challenge.
+* VisualFeedback.tsx: In client/srcs/components/cypherpunk (or a new solana folder), create this new component. It will receive props to determine which success animation to display. Use SVGs and CSS animations to create the blueprint, data flow, and other visual effects.
+* NftAchievementModal.tsx: Create a new modal component. When a challenge is successfully completed, this modal should appear, displaying the name of the badge earned and a "Continue to Next Challenge" button.
+
+3. Implement the Challenge Logic in CodingChallengePage.tsx:
+* State Management: Use React state (useState, useContext) to manage:
+* The current challenge number (currentChallenge, from 1 to 10).
+* The code in the editor.
+* The user's progress, which should be persistent.
+* Sequential Flow: The user should only be able to access the challenges in order. Completing a challenge successfully should unlock the next one.
+* Code Validation: Implement a "Compile & Test" button. When clicked, it should trigger a mock validation function. If the user's code meets the criteria for the current challenge's task, it should trigger the success state (play the visual feedback animation and show the NFT modal).
+
+4. Build Each of the 10 Challenges:
+* For each challenge (1 through 10), implement the following specific content:
+
+* **Challenge 1: The Genesis Program**
+    * **Reading:** "Every structure begins with a foundation..."
+    * **Task:** Change `#[program]` name to `my_chyron`.
+    * **Visual Feedback:** Animate a blueprint schematic of a structure being drawn.
+    * **NFT Achievement:** "The Architect" Badge.
+
+* **Challenge 2: The First Instruction**
+    * **Reading:** "A program is useless without instructions..."
+    * **Task:** Define the `initialize` function with `msg!("Chyron Initialized!");`.
+    * **Visual Feedback:** The blueprint animates, and a glowing "INITIALIZE" button is added.
+    * **NFT Achievement:** "First Contact" Badge.
+
+* **Challenge 3: State & Accounts**
+    * **Reading:** "Programs themselves don't store data..."
+    * **Task:** Define the `#[account]` struct with a `message: String` field.
+    * **Visual Feedback:** Animate a data packet flowing from the program to a new "ACCOUNT" box.
+    * **NFT Achievement:** "State Keeper" Badge.
+
+* **Challenge 4: Writing to the Chain**
+    * **Reading:** "Now, let's connect our instruction to our account..."
+    * **Task:** Modify the `Initialize` context to `init` the account and set the message to "Hello, World!".
+    * **Visual Feedback:** The account box's text updates, and the box glows to signify persistence.
+    * **NFT Achievement:** "Chain Writer" Badge.
+
+* **Challenge 5: Creating a Custom Instruction**
+    * **Reading:** "An on-screen display isn't very useful..."
+    * **Task:** Create the `update_message` instruction function.
+    * **Visual Feedback:** A new "UPDATE\_MESSAGE" button is added to the animated control panel.
+    * **NFT Achievement:** "State Modifier" Badge.
+
+* **Challenge 6: Access Control & Signers**
+    * **Reading:** "We have a problem. Right now, *anyone* can call..."
+    * **Task:** Add an `authority: Pubkey` to the account and `has_one = authority` constraint.
+    * **Visual Feedback:** A keyhole appears on the "UPDATE\_MESSAGE" button, and a key animates to unlock it.
+    * **NFT Achievement:** "Gatekeeper" Badge.
+
+* **Challenge 7: Program Derived Addresses (PDAs)**
+    * **Reading:** "**Program Derived Addresses**, or PDAs, are powerful..."
+    * **Task:** Create an instruction to initialize a PDA using `seeds` and a `bump`.
+    * **Visual Feedback:** The program animates a robotic arm with its own key, creating a new "PDA" account box.
+    * **NFT Achievement:** "Master of Puppets" Badge.
+
+* **Challenge 8: Cross-Program Invocation (CPI)**
+    * **Reading:** "Solana programs are composable..."
+    * **Task:** Add a CPI call to the `SPL Memo` program within the `update_message` instruction.
+    * **Visual Feedback:** Animate a data packet sent from your program to another program box labeled "SPL Memo."
+    * **NFT Achievement:** "The Composer" Badge.
+
+* **Challenge 9: Handling SOL**
+    * **Reading:** "Let's make things interesting..."
+    * **Task:** Create a `pay_to_update` instruction that uses `system_program` to transfer lamports.
+    * **Visual Feedback:** Animate a SOL coin icon moving from a user wallet to an authority wallet.
+    * **NFT Achievement:** "Toll Collector" Badge.
+
+* **Challenge 10: Custom Errors**
+    * **Reading:** "Production-level programs need clear **error handling**..."
+    * **Task:** Define a custom `ErrorCode` enum and use a `require!` macro to check message length.
+    * **Visual Feedback:** Animate a long string of text being rejected by the program, which glows red and displays the custom error.
+    * **NFT Achievement:** "The Debugger" Badge.
+Please generate the necessary code for these new components and pages, and show the required modifications to integrate this entire feature set into the application.
