@@ -35,8 +35,8 @@ export default function Lessons() {
       <div className="container mx-auto px-4 py-20">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="font-titulo text-5xl md:text-6xl text-cyan-400 mb-6">
-            CHOOSE YOUR PATH
+          <h1 className="font-space-gothic text-5xl md:text-6xl text-cyan-400 mb-6">
+            choose your path
           </h1>
           <p className="font-tech text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Two tracks await at Shadow Ranch. Master the philosophical foundations before diving into the technical depths.
