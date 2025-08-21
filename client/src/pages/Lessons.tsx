@@ -134,7 +134,7 @@ export default function Lessons() {
             <div className="p-8">
               <div className="flex items-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-tech-purple-500 to-tech-purple-600 rounded-lg flex items-center justify-center mr-4">
-                  <img src={solanaLogo} alt="Solana Logo" className="w-10 h-10 pl-[2px] pr-[2px] pt-[5px] pb-[5px] ml-[0px] mr-[0px] mt-[1px] mb-[1px]" />
+                  <img src={solanaLogo} alt="Solana Logo" className="w-10 h-10 ml-[0px] mr-[0px] mt-[1px] mb-[1px] pl-[4px] pr-[4px] pt-[8px] pb-[8px]" />
                 </div>
                 <div>
                   <h2 className="font-space-gothic text-2xl text-tech-purple-400 mb-2">SOLANA PROGRAM DEVELOPMENT</h2>
