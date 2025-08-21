@@ -17,7 +17,6 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
     { href: "/cypherpunks-ethos", label: "Ethos" },
     { href: "/mindmap", label: "Mindmap" },
     { href: "/lessons", label: "Lessons" },
-    { href: "/ranch", label: "My Ranch" },
     { href: "/profile", label: "Profile" },
   ];
 
