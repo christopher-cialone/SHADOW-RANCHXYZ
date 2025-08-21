@@ -1,0 +1,73 @@
+rompt for Replit Agent (Mind Map Expansion & Visual Upgrade)
+Agent, your task is to perform a major update on the MindmapPage.tsx component. You will expand the mind map with detailed information about the Solana ecosystem and enhance its visual clarity.
+
+Please follow these instructions precisely:
+
+1. Update the mindmapData Constant:
+* Locate the solana_node object within the mindmapData constant.
+* Replace its entire children array with the new, deeply-researched array provided below. This new data adds detailed nodes for Anatoly Yakovenko's background, the founding team, core technologies, and key ecosystem developments like Wormhole and ZK privacy solutions.
+
+JavaScript
+
+// This is the NEW children array for the 'solana_node'
+children: [
+  {
+    id: 'anatoly_yakovenko',
+    title: 'Anatoly Yakovenko',
+    blurb: 'Founder of Solana. Drew on his background in distributed systems at Qualcomm to conceive of Proof of History, the core innovation that enables Solana\'s high throughput.',
+    link: 'https://www.risein.com/blog/who-is-anatoly-yakovenko-founder-of-solana-blockchain',
+    category: 'person'
+  },
+  {
+    id: 'founding_team',
+    title: 'Founding Team',
+    blurb: 'Anatoly recruited a core team of brilliant engineers, many former colleagues from Qualcomm, to build out the Solana network.',
+    link: 'https://dailycoin.com/solana-history-story-behind-cryptos-leading-ethereum-killer/',
+    category: 'person',
+    children: [
+      { id: 'greg_fitzgerald', title: 'Greg Fitzgerald', blurb: 'Former Qualcomm colleague who suggested rewriting the initial codebase in Rust for performance and safety, a pivotal decision. Now leads the Firedancer validator client project.', link: 'https://messari.io/project/solana/profile', category: 'person' },
+      { id: 'stephen_akridge', title: 'Stephen Akridge', blurb: 'Qualcomm veteran credited with co-designing Sealevel, Solana\'s parallel transaction processing engine.', link: 'https://solana.com/docs/core/runtime/sealevel', category: 'person' }
+    ]
+  },
+  {
+    id: 'core_tech',
+    title: 'Core Technologies',
+    blurb: 'A suite of eight core innovations that work together to create a hyper-optimized network.',
+    link: 'https://solana.com/docs/core/eight-innovations',
+    category: 'technology',
+    children: [
+      { id: 'poh', title: 'Proof of History (PoH)', blurb: 'A cryptographic clock that creates a verifiable, ordered sequence of events, allowing for extremely fast transaction processing before consensus.', link: 'https://blog.bitunix.com/the-story-of-solana-from-genesis-to-future/', category: 'technology' },
+      { id: 'sealevel', title: 'Sealevel', blurb: 'The world\'s first parallel smart contract run-time, enabling tens of thousands of contracts to be processed simultaneously.', link: 'https://solana.com/docs/core/runtime/sealevel', category: 'technology' },
+      { id: 'tower_bft', title: 'Tower BFT', blurb: 'Solana\'s implementation of Proof of Stake, optimized to work with Proof of History for fast consensus.', link: 'https://medium.com/solana-labs/tower-bft-solanas-high-performance-consensus-algorithm-d26a6352178b', category: 'technology' }
+    ]
+  },
+  {
+    id: 'ecosystem_dev',
+    title: 'Ecosystem Developments',
+    blurb: 'The technology of Solana has enabled a vibrant and diverse ecosystem of projects.',
+    link: 'https://solana.com/ecosystem',
+    category: 'concept',
+    children: [
+      { id: 'wormhole', title: 'Wormhole Protocol', blurb: 'A generic cross-chain messaging protocol that allows different blockchains to communicate. While enabling interoperability, it also highlights the security challenges of bridging networks.', link: 'https://wormhole.com/', category: 'technology' },
+      { id: 'privacy_solutions', title: 'Privacy Solutions', blurb: 'While the base layer is transparent, projects are building privacy using Zero-Knowledge proofs to fulfill the original Cypherpunk vision.', link: 'https://www.arcium.com/articles/the-rebirth-of-privacy-on-solana', category: 'technology', children: [
+        { id: 'zk_proofs', title: 'ZK Proofs', blurb: 'Zero-Knowledge proofs allow one party to prove a statement is true without revealing any other information. Key to both scalability and privacy.', link: 'https://solanacompass.com/projects/category/research/zk-proofs', category: 'technology' }
+      ]}
+    ]
+  }
+]
+2. Add Categories to All Existing Nodes:
+* Go through the entire mindmapData object and add a category property to every single node (including the ones you just added). Use the following categories: person, technology, concept, event, legal. This is crucial for the visual upgrade.
+
+3. Implement Visual Enhancements:
+* Define Category Colors: At the top of the MindmapPage component, add a color mapping object:
+javascript const categoryColors: { [key: string]: string } = { person: '#60a5fa', // blue-400 technology: '#4ade80', // green-400 concept: '#facc15', // yellow-400 event: '#f87171', // red-400 legal: '#c084fc', // purple-400 default: '#9ca3af' // gray-400 }; 
+* Update Node Rendering: In the useEffect hook where you create the D3 nodes, modify the circles selection. The stroke color should now be determined by the node's category using the categoryColors map.
+javascript // Find this line: .attr("stroke", (d) => d.depth === 0 ? "#00FFFF" : "#4A5568") // And REPLACE it with this: .attr("stroke", (d) => categoryColors[d.category || 'default']) 
+* Update Highlight Logic: Modify the highlightPath and svg.on("click") functions to use the categoryColors map when resetting the node styles, ensuring the colors persist correctly.
+
+4. Adjust Force Simulation for Readability:
+* In the useEffect hook, find the d3.forceSimulation setup.
+* Modify the forceLink and forceManyBody strengths to create more space between nodes.
+javascript // Find the simulation setup and apply these values: const simulation = d3.forceSimulation(nodes as any) .force("link", d3.forceLink(links).id((d: any) => d.id).distance(d => (d.source.depth + 1) * 60).strength(1)) .force("charge", d3.forceManyBody().strength(-350)) .force("center", d3.forceCenter(width / 2, height / 2)) .force("collision", d3.forceCollide().radius(d => 25 - d.depth * 2)); 
+
+Please apply these changes to the MindmapPage.tsx file. The result will be a more detailed, visually intuitive, and readable mind map.
