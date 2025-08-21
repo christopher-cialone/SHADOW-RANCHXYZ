@@ -6,7 +6,6 @@ import { CodeEditor } from "@/components/ui/CodeEditor";
 import { NarrativeBox } from "@/components/lessons/NarrativeBox";
 import { VisualFeedback } from "@/components/solana/VisualFeedback";
 import { NftAchievementModal } from "@/components/solana/NftAchievementModal";
-import { SplashScreen } from "@/components/ui/SplashScreen";
 import { solanaChallenges } from "@/data/solana-challenges";
 import { useToast } from "@/hooks/use-toast";
 
@@ -28,7 +27,6 @@ export default function CodingChallengePage() {
     badges: []
   });
   
-  const [isLoading, setIsLoading] = useState(false);
   const [isCompiling, setIsCompiling] = useState(false);
   const [compilationResult, setCompilationResult] = useState<{
     success: boolean;
@@ -72,16 +70,6 @@ export default function CodingChallengePage() {
       }));
     }
   }, [challengeId, currentChallenge]);
-
-  // Hide splash screen after challenge changes
-  useEffect(() => {
-    // This runs after the new challenge content has started to load
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500); // Keep splash screen visible for 1.5 seconds
-
-    return () => clearTimeout(timer);
-  }, [challengeId]);
 
   const handleCodeChange = (newCode: string) => {
     setProgress(prev => ({ ...prev, code: newCode }));
@@ -149,14 +137,12 @@ export default function CodingChallengePage() {
 
   const handleNext = () => {
     if (challengeId < solanaChallenges.length) {
-      setIsLoading(true);
       window.location.href = `/solana-challenges/${challengeId + 1}`;
     }
   };
 
   const handlePrevious = () => {
     if (challengeId > 1) {
-      setIsLoading(true);
       window.location.href = `/solana-challenges/${challengeId - 1}`;
     }
   };
@@ -168,7 +154,6 @@ export default function CodingChallengePage() {
   const handleContinue = () => {
     setShowAchievementModal(false);
     if (challengeId < solanaChallenges.length) {
-      setIsLoading(true);
       setTimeout(() => {
         window.location.href = `/solana-challenges/${challengeId + 1}`;
       }, 300);
@@ -192,7 +177,6 @@ export default function CodingChallengePage() {
 
   return (
     <>
-      {isLoading && <SplashScreen />}
       <CodingChallengeLayout
         title={currentChallenge.title}
         currentChallenge={challengeId}
