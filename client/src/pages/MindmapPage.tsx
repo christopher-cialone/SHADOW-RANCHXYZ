@@ -8,6 +8,7 @@ interface MindmapNode {
   blurb: string;
   link: string;
   depth: number;
+  category?: string; // Added for color coding
   parent?: string;
   children?: MindmapNode[];
   x?: number;
@@ -26,21 +27,24 @@ const mindmapData = {
   title: 'History of the Internet',
   blurb: 'The evolution from a decentralized military project (ARPANET) to a centralized, corporate-dominated network (Web 2.0), setting the stage for the Web3 movement.',
   link: 'https://en.wikipedia.org/wiki/History_of_the_Internet',
+  category: 'concept',
   children: [
     {
       id: 'arpanet',
       title: 'ARPANET (1960s)',
       blurb: 'The precursor to the modern internet, designed as a resilient, decentralized network for the US military.',
       link: 'https://en.wikipedia.org/wiki/ARPANET',
+      category: 'technology',
     },
     {
       id: 'web1',
       title: 'Web 1.0 (1990s)',
       blurb: 'The "read-only" web of static websites. Decentralized protocols (HTTP, SMTP) dominated, but user interaction was limited.',
       link: 'https://en.wikipedia.org/wiki/Web_1.0',
+      category: 'concept',
       children: [
-        { id: 'netscape', title: 'Rise & Fall of Netscape', blurb: 'Netscape Navigator was the dominant browser of the early web, but lost the "first browser war" to Microsoft\'s Internet Explorer, a key moment in centralization.', link: 'https://en.wikipedia.org/wiki/Browser_wars#First_Browser_War'},
-        { id: 'cda_230', title: 'CDA Section 230 (1996)', blurb: 'A pivotal piece of US legislation that granted online platforms immunity for their users\' content, enabling the rise of social media.', link: 'https://www.eff.org/issues/cda230'},
+        { id: 'netscape', title: 'Rise & Fall of Netscape', blurb: 'Netscape Navigator was the dominant browser of the early web, but lost the "first browser war" to Microsoft\'s Internet Explorer, a key moment in centralization.', link: 'https://en.wikipedia.org/wiki/Browser_wars#First_Browser_War', category: 'event'},
+        { id: 'cda_230', title: 'CDA Section 230 (1996)', blurb: 'A pivotal piece of US legislation that granted online platforms immunity for their users\' content, enabling the rise of social media.', link: 'https://www.eff.org/issues/cda230', category: 'legal'},
       ]
     },
     {
@@ -48,8 +52,9 @@ const mindmapData = {
       title: 'Web 2.0 (2000s-Present)',
       blurb: 'The "read-write" web of centralized platforms (Google, Facebook, etc.) where user data became the primary product, leading to the problems the Cypherpunks predicted.',
       link: 'https://en.wikipedia.org/wiki/Web2',
+      category: 'concept',
       children: [
-        { id: 'google_facebook', title: 'Rise of Big Tech', blurb: 'Companies like Google and Facebook created massive, centralized databases of user information, pioneering the business model of surveillance capitalism.', link: 'https://en.wikipedia.org/wiki/Surveillance_capitalism'},
+        { id: 'google_facebook', title: 'Rise of Big Tech', blurb: 'Companies like Google and Facebook created massive, centralized databases of user information, pioneering the business model of surveillance capitalism.', link: 'https://en.wikipedia.org/wiki/Surveillance_capitalism', category: 'event'},
       ]
     },
     {
@@ -57,15 +62,17 @@ const mindmapData = {
       title: 'Cryptography',
       blurb: 'The science of secure communication. It provides the mathematical foundation for all blockchain technology and secure internet protocols.',
       link: 'https://en.wikipedia.org/wiki/Cryptography',
+      category: 'technology',
       children: [
         {
           id: 'pkc',
           title: 'Public-Key Cryptography',
           blurb: 'A revolutionary concept from the 1970s allowing for secure communication without pre-sharing a secret key. It is the basis for all crypto wallets.',
           link: 'https://en.wikipedia.org/wiki/Public-key_cryptography',
+          category: 'technology',
           children: [
-            { id: 'diffie_hellman', title: 'Diffie & Hellman', blurb: 'Whitfield Diffie and Martin Hellman published the first paper on public-key cryptography in 1976, making widespread secure communication possible.', link: 'https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange'},
-            { id: 'pgp', title: 'PGP (Pretty Good Privacy)', blurb: 'Created by Phil Zimmermann in 1991, PGP was a powerful encryption software released for free, sparking the "Crypto Wars."', link: 'https://en.wikipedia.org/wiki/Pretty_Good_Privacy'},
+            { id: 'diffie_hellman', title: 'Diffie & Hellman', blurb: 'Whitfield Diffie and Martin Hellman published the first paper on public-key cryptography in 1976, making widespread secure communication possible.', link: 'https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange', category: 'person'},
+            { id: 'pgp', title: 'PGP (Pretty Good Privacy)', blurb: 'Created by Phil Zimmermann in 1991, PGP was a powerful encryption software released for free, sparking the "Crypto Wars."', link: 'https://en.wikipedia.org/wiki/Pretty_Good_Privacy', category: 'technology'},
           ]
         },
         {
@@ -73,8 +80,9 @@ const mindmapData = {
           title: 'Legislation: The Crypto Wars',
           blurb: 'The 1990s conflict between the US government, which wanted to control encryption (classifying it as a munition), and activists fighting for public access.',
           link: 'https://en.wikipedia.org/wiki/Crypto_Wars',
+          category: 'legal',
         },
-        { id: 'david_chaum_crypto', title: 'David Chaum', blurb: 'The "godfather of digital cash." His 1980s work on blind signatures and the DigiCash system was a crucial early experiment in private digital transactions.', link: 'https://en.wikipedia.org/wiki/David_Chaum'},
+        { id: 'david_chaum_crypto', title: 'David Chaum', blurb: 'The "godfather of digital cash." His 1980s work on blind signatures and the DigiCash system was a crucial early experiment in private digital transactions.', link: 'https://en.wikipedia.org/wiki/David_Chaum', category: 'person'},
       ]
     },
     {
@@ -82,16 +90,18 @@ const mindmapData = {
       title: 'The Cypherpunk Movement',
       blurb: 'A movement from the late 1980s advocating for privacy and social change through the use of strong cryptography. They are the philosophical architects of Web3.',
       link: 'https://www.activism.net/cypherpunk/manifesto.html',
+      category: 'concept',
       children: [
         {
           id: 'people_cypherpunks',
           title: 'Key Individuals',
           blurb: 'The core thinkers and builders who drove the movement.',
           link: 'https://en.wikipedia.org/wiki/Cypherpunk#Noteworthy_cypherpunks',
+          category: 'person',
           children: [
-            { id: 'tim_may', title: 'Timothy May', blurb: 'Author of "The Crypto Anarchist Manifesto," a foundational text outlining a vision of society transformed by cryptography.', link: 'https://nakamotoinstitute.org/crypto-anarchist-manifesto/'},
-            { id: 'eric_hughes', title: 'Eric Hughes', blurb: 'Author of "A Cypherpunk\'s Manifesto," famously stating "Cypherpunks write code."', link: 'https://www.activism.net/cypherpunk/manifesto.html'},
-            { id: 'wei_dai', title: 'Wei Dai', blurb: 'Creator of "b-money," an early proposal for an anonymous, distributed electronic cash system, cited in the Bitcoin whitepaper.', link: 'http://www.weidai.com/bmoney.txt'},
+            { id: 'tim_may', title: 'Timothy May', blurb: 'Author of "The Crypto Anarchist Manifesto," a foundational text outlining a vision of society transformed by cryptography.', link: 'https://nakamotoinstitute.org/crypto-anarchist-manifesto/', category: 'person'},
+            { id: 'eric_hughes', title: 'Eric Hughes', blurb: 'Author of "A Cypherpunk\'s Manifesto," famously stating "Cypherpunks write code."', link: 'https://www.activism.net/cypherpunk/manifesto.html', category: 'person'},
+            { id: 'wei_dai', title: 'Wei Dai', blurb: 'Creator of "b-money," an early proposal for an anonymous, distributed electronic cash system, cited in the Bitcoin whitepaper.', link: 'http://www.weidai.com/bmoney.txt', category: 'person'},
           ]
         },
         {
@@ -99,6 +109,7 @@ const mindmapData = {
           title: 'Bitcoin',
           blurb: 'The first successful decentralized electronic cash system, created by the anonymous Satoshi Nakamoto. It was the culmination of the Cypherpunks\' dream of private, digital money.',
           link: 'https://bitcoin.org/bitcoin.pdf',
+          category: 'technology'
         },
       ]
     },
@@ -107,16 +118,18 @@ const mindmapData = {
       title: 'The Smart Contract Revolution',
       blurb: 'The evolutionary leap after Bitcoin, generalizing the blockchain concept from just money to a global, decentralized computer.',
       link: 'https://ethereum.org/en/whitepaper/',
+      category: 'concept',
       children: [
         {
           id: 'people_smart_contracts',
           title: 'Key Individuals',
           blurb: 'The visionaries who imagined and built programmable blockchains.',
           link: '#',
+          category: 'person',
           children: [
-            { id: 'nick_szabo', title: 'Nick Szabo', blurb: 'Pioneered the concept of "smart contracts" in the 1990s, laying the theoretical groundwork for Ethereum long before blockchain existed.', link: 'https://en.wikipedia.org/wiki/Nick_Szabo'},
-            { id: 'vitalik_buterin', title: 'Vitalik Buterin', blurb: 'Co-founder of Ethereum. His 2013 whitepaper proposed a Turing-complete blockchain, and he framed the "Scalability Trilemma" that projects like Solana aim to solve.', link: 'https://en.wikipedia.org/wiki/Vitalik_Buterin'},
-            { id: 'gavin_wood', title: 'Gavin Wood', blurb: 'Co-founder of Ethereum, wrote the technical "Yellow Paper" specifying the EVM, and created Solidity. Later founded Polkadot.', link: 'https://en.wikipedia.org/wiki/Gavin_Wood'},
+            { id: 'nick_szabo', title: 'Nick Szabo', blurb: 'Pioneered the concept of "smart contracts" in the 1990s, laying the theoretical groundwork for Ethereum long before blockchain existed.', link: 'https://en.wikipedia.org/wiki/Nick_Szabo', category: 'person'},
+            { id: 'vitalik_buterin', title: 'Vitalik Buterin', blurb: 'Co-founder of Ethereum. His 2013 whitepaper proposed a Turing-complete blockchain, and he framed the "Scalability Trilemma" that projects like Solana aim to solve.', link: 'https://en.wikipedia.org/wiki/Vitalik_Buterin', category: 'person'},
+            { id: 'gavin_wood', title: 'Gavin Wood', blurb: 'Co-founder of Ethereum, wrote the technical "Yellow Paper" specifying the EVM, and created Solidity. Later founded Polkadot.', link: 'https://en.wikipedia.org/wiki/Gavin_Wood', category: 'person'},
           ]
         },
         {
@@ -124,50 +137,64 @@ const mindmapData = {
           title: 'Core Concepts',
           blurb: 'The key ideas that enabled the explosion of dApps.',
           link: '#',
+          category: 'concept',
           children: [
-            { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain, allowing developers to build and deploy any decentralized application (dApp).', link: 'https://ethereum.org/'},
-            { id: 'dao_hack', title: 'The DAO Hack', blurb: 'The first major philosophical crisis of the smart contract era, forcing a fork of Ethereum and a confrontation with the "code is law" principle.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)'},
+            { id: 'ethereum', title: 'Ethereum', blurb: 'The first Turing-complete blockchain, allowing developers to build and deploy any decentralized application (dApp).', link: 'https://ethereum.org/', category: 'technology'},
+            { id: 'dao_hack', title: 'The DAO Hack', blurb: 'The first major philosophical crisis of the smart contract era, forcing a fork of Ethereum and a confrontation with the "code is law" principle.', link: 'https://en.wikipedia.org/wiki/The_DAO_(organization)', category: 'event'},
           ]
         },
         {
           id: 'solana_node',
           title: 'Solana',
           blurb: 'A high-performance blockchain designed to solve the Scalability Trilemma with innovations like Proof of History.',
-          link: 'https://solana.com/'
+          link: 'https://solana.com/',
+          category: 'technology',
+          children: [
+            {
+              id: 'anatoly_yakovenko',
+              title: 'Anatoly Yakovenko',
+              blurb: 'Founder of Solana. Drew on his background in distributed systems at Qualcomm to conceive of Proof of History, the core innovation that enables Solana\'s high throughput.',
+              link: 'https://www.risein.com/blog/who-is-anatoly-yakovenko-founder-of-solana-blockchain',
+              category: 'person'
+            },
+            {
+              id: 'founding_team',
+              title: 'Founding Team',
+              blurb: 'Anatoly recruited a core team of brilliant engineers, many former colleagues from Qualcomm, to build out the Solana network.',
+              link: 'https://dailycoin.com/solana-history-story-behind-cryptos-leading-ethereum-killer/',
+              category: 'person',
+              children: [
+                { id: 'greg_fitzgerald', title: 'Greg Fitzgerald', blurb: 'Former Qualcomm colleague who suggested rewriting the initial codebase in Rust for performance and safety, a pivotal decision. Now leads the Firedancer validator client project.', link: 'https://messari.io/project/solana/profile', category: 'person' },
+                { id: 'stephen_akridge', title: 'Stephen Akridge', blurb: 'Qualcomm veteran credited with co-designing Sealevel, Solana\'s parallel transaction processing engine.', link: 'https://solana.com/docs/core/runtime/sealevel', category: 'person' }
+              ]
+            },
+            {
+              id: 'core_tech',
+              title: 'Core Technologies',
+              blurb: 'A suite of eight core innovations that work together to create a hyper-optimized network.',
+              link: 'https://solana.com/docs/core/eight-innovations',
+              category: 'technology',
+              children: [
+                { id: 'poh', title: 'Proof of History (PoH)', blurb: 'A cryptographic clock that creates a verifiable, ordered sequence of events, allowing for extremely fast transaction processing before consensus.', link: 'https://blog.bitunix.com/the-story-of-solana-from-genesis-to-future/', category: 'technology' },
+                { id: 'sealevel', title: 'Sealevel', blurb: 'The world\'s first parallel smart contract run-time, enabling tens of thousands of contracts to be processed simultaneously.', link: 'https://solana.com/docs/core/runtime/sealevel', category: 'technology' },
+                { id: 'tower_bft', title: 'Tower BFT', blurb: 'Solana\'s implementation of Proof of Stake, optimized to work with Proof of History for fast consensus.', link: 'https://medium.com/solana-labs/tower-bft-solanas-high-performance-consensus-algorithm-d26a6352178b', category: 'technology' }
+              ]
+            },
+            {
+              id: 'ecosystem_dev',
+              title: 'Ecosystem Developments',
+              blurb: 'The technology of Solana has enabled a vibrant and diverse ecosystem of projects.',
+              link: 'https://solana.com/ecosystem',
+              category: 'concept',
+              children: [
+                { id: 'wormhole', title: 'Wormhole Protocol', blurb: 'A generic cross-chain messaging protocol that allows different blockchains to communicate. While enabling interoperability, it also highlights the security challenges of bridging networks.', link: 'https://wormhole.com/', category: 'technology' },
+                { id: 'privacy_solutions', title: 'Privacy Solutions', blurb: 'While the base layer is transparent, projects are building privacy using Zero-Knowledge proofs to fulfill the original Cypherpunk vision.', link: 'https://www.arcium.com/articles/the-rebirth-of-privacy-on-solana', category: 'technology', children: [
+                  { id: 'zk_proofs', title: 'ZK Proofs', blurb: 'Zero-Knowledge proofs allow one party to prove a statement is true without revealing any other information. Key to both scalability and privacy.', link: 'https://solanacompass.com/projects/category/research/zk-proofs', category: 'technology' }
+                ]}
+              ]
+            }
+          ]
         }
-      ]
-    },
-    {
-      id: 'intelligence_connection',
-      title: 'The Intelligence Connection',
-      blurb: 'Explores the documented interest of intelligence agencies and their research arms (like DARPA) in the technologies that both enable and threaten privacy.',
-      link: 'https://unlimitedhangout.com/',
-      children: [
-        { id: 'darpa', title: "DARPA's Dual Legacy", blurb: 'The agency that created the decentralized ARPANET has also funded projects aimed at surveillance and breaking encryption, a fundamental conflict.', link: 'https://www.darpa.mil/about-us/timeline/arpanet'},
-        { id: 'whitney_webb', title: "Whitney Webb's Research", blurb: 'Investigative journalist who documents deep ties between intelligence agencies, Silicon Valley, and figures in the crypto space.', link: 'https://unlimitedhangout.com/'},
-        { id: 'total_info', title: '"Total Information Awareness"', blurb: 'A post-9/11 DARPA program for mass data collection that, while defunded, influenced the architecture of Web 2.0 surveillance.', link: 'https://en.wikipedia.org/wiki/Total_Information_Awareness'},
-      ]
-    },
-    {
-      id: 'legal_battlefield',
-      title: 'The Legal Battlefield',
-      blurb: 'The ongoing fight to define the legal boundaries of code, privacy, and decentralization in the courts.',
-      link: '#',
-      children: [
-        { id: 'roman_storm', title: 'Roman Storm (Tornado Cash)', blurb: 'His indictment for creating a non-custodial privacy tool is a pivotal case for developer liability and the "code is speech" debate.', link: 'https://www.coindesk.com/policy/2023/08/23/tornado-cash-founders-charged-with-money-laundering-and-sanctions-violations/'},
-        { id: 'roger_ver', title: 'Roger Ver ("Bitcoin Jesus")', blurb: 'His tax evasion case highlights the conflict between sovereign individuals and nation-states over financial control in a digital economy.', link: 'https://www.justice.gov/opa/pr/early-bitcoin-investor-charged-tax-fraud'},
-        { id: 'code_is_speech', title: 'The "Code is Speech" Debate', blurb: 'The central legal argument that writing and publishing open-source software is a form of protected speech under the First Amendment.', link: 'https://www.eff.org/deeplinks/2023/10/code-speech-and-tornado-cash-case'},
-      ]
-    },
-    {
-      id: 'corporate_cooption',
-      title: 'Corporate Co-option vs. Ethos',
-      blurb: 'The internal struggle against the centralizing forces of venture capital, profit motives, and dishonest marketing within Web3.',
-      link: '#',
-      children: [
-        { id: 'cexs', title: 'The Rise of CEXs', blurb: 'Centralized exchanges like Coinbase and the defunct FTX reintroduced central points of failure, as shown by the FTX collapse.', link: 'https://en.wikipedia.org/wiki/Collapse_of_FTX'},
-        { id: 'fake_decentralization', title: '"Fake Decentralization"', blurb: 'A critique of projects that use a blockchain but maintain centralized control, often masked by clever marketing.', link: '#'},
-        { id: 'vc_influence', title: 'The VC Influence', blurb: 'Venture capital has accelerated innovation but also introduced pressures for profit over principle, sometimes at the expense of true decentralization.', link: '#'},
       ]
     }
   ]
@@ -176,6 +203,16 @@ const mindmapData = {
 export default function MindmapPage() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedNode, setSelectedNode] = useState<MindmapNode | null>(null);
+  
+  // Category Colors for visual enhancement
+  const categoryColors: { [key: string]: string } = {
+    person: '#60a5fa',      // blue-400
+    technology: '#4ade80',  // green-400
+    concept: '#facc15',     // yellow-400
+    event: '#f87171',       // red-400
+    legal: '#c084fc',       // purple-400
+    default: '#9ca3af'      // gray-400
+  };
   const [nodes, setNodes] = useState<MindmapNode[]>([]);
   const [links, setLinks] = useState<MindmapLink[]>([]);
 
@@ -187,6 +224,7 @@ export default function MindmapPage() {
       blurb: node.blurb,
       link: node.link,
       depth,
+      category: node.category,
       parent: parent?.id
     };
 
@@ -236,12 +274,12 @@ export default function MindmapPage() {
 
     svg.call(zoom);
 
-    // Create force simulation
+    // Create force simulation with enhanced spacing
     const simulation = d3.forceSimulation(nodes as any)
-      .force("link", d3.forceLink(links).id((d: any) => d.id).distance(80).strength(0.8))
-      .force("charge", d3.forceManyBody().strength(-400))
+      .force("link", d3.forceLink(links).id((d: any) => d.id).distance((d: any) => ((d.source.depth || 0) + 1) * 60).strength(1))
+      .force("charge", d3.forceManyBody().strength(-350))
       .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(25));
+      .force("collision", d3.forceCollide().radius((d: any) => 25 - (d.depth || 0) * 2));
 
     // Create links
     const link = container.append("g")
@@ -277,11 +315,11 @@ export default function MindmapPage() {
           d.fy = null;
         }));
 
-    // Add circles to nodes
+    // Add circles to nodes with category-based coloring
     const circles = nodeGroup.append("circle")
       .attr("r", (d) => Math.max(8, 20 - d.depth * 3))
       .attr("fill", "#1F2937")
-      .attr("stroke", (d) => d.depth === 0 ? "#00FFFF" : "#4A5568")
+      .attr("stroke", (d) => categoryColors[d.category || 'default'])
       .attr("stroke-width", (d) => d.depth === 0 ? 3 : 2)
       .style("transition", "all 0.3s ease");
 
@@ -303,8 +341,8 @@ export default function MindmapPage() {
 
     // Highlight path function
     const highlightPath = (targetNode: MindmapNode) => {
-      // Reset all styles
-      circles.attr("stroke", (d) => d.depth === 0 ? "#00FFFF" : "#4A5568")
+      // Reset all styles using category colors
+      circles.attr("stroke", (d) => categoryColors[d.category || 'default'])
              .attr("stroke-width", (d) => d.depth === 0 ? 3 : 2);
       link.attr("stroke", "#4A5568").attr("stroke-width", 2);
 
@@ -348,7 +386,7 @@ export default function MindmapPage() {
     // Clear selection on background click
     svg.on("click", () => {
       setSelectedNode(null);
-      circles.attr("stroke", (d) => d.depth === 0 ? "#00FFFF" : "#4A5568")
+      circles.attr("stroke", (d) => categoryColors[d.category || 'default'])
              .attr("stroke-width", (d) => d.depth === 0 ? 3 : 2);
       link.attr("stroke", "#4A5568").attr("stroke-width", 2);
     });
@@ -478,6 +516,26 @@ export default function MindmapPage() {
                 <li>• Zoom and pan to navigate</li>
                 <li>• Paths highlight automatically</li>
               </ul>
+            </div>
+
+            {/* Color Legend */}
+            <div className="mt-6 bg-gray-900/50 border border-gray-700/50 rounded-lg p-4">
+              <h4 className="font-space-gothic text-cyan-400 text-lg mb-3">
+                Node Categories
+              </h4>
+              <div className="space-y-2 text-sm">
+                {Object.entries(categoryColors).filter(([key]) => key !== 'default').map(([category, color]) => (
+                  <div key={category} className="flex items-center space-x-3">
+                    <div 
+                      className="w-3 h-3 rounded-full border-2" 
+                      style={{ borderColor: color }}
+                    />
+                    <span className="text-gray-300 font-mono capitalize">
+                      {category === 'person' ? 'People' : category}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Community Contribution */}
