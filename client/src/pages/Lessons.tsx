@@ -191,7 +191,6 @@ export default function Lessons() {
                       setLocation('/lessons/1');
                     }}
                   >
-                    <img src={solanaLogo} alt="Solana" className="w-4 h-4 mr-2" />
                     START SOLANA TRACK
                   </TechButton>
                 </div>
