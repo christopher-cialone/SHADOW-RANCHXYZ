@@ -4,6 +4,7 @@ import { TechCard } from "@/components/ui/TechCard";
 import { usePageLoader } from "@/hooks/use-page-loader";
 import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 import { solanaCodingLessons } from '@/data/lessons';
+import solanaLogo from '@assets/solanaLogoMark_1755774382889.png';
 
 export default function Lessons() {
   const [, setLocation] = useLocation();
@@ -132,7 +133,7 @@ export default function Lessons() {
             <div className="p-8">
               <div className="flex items-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-tech-purple-500 to-tech-purple-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-2xl">⚡</span>
+                  <img src={solanaLogo} alt="Solana Logo" className="w-10 h-10" />
                 </div>
                 <div>
                   <h2 className="font-space-gothic text-2xl text-tech-purple-400 mb-2">SOLANA PROGRAM DEVELOPMENT</h2>
@@ -189,7 +190,7 @@ export default function Lessons() {
                       setLocation('/lessons/1');
                     }}
                   >
-                    <span className="mr-2">⚡</span>
+                    <img src={solanaLogo} alt="Solana" className="w-4 h-4 mr-2" />
                     START SOLANA TRACK
                   </TechButton>
                 </div>
