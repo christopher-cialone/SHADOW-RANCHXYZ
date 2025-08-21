@@ -178,7 +178,6 @@ export default function Lessons() {
                     className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 border-purple-400"
                     onClick={() => setLocation('/solana-challenges/1')}
                   >
-                    <span className="mr-2">🔧</span>
                     START CODING CHALLENGES
                   </TechButton>
                   
