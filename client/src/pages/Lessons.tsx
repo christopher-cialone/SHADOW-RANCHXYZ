@@ -122,7 +122,6 @@ export default function Lessons() {
                   className="w-full"
                   onClick={handleCypherpunkTrackClick}
                 >
-                  <span className="mr-2">{trackProgress > 0 ? '🎯' : '🚀'}</span>
                   {trackProgress > 0 ? 'CONTINUE TRACK' : 'START LEGACY TRACK'}
                 </TechButton>
               )}
