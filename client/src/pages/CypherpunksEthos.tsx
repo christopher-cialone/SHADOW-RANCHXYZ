@@ -268,7 +268,7 @@ export default function CypherpunksEthos() {
             <iframe
               ref={videoRef}
               className="absolute top-0 left-0 w-full h-full"
-              src="https://www.youtube.com/embed/PYl9_1cBeVc?si=3-vOsKouvBAEp1mV&autoplay=0&loop=1&playlist=PYl9_1cBeVc&controls=1"
+              src="https://www.youtube.com/embed/-U9KE2w8-L0?si=WBOgFkKFaCh0b8MZ"
               title="The Cypherpunk Philosophy"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
