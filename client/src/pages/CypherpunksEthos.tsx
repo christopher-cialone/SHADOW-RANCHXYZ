@@ -421,7 +421,6 @@ export default function CypherpunksEthos() {
         <div className="text-center pb-12 sm:pb-20">
           <Link href="/lessons">
             <TechButton variant="accent" size="lg" className="group min-h-[56px]">
-              <span className="mr-2 group-hover:scale-110 transition-transform">🚀</span>
               Start Your Cypherpunk Journey
             </TechButton>
           </Link>
