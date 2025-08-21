@@ -5,6 +5,7 @@ import { usePageLoader } from "@/hooks/use-page-loader";
 import { useCypherpunkProgress } from "@/hooks/use-cypherpunk-progress";
 import { solanaCodingLessons } from '@/data/lessons';
 import solanaLogo from '@assets/solanaLogoMark_1755774382889.png';
+import srLogo from '@assets/@sr_logo__1755774706436.png';
 
 export default function Lessons() {
   const [, setLocation] = useLocation();
@@ -49,7 +50,7 @@ export default function Lessons() {
             <div className="p-8">
               <div className="flex items-center mb-6">
                 <div className="w-16 h-16 bg-cyan-500/20 border border-cyan-400/30 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-2xl">🔓</span>
+                  <img src={srLogo} alt="Shadow Ranch Logo" className="w-12 h-8" />
                 </div>
                 <div>
                   <h2 className="font-space-gothic text-2xl text-cyan-400 mb-2">THE CYPHERPUNK LEGACY</h2>
