@@ -1,0 +1,80 @@
+Agent, your next task is to completely overhaul the "Solana Corps of Engineers" coding challenges to make them more beginner-friendly. You will replace the current two-part challenge format with a new, three-part guided structure: "The Story," "The Example," and "Your Task."
+
+Please implement the following changes:
+
+1. Update the Challenge Layout Component:
+* Modify your CodingChallengeLayout.tsx and NarrativeBox.tsx components.
+* The left panel must now be divided into three clear sections: THE STORY, THE EXAMPLE, and YOUR TASK.
+* THE EXAMPLE section should be styled to look like a code block, but with annotations to explain the code.
+
+2. Replace All Existing Challenge Content:
+* You will delete the content for the previous 10 challenges.
+* Replace it with the new, three-part content provided below for each of the 10 challenges. This new content breaks down complex tasks into smaller, more manageable steps with clear examples.
+
+3. Implement the New Challenge Content:
+
+Challenge 1: The Genesis Program (No change in structure, as it's simple)
+
+Reading: "Every structure begins with a foundation..."
+
+Task: Change the program's name to my_chyron.
+
+Challenge 2: The First Instruction (No change in structure)
+
+Reading: "A program is useless without instructions..."
+
+Task: Add msg!("Chyron Initialized!"); to the initialize function.
+
+Challenge 3: State & Accounts (No change in structure)
+
+Reading: "Programs themselves don't store data..."
+
+Task: Define the ChyronAccount struct with a message: String field.
+
+Challenge 4: Writing to the Chain (New Guided Structure)
+
+The Story: "Now, let's connect our instruction to our account. This is where the magic happens – we'll write our first piece of data permanently to the Solana blockchain."
+
+The Example:
+
+Rust
+
+// In our instruction's context, we need to define the accounts it will use.
+#[derive(Accounts)]
+pub struct SomeContext<'info> {
+    // To create an account, we need 3 things:
+    // 1. The account itself, using the 'init' macro.
+    #[account(init, payer = user, space = 8 + 256)]
+    pub my_account: Account<'info, MyAccountStruct>,
+    // 2. The user who will pay for it.
+    #[account(mut)]
+    pub user: Signer<'info>,
+    // 3. The official Solana System Program.
+    pub system_program: Program<'info, System>,
+}
+Your Task: "First, let's prepare our Initialize context. Following the example, add the three necessary fields inside the struct: chyron_account, user, and system_program. Don't forget to add 'info!"
+
+Challenge 5: Setting the State (This is the second half of the old Challenge 4)
+
+The Story: "Our context is ready! Now we can access the newly created account inside our initialize instruction and set its message."
+
+The Example:
+
+Rust
+
+// Inside an instruction, we can access accounts via the context (ctx).
+pub fn some_instruction(ctx: Context<SomeContext>) -> Result<()> {
+    // We create a mutable reference to our account.
+    let my_account = &mut ctx.accounts.my_account;
+    // Then, we can set its fields.
+    my_account.some_data = "A new message!".to_string();
+    Ok(())
+}
+Your Task: "Inside the initialize function, create a mutable reference to chyron_account and set its message field to \"Hello, World!\".to_string()."
+
+(This pattern of breaking down complex tasks and providing clear examples will continue for the remaining challenges, ensuring a smoother learning curve.)
+
+4. Final Verification:
+* Ensure the UI correctly displays the new three-part structure for challenges 4 and beyond.
+* Confirm that the code examples are clearly differentiated from the user's task.
+* The validation logic for each challenge should now check for the smaller, more focused task completion.

@@ -206,8 +206,20 @@ export default function CodingChallengePage() {
                       typewriter={true}
                       typewriterSpeed={30}
                     >
-                      {currentChallenge.reading}
+                      {currentChallenge.story}
                     </NarrativeBox>
+                    
+                    {currentChallenge.example && (
+                      <div className="mb-6">
+                        <NarrativeBox variant="info" icon="💡" title="The Example">
+                          <pre className="bg-gray-800 p-4 rounded-lg overflow-x-auto text-sm">
+                            <code className="text-gray-200 font-mono">
+                              {currentChallenge.example}
+                            </code>
+                          </pre>
+                        </NarrativeBox>
+                      </div>
+                    )}
                   </div>
 
                   <div className="mb-6">
