@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       borderRadius: {
@@ -87,16 +87,16 @@ export default {
           900: "hsl(var(--tech-cyan-900))",
         },
         "tech-pink": {
-          50: "hsl(var(--tech-pink-50))",
-          100: "hsl(var(--tech-pink-100))",
-          200: "hsl(var(--tech-pink-200))",
-          300: "hsl(var(--tech-pink-300))",
-          400: "hsl(var(--tech-pink-400))",
-          500: "hsl(var(--tech-pink-500))",
-          600: "hsl(var(--tech-pink-600))",
-          700: "hsl(var(--tech-pink-700))",
-          800: "hsl(var(--tech-pink-800))",
-          900: "hsl(var(--tech-pink-900))",
+          50: "hsl(var(--tech-purple-50))",
+          100: "hsl(var(--tech-purple-100))",
+          200: "hsl(var(--tech-purple-200))",
+          300: "hsl(var(--tech-purple-300))",
+          400: "hsl(var(--tech-purple-400))",
+          500: "hsl(var(--tech-purple-500))",
+          600: "hsl(var(--tech-purple-600))",
+          700: "hsl(var(--tech-purple-700))",
+          800: "hsl(var(--tech-purple-800))",
+          900: "hsl(var(--tech-purple-900))",
         },
       },
       fontFamily: {
