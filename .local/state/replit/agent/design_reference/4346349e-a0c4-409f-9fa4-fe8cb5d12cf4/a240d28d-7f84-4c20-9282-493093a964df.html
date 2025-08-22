@@ -1,0 +1,835 @@
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRB: A Solana Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Creepster&family=Fredoka+One:wght@400&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: ['class'],
+            theme: {
+                extend: {
+                    colors: {
+                        desert: {
+                            50: '#faf7f0',
+                            100: '#f4ebe0',
+                            200: '#e8d4c0',
+                            300: '#d4a574',
+                            400: '#c89660',
+                            500: '#b8824c',
+                            600: '#a66e42',
+                            700: '#8b5a39',
+                            800: '#714a33',
+                            900: '#5c3d2b'
+                        },
+                        sunset: {
+                            50: '#fef3f2',
+                            100: '#fee4e2',
+                            200: '#fececa',
+                            300: '#fda4a6',
+                            400: '#f97316',
+                            500: '#e67e22',
+                            600: '#dc5a1e',
+                            700: '#b8451a',
+                            800: '#983a1b',
+                            900: '#7e331c'
+                        },
+                        rust: {
+                            50: '#faf6f3',
+                            100: '#f4ebe6',
+                            200: '#e8d4c9',
+                            300: '#d6b5a3',
+                            400: '#c1907a',
+                            500: '#a0522d',
+                            600: '#944a28',
+                            700: '#7b3e24',
+                            800: '#653523',
+                            900: '#542e22'
+                        },
+                        sage: {
+                            50: '#f6f8f4',
+                            100: '#eaefe6',
+                            200: '#d6dfce',
+                            300: '#b8c8a8',
+                            400: '#95b07e',
+                            500: '#87a96b',
+                            600: '#6d8a51',
+                            700: '#566b42',
+                            800: '#465637',
+                            900: '#3c4830'
+                        },
+                        leather: {
+                            50: '#faf6f2',
+                            100: '#f4ebe3',
+                            200: '#e7d4c2',
+                            300: '#d5b79a',
+                            400: '#c0966f',
+                            500: '#8b4513',
+                            600: '#7f3e11',
+                            700: '#6a3210',
+                            800: '#572a13',
+                            900: '#472414'
+                        },
+                        mystic: {
+                            50: '#f4f3ff',
+                            100: '#ebe9fe',
+                            200: '#d9d5fe',
+                            300: '#bfb5fd',
+                            400: '#a089fa',
+                            500: '#6a5acd',
+                            600: '#5d4fc4',
+                            700: '#5043b8',
+                            800: '#423996',
+                            900: '#383178'
+                        }
+                    },
+                    fontFamily: {
+                        'western': ['Rye', 'serif'],
+                        'saloon': ['Creepster', 'cursive'],
+                        'deputy': ['Fredoka One', 'cursive'],
+                        'mono': ['Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'dust-swirl': 'dust-swirl 20s infinite linear',
+                        'sheriff-star': 'sheriff-star 3s ease-in-out infinite',
+                        'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
+                        'fade-in': 'fade-in 0.5s ease-out',
+                        'slide-up': 'slide-up 0.5s ease-out'
+                    },
+                    keyframes: {
+                        'dust-swirl': {
+                            '0%': { transform: 'translateX(-100px) rotate(0deg)', opacity: '0' },
+                            '10%': { opacity: '0.6' },
+                            '90%': { opacity: '0.6' },
+                            '100%': { transform: 'translateX(100vw) rotate(360deg)', opacity: '0' }
+                        },
+                        'sheriff-star': {
+                            '0%, 100%': { transform: 'rotate(0deg) scale(1)', filter: 'brightness(1)' },
+                            '50%': { transform: 'rotate(180deg) scale(1.1)', filter: 'brightness(1.3)' }
+                        },
+                        'glow-pulse': {
+                            '0%': { boxShadow: '0 0 5px rgba(212, 165, 116, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(212, 165, 116, 0.8), 0 0 30px rgba(212, 165, 116, 0.6)' }
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        'slide-up': {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .dust-particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(212, 165, 116, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: dust-swirl 20s infinite linear;
+        }
+        
+        .dust-particle:nth-child(odd) {
+            animation-delay: -5s;
+            animation-duration: 25s;
+        }
+        
+        .dust-particle:nth-child(3n) {
+            animation-delay: -10s;
+            animation-duration: 30s;
+            background: rgba(230, 126, 34, 0.2);
+        }
+        
+        .btn-western-primary {
+            @apply bg-gradient-to-r from-desert-500 to-sunset-500 text-white font-deputy px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-desert-600;
+        }
+        
+        .btn-western-secondary {
+            @apply bg-gradient-to-r from-sage-500 to-sage-600 text-white font-deputy px-6 py-3 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 hover:shadow-xl border-2 border-sage-700;
+        }
+        
+        .western-card {
+            @apply bg-gradient-to-br from-leather-900/90 to-leather-800/90 border-2 border-desert-600 rounded-lg shadow-xl backdrop-blur-sm;
+        }
+        
+        .code-editor {
+            background: linear-gradient(145deg, #1e1e1e, #2d2d2d);
+            border: 2px solid #444;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .progress-trail {
+            background: linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.3) 50%, transparent 100%);
+        }
+
+        .sparkle-effect {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen overflow-x-hidden">
+    <!-- Dust Particles -->
+    <div class="dust-particle" style="top: 20%; animation-delay: 0s;"></div>
+    <div class="dust-particle" style="top: 40%; animation-delay: -3s;"></div>
+    <div class="dust-particle" style="top: 60%; animation-delay: -6s;"></div>
+    <div class="dust-particle" style="top: 80%; animation-delay: -9s;"></div>
+    <div class="dust-particle" style="top: 30%; animation-delay: -12s;"></div>
+    <div class="dust-particle" style="top: 70%; animation-delay: -15s;"></div>
+
+    <!-- @COMPONENT: Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-desert-600/30">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-star text-desert-400 text-2xl animate-sheriff-star"></i>
+                <h1 class="font-western text-2xl text-desert-400">BRB: A Solana Adventure</h1>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#" class="font-deputy text-gray-300 hover:text-desert-400 transition-colors">Home</a>
+                <a href="#lessons" class="font-deputy text-gray-300 hover:text-desert-400 transition-colors">Lessons</a>
+                <a href="#playground" class="font-deputy text-gray-300 hover:text-desert-400 transition-colors">Playground</a>
+                <a href="#ranch" class="font-deputy text-gray-300 hover:text-desert-400 transition-colors">My Ranch</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <!-- @COMPONENT: WalletButton -->
+                <button class="btn-western-primary" data-event="click:connectWallet">
+                    <i class="fas fa-wallet mr-2"></i>
+                    <span data-bind="wallet.connected ? 'Connected' : 'Connect Wallet'">Connect Wallet</span>
+                </button>
+                <button class="p-2 text-gray-400 hover:text-desert-400 transition-colors">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <main class="pt-20">
+        <!-- @COMPONENT: HeroSection -->
+        <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <!-- Background particles effect -->
+            <div class="absolute inset-0 opacity-30">
+                <div class="sparkle-effect" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+                <div class="sparkle-effect" style="top: 60%; left: 80%; animation-delay: 0.5s;"></div>
+                <div class="sparkle-effect" style="top: 40%; left: 30%; animation-delay: 1s;"></div>
+                <div class="sparkle-effect" style="top: 80%; left: 60%; animation-delay: 1.5s;"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <div class="animate-fade-in">
+                    <h1 class="font-western text-6xl md:text-8xl text-desert-400 mb-6 animate-glow-pulse">
+                        Welcome to Shadow Ranch
+                    </h1>
+                    <p class="font-deputy text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                        Saddle up for the ultimate coding adventure! Learn Solana development through immersive challenges in our cypher-punk Western world.
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                        <button class="btn-western-primary text-lg" data-event="click:startAdventure">
+                            <i class="fas fa-play mr-2"></i>
+                            Start Your Adventure
+                        </button>
+                        <button class="btn-western-secondary text-lg" data-event="click:viewLessons">
+                            <i class="fas fa-book mr-2"></i>
+                            Browse Lessons
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: HeroSection -->
+
+        <!-- @COMPONENT: LessonsSection -->
+        <section id="lessons" class="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-western text-4xl md:text-5xl text-sunset-400 mb-6">Choose Your Path</h2>
+                    <p class="font-deputy text-lg text-gray-300 max-w-2xl mx-auto">
+                        Master the art of Solana development through hands-on challenges. Each lesson brings you closer to becoming a blockchain pioneer.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- @MAP: lessons.map(lesson => ( -->
+                    <div class="western-card p-6 hover:scale-105 transition-transform duration-200 animate-slide-up">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-deputy text-xl text-desert-400" data-bind="lesson.title">Introduction to Rust</h3>
+                            <span class="bg-sage-600 text-white px-2 py-1 rounded text-sm font-mono" data-bind="lesson.difficulty">Beginner</span>
+                        </div>
+                        <p class="text-gray-300 mb-4 font-mono text-sm" data-bind="lesson.description">
+                            Learn the basics of Rust programming language and set up your development environment for Solana.
+                        </p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center text-desert-400">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span class="text-sm" data-bind="lesson.duration">30 min</span>
+                            </div>
+                            <div class="flex items-center text-sunset-400">
+                                <i class="fas fa-coins mr-1"></i>
+                                <span class="text-sm" data-bind="lesson.reward">+100 RC</span>
+                            </div>
+                        </div>
+                        <div class="progress-trail h-2 rounded-full mb-4">
+                            <div class="bg-gradient-to-r from-desert-500 to-sunset-500 h-full rounded-full" style="width: 0%" data-bind="lesson.progress"></div>
+                        </div>
+                        <button class="w-full btn-western-primary" data-event="click:startLesson" data-implementation="Should navigate to lesson detail page">
+                            <i class="fas fa-horse mr-2"></i>
+                            Start Lesson
+                        </button>
+                    </div>
+
+                    <div class="western-card p-6 hover:scale-105 transition-transform duration-200 animate-slide-up">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-deputy text-xl text-desert-400">Anchor Framework</h3>
+                            <span class="bg-rust-600 text-white px-2 py-1 rounded text-sm font-mono">Intermediate</span>
+                        </div>
+                        <p class="text-gray-300 mb-4 font-mono text-sm">
+                            Dive into Anchor framework and build your first Solana program with automatic IDL generation.
+                        </p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center text-desert-400">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span class="text-sm">45 min</span>
+                            </div>
+                            <div class="flex items-center text-sunset-400">
+                                <i class="fas fa-coins mr-1"></i>
+                                <span class="text-sm">+200 RC</span>
+                            </div>
+                        </div>
+                        <div class="progress-trail h-2 rounded-full mb-4">
+                            <div class="bg-gradient-to-r from-desert-500 to-sunset-500 h-full rounded-full" style="width: 35%"></div>
+                        </div>
+                        <button class="w-full btn-western-primary">
+                            <i class="fas fa-horse mr-2"></i>
+                            Continue Lesson
+                        </button>
+                    </div>
+
+                    <div class="western-card p-6 hover:scale-105 transition-transform duration-200 animate-slide-up opacity-60">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-deputy text-xl text-gray-500">Advanced Programs</h3>
+                            <span class="bg-mystic-600 text-white px-2 py-1 rounded text-sm font-mono">Advanced</span>
+                        </div>
+                        <p class="text-gray-500 mb-4 font-mono text-sm">
+                            Build complex DeFi protocols and NFT marketplaces using advanced Solana programming patterns.
+                        </p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center text-gray-500">
+                                <i class="fas fa-lock mr-1"></i>
+                                <span class="text-sm">Locked</span>
+                            </div>
+                            <div class="flex items-center text-gray-500">
+                                <i class="fas fa-coins mr-1"></i>
+                                <span class="text-sm">+500 RC</span>
+                            </div>
+                        </div>
+                        <div class="progress-trail h-2 rounded-full mb-4">
+                            <div class="bg-gray-600 h-full rounded-full" style="width: 0%"></div>
+                        </div>
+                        <button class="w-full bg-gray-700 text-gray-500 py-3 rounded-lg cursor-not-allowed" disabled>
+                            <i class="fas fa-lock mr-2"></i>
+                            Complete Previous Lessons
+                        </button>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: LessonsSection -->
+
+        <!-- @COMPONENT: LessonDetailView -->
+        <section id="lesson-detail" class="py-20 bg-gray-800 hidden" data-state="currentLesson">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-3 gap-8 h-screen max-h-screen">
+                    <!-- Left Panel: Narrative & Instructions -->
+                    <div class="western-card p-6 overflow-y-auto">
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="font-western text-2xl text-desert-400" data-bind="currentLesson.title">Introduction to Rust</h2>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="progress-trail h-3 rounded-full mb-4">
+                                <div class="bg-gradient-to-r from-desert-500 to-sunset-500 h-full rounded-full transition-all duration-500" style="width: 25%" data-bind="lessonProgress"></div>
+                            </div>
+                            <p class="text-sm text-gray-400 font-mono">Step <span data-bind="currentStep">1</span> of <span data-bind="totalSteps">4</span></p>
+                        </div>
+
+                        <!-- @COMPONENT: NarrativeBox -->
+                        <div class="bg-gradient-to-r from-leather-800/50 to-leather-700/50 border-l-4 border-desert-500 p-4 rounded-r-lg mb-6">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-user-cowboy text-desert-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-deputy text-desert-400 mb-2">Sheriff's Instructions</h4>
+                                    <p class="text-gray-300 font-mono text-sm" data-bind="currentStep.narrative">
+                                        Welcome to Shadow Ranch, partner! Time to learn the basics of Rust. Let's start by declaring a simple variable. 
+                                        In Rust, we use `let` to create variables. Try creating a variable called `greeting` with the value "Hello, Solana!".
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_COMPONENT: NarrativeBox -->
+
+                        <!-- Challenge Requirements -->
+                        <div class="bg-gradient-to-r from-sage-800/30 to-sage-700/30 border border-sage-600 p-4 rounded-lg mb-6">
+                            <h4 class="font-deputy text-sage-400 mb-3 flex items-center">
+                                <i class="fas fa-target mr-2"></i>
+                                Challenge Objectives
+                            </h4>
+                            <ul class="space-y-2 text-sm text-gray-300 font-mono">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-sage-400 mr-2"></i>
+                                    Declare a variable named `greeting`
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="far fa-circle text-gray-500 mr-2"></i>
+                                    Assign the string "Hello, Solana!"
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="far fa-circle text-gray-500 mr-2"></i>
+                                    Print the variable using println! macro
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Hint Section -->
+                        <div class="bg-gradient-to-r from-mystic-800/30 to-mystic-700/30 border border-mystic-600 p-4 rounded-lg">
+                            <button class="flex items-center justify-between w-full text-left" data-event="click:toggleHint">
+                                <h4 class="font-deputy text-mystic-400 flex items-center">
+                                    <i class="fas fa-lightbulb mr-2"></i>
+                                    Need a Hint?
+                                </h4>
+                                <i class="fas fa-chevron-down text-mystic-400"></i>
+                            </button>
+                            <div class="mt-3 text-sm text-gray-300 font-mono hidden" data-state="hintVisible">
+                                Remember: In Rust, strings are created with double quotes. The syntax is: `let variable_name = "string value";`
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Middle Panel: Code Editor -->
+                    <div class="western-card p-6 flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-deputy text-xl text-sunset-400">Code Editor</h3>
+                            <div class="flex items-center space-x-3">
+                                <!-- @COMPONENT: LanguageSelector -->
+                                <select class="bg-gray-700 border border-gray-600 rounded px-3 py-1 text-sm text-gray-300 font-mono">
+                                    <option value="rust">Rust (Anchor)</option>
+                                    <option value="python">Python (Seahorse)</option>
+                                </select>
+                                <!-- @END_COMPONENT: LanguageSelector -->
+                                <button class="bg-desert-600 hover:bg-desert-500 px-4 py-2 rounded text-white font-deputy text-sm transition-colors" data-event="click:runCode">
+                                    <i class="fas fa-play mr-1"></i>
+                                    Run
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- @COMPONENT: MonacoEditor (Mock) -->
+                        <div class="flex-1 code-editor rounded-lg overflow-hidden">
+                            <div class="bg-gray-800 px-4 py-2 border-b border-gray-600 flex items-center justify-between">
+                                <span class="text-sm text-gray-400 font-mono">main.rs</span>
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                            </div>
+                            <textarea 
+                                class="w-full h-full bg-gray-900 text-gray-300 p-4 font-mono text-sm resize-none border-none outline-none"
+                                placeholder="// Start coding here..."
+                                data-bind="editorContent"
+                                data-implementation="Should use Monaco Editor API for syntax highlighting"
+                            >fn main() {
+    // Write your code here
+    
+}</textarea>
+                        </div>
+                        <!-- @END_COMPONENT: MonacoEditor -->
+
+                        <!-- Console Output -->
+                        <div class="mt-4 bg-gray-900 border border-gray-700 rounded-lg">
+                            <div class="bg-gray-800 px-4 py-2 border-b border-gray-700">
+                                <span class="text-sm text-gray-400 font-mono">Console Output</span>
+                            </div>
+                            <div class="p-4 font-mono text-sm min-h-20" data-bind="consoleOutput">
+                                <div class="text-green-400">$ cargo run</div>
+                                <div class="text-gray-400">Compiling lesson v0.1.0</div>
+                                <div class="text-blue-400">Ready for your code...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Game Canvas -->
+                    <div class="western-card p-6">
+                        <h3 class="font-deputy text-xl text-rust-400 mb-4 flex items-center">
+                            <i class="fas fa-tv mr-2"></i>
+                            Shadow Ranch Live
+                        </h3>
+                        
+                        <!-- @COMPONENT: GameCanvas (PIXI.js Mock) -->
+                        <div class="bg-gradient-to-b from-desert-800 to-desert-900 rounded-lg h-64 relative overflow-hidden border-2 border-desert-600" data-implementation="Should use PIXI.js for 2D rendering">
+                            <!-- Mock ranch scene -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-sunset-400/20 to-transparent"></div>
+                            
+                            <!-- Ranch buildings -->
+                            <div class="absolute bottom-4 left-4 w-16 h-12 bg-leather-700 rounded-t-lg border border-leather-600">
+                                <div class="w-full h-3 bg-rust-600 rounded-t-lg"></div>
+                            </div>
+                            <div class="absolute bottom-4 right-4 w-20 h-16 bg-sage-700 rounded border border-sage-600">
+                                <div class="w-full h-4 bg-sage-600 rounded-t"></div>
+                            </div>
+                            
+                            <!-- Character -->
+                            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-6 h-8 bg-desert-600 rounded-full">
+                                <div class="w-4 h-4 bg-leather-600 rounded-full mx-auto mt-1"></div>
+                            </div>
+                            
+                            <!-- Status overlay -->
+                            <div class="absolute top-4 left-4 bg-black/70 rounded px-2 py-1">
+                                <div class="text-xs text-desert-400 font-mono">Ranch Coins: <span data-bind="ranchCoins">100</span></div>
+                                <div class="text-xs text-sage-400 font-mono">XP: <span data-bind="experience">50</span></div>
+                            </div>
+                            
+                            <!-- Success animation area -->
+                            <div class="absolute inset-0 flex items-center justify-center hidden" data-state="successAnimation">
+                                <div class="bg-green-500/90 text-white px-4 py-2 rounded-lg font-deputy">
+                                    <i class="fas fa-check-circle mr-2"></i>
+                                    Code Executed Successfully!
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_COMPONENT: GameCanvas -->
+
+                        <!-- Ranch Stats -->
+                        <div class="mt-6 grid grid-cols-2 gap-4">
+                            <div class="bg-gradient-to-r from-desert-800/50 to-desert-700/50 p-3 rounded border border-desert-600">
+                                <div class="text-xs text-desert-400 font-mono mb-1">Buildings</div>
+                                <div class="text-lg font-deputy text-white" data-bind="buildingCount">2</div>
+                            </div>
+                            <div class="bg-gradient-to-r from-sage-800/50 to-sage-700/50 p-3 rounded border border-sage-600">
+                                <div class="text-xs text-sage-400 font-mono mb-1">Characters</div>
+                                <div class="text-lg font-deputy text-white" data-bind="characterCount">1</div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-6 space-y-3">
+                            <button class="w-full btn-western-secondary" data-event="click:validateCode" data-implementation="Should send code to backend for validation">
+                                <i class="fas fa-check-double mr-2"></i>
+                                Validate Code
+                            </button>
+                            <button class="w-full bg-mystic-600 hover:bg-mystic-500 text-white py-2 rounded-lg font-deputy transition-colors" data-event="click:nextStep">
+                                <i class="fas fa-arrow-right mr-2"></i>
+                                Next Step
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: LessonDetailView -->
+
+        <!-- @COMPONENT: RanchSection -->
+        <section id="ranch" class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-western text-4xl md:text-5xl text-rust-400 mb-6">Your Shadow Ranch</h2>
+                    <p class="font-deputy text-lg text-gray-300 max-w-2xl mx-auto">
+                        Build and customize your virtual ranch as you progress through lessons. Each achievement unlocks new buildings and characters.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-4 gap-8">
+                    <!-- Ranch Overview -->
+                    <div class="lg:col-span-3">
+                        <div class="western-card p-6 h-96 relative overflow-hidden" data-implementation="Main PIXI.js ranch canvas should be here">
+                            <div class="absolute inset-0 bg-gradient-to-b from-sunset-500/30 via-desert-500/20 to-desert-800/40 rounded-lg"></div>
+                            
+                            <!-- Expanded ranch view -->
+                            <div class="absolute bottom-6 left-6 w-24 h-20 bg-leather-700 rounded-t-xl border-2 border-leather-600 shadow-lg">
+                                <div class="w-full h-6 bg-rust-600 rounded-t-xl"></div>
+                                <div class="text-xs text-center text-white font-mono mt-2">Saloon</div>
+                            </div>
+                            
+                            <div class="absolute bottom-6 right-6 w-28 h-24 bg-sage-700 rounded border-2 border-sage-600 shadow-lg">
+                                <div class="w-full h-6 bg-sage-600 rounded-t"></div>
+                                <div class="text-xs text-center text-white font-mono mt-2">Stable</div>
+                            </div>
+                            
+                            <div class="absolute bottom-6 left-1/3 w-20 h-16 bg-mystic-700 rounded-lg border-2 border-mystic-600 shadow-lg">
+                                <div class="w-full h-4 bg-mystic-600 rounded-t-lg"></div>
+                                <div class="text-xs text-center text-white font-mono mt-1">Library</div>
+                            </div>
+                            
+                            <!-- Characters -->
+                            <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-8 h-10 bg-desert-600 rounded-full shadow-lg">
+                                <div class="w-6 h-6 bg-leather-600 rounded-full mx-auto mt-1"></div>
+                                <div class="text-xs text-center text-white font-mono mt-1">You</div>
+                            </div>
+                            
+                            <div class="absolute bottom-12 left-2/3 w-8 h-10 bg-sage-600 rounded-full shadow-lg">
+                                <div class="w-6 h-6 bg-rust-600 rounded-full mx-auto mt-1"></div>
+                                <div class="text-xs text-center text-white font-mono mt-1">Sheriff</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ranch Stats & Management -->
+                    <div class="space-y-6">
+                        <!-- Stats Card -->
+                        <div class="western-card p-6">
+                            <h3 class="font-deputy text-xl text-desert-400 mb-4">Ranch Stats</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-300 font-mono text-sm">Ranch Coins</span>
+                                    <span class="text-sunset-400 font-deputy text-lg" data-bind="totalRanchCoins">1,250</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-300 font-mono text-sm">Total XP</span>
+                                    <span class="text-sage-400 font-deputy text-lg" data-bind="totalExperience">850</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-300 font-mono text-sm">Buildings</span>
+                                    <span class="text-rust-400 font-deputy text-lg" data-bind="totalBuildings">3</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-300 font-mono text-sm">Characters</span>
+                                    <span class="text-mystic-400 font-deputy text-lg" data-bind="totalCharacters">2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shop Card -->
+                        <div class="western-card p-6">
+                            <h3 class="font-deputy text-xl text-desert-400 mb-4">Ranch Shop</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-gray-800 rounded border border-gray-700">
+                                    <div>
+                                        <div class="font-mono text-sm text-white">Water Tower</div>
+                                        <div class="font-mono text-xs text-gray-400">500 RC</div>
+                                    </div>
+                                    <button class="btn-western-primary text-xs px-3 py-1" data-event="click:purchaseBuilding">
+                                        Buy
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-800 rounded border border-gray-700">
+                                    <div>
+                                        <div class="font-mono text-sm text-white">Deputy</div>
+                                        <div class="font-mono text-xs text-gray-400">750 RC</div>
+                                    </div>
+                                    <button class="btn-western-primary text-xs px-3 py-1" data-event="click:purchaseCharacter">
+                                        Buy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="western-card p-6">
+                            <h3 class="font-deputy text-xl text-desert-400 mb-4">Achievements</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <i class="fas fa-star text-sunset-400"></i>
+                                    <span class="text-gray-300 font-mono">First Steps</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <i class="fas fa-star text-sunset-400"></i>
+                                    <span class="text-gray-300 font-mono">Ranch Builder</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <i class="far fa-star text-gray-500"></i>
+                                    <span class="text-gray-500 font-mono">Code Master</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: RanchSection -->
+    </main>
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-gray-900 border-t border-desert-600/30 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-western text-xl text-desert-400 mb-4">Shadow Ranch</h3>
+                    <p class="text-gray-400 font-mono text-sm">
+                        The ultimate destination for learning Solana development through immersive gameplay.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-deputy text-lg text-sunset-400 mb-4">Learn</h4>
+                    <ul class="space-y-2 text-gray-400 font-mono text-sm">
+                        <li><a href="#" class="hover:text-desert-400 transition-colors">Rust Basics</a></li>
+                        <li><a href="#" class="hover:text-desert-400 transition-colors">Anchor Framework</a></li>
+                        <li><a href="#" class="hover:text-desert-400 transition-colors">Python Seahorse</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-deputy text-lg text-sunset-400 mb-4">Community</h4>
+                    <ul class="space-y-2 text-gray-400 font-mono text-sm">
+                        <li><a href="#" class="hover:text-desert-400 transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:text-desert-400 transition-colors">GitHub</a></li>
+                        <li><a href="#" class="hover:text-desert-400 transition-colors">Twitter</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-deputy text-lg text-sunset-400 mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-desert-400 transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-desert-400 transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-desert-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-500 font-mono text-sm">
+                    © 2024 BRB: A Solana Adventure. Built with ❤️ for the Solana community.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        (function() {
+            // Mock state management
+            let gameState = {
+                wallet: { connected: false, address: null },
+                lessons: [],
+                currentLesson: null,
+                ranchData: { coins: 1250, experience: 850 }
+            };
+
+            // Mock wallet connection
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event*="connectWallet"]')) {
+                    e.preventDefault();
+                    gameState.wallet.connected = !gameState.wallet.connected;
+                    if (gameState.wallet.connected) {
+                        gameState.wallet.address = '7xKXt...9mBc3';
+                        e.target.innerHTML = '<i class="fas fa-wallet mr-2"></i>Connected';
+                        e.target.classList.add('animate-glow-pulse');
+                    } else {
+                        gameState.wallet.address = null;
+                        e.target.innerHTML = '<i class="fas fa-wallet mr-2"></i>Connect Wallet';
+                        e.target.classList.remove('animate-glow-pulse');
+                    }
+                }
+            });
+
+            // Mock lesson navigation
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event*="startLesson"]') || e.target.closest('[data-event*="viewLessons"]')) {
+                    e.preventDefault();
+                    const lessonSection = document.getElementById('lesson-detail');
+                    if (lessonSection) {
+                        lessonSection.classList.remove('hidden');
+                        lessonSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+
+            // Mock code execution
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event*="runCode"]')) {
+                    e.preventDefault();
+                    const button = e.target.closest('button');
+                    const originalText = button.innerHTML;
+                    
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Running...';
+                    button.disabled = true;
+                    
+                    setTimeout(() => {
+                        // Simulate console output
+                        const console = document.querySelector('[data-bind="consoleOutput"]');
+                        if (console) {
+                            console.innerHTML = `
+                                <div class="text-green-400">$ cargo run</div>
+                                <div class="text-gray-400">Compiling lesson v0.1.0</div>
+                                <div class="text-green-400">   Finished dev [unoptimized + debuginfo] target(s) in 0.50s</div>
+                                <div class="text-blue-400">Running \`target/debug/lesson\`</div>
+                                <div class="text-white">Hello, Solana!</div>
+                            `;
+                        }
+                        
+                        // Show success animation
+                        const successAnim = document.querySelector('[data-state="successAnimation"]');
+                        if (successAnim) {
+                            successAnim.classList.remove('hidden');
+                            setTimeout(() => successAnim.classList.add('hidden'), 3000);
+                        }
+                        
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }
+            });
+
+            // Mock hint toggle
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event*="toggleHint"]')) {
+                    e.preventDefault();
+                    const hint = document.querySelector('[data-state="hintVisible"]');
+                    const chevron = e.target.querySelector('.fa-chevron-down') || e.target.closest('button').querySelector('.fa-chevron-down');
+                    
+                    if (hint && chevron) {
+                        hint.classList.toggle('hidden');
+                        chevron.classList.toggle('fa-chevron-down');
+                        chevron.classList.toggle('fa-chevron-up');
+                    }
+                }
+            });
+
+            // Add more dynamic dust particles
+            function createDustParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'dust-particle';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (20 + Math.random() * 10) + 's';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 30000);
+            }
+
+            // Create dust particles periodically
+            setInterval(createDustParticle, 3000);
+        })();
+    </script>
+</body>
+</html>
