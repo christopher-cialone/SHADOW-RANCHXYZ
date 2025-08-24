@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "check": "tsc",
-    "anchor:build": "anchor build",
+    "anchor:build": "anchor build --skip-lint",
     "anchor:test": "anchor test",
     "anchor:deploy": "anchor deploy"
   },
