@@ -8,6 +8,14 @@ import { VisualFeedback } from "@/components/solana/VisualFeedback";
 import { NftAchievementModal } from "@/components/solana/NftAchievementModal";
 import { solanaChallenges } from "@/data/solana-challenges";
 import { useToast } from "@/hooks/use-toast";
+import { useWallet } from "@/hooks/use-wallet";
+import { 
+  SolanaService, 
+  createConnection, 
+  UserProgress,
+  NFTMetadata 
+} from "@/lib/solanaService";
+import { Connection, PublicKey } from "@solana/web3.js";
 
 interface ChallengeProgress {
   currentChallenge: number;

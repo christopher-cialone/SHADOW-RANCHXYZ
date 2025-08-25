@@ -22,6 +22,7 @@ import ProfilePage from "@/pages/ProfilePage";
 import { WalletTest } from "@/pages/WalletTest";
 import LessonTest from "@/pages/LessonTest";
 import CodingChallengePage from "@/pages/CodingChallengePage";
+import TestPage from "@/pages/TestPage";
 
 
 function Router() {
@@ -40,6 +41,7 @@ function Router() {
       <Route path="/cypherpunk-module-4" component={CypherpunkModule4} />
       <Route path="/profile/:publicKey?" component={ProfilePage} />
       <Route path="/solana-challenges/:challengeId?" component={CodingChallengePage} />
+      <Route path="/test" component={TestPage} />
       <Route path="/wallet-test" component={WalletTest} />
       <Route path="/lesson-test" component={LessonTest} />
       <Route component={NotFound} />
