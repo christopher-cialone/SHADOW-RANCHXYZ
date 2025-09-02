@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { WalletButton } from "@/components/wallet/WalletButton";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {
@@ -85,7 +85,7 @@ export function Header({ onThemeToggle, currentTheme }: HeaderProps) {
           
           {/* Right side actions */}
           <div className="flex items-center">
-            <WalletButton />
+            <WalletMultiButton />
           </div>
         </div>
       </header>

@@ -51,3 +51,4 @@ coverage/
 server/public
 vite.config.ts.*
 *.tar.gz
+node_modules

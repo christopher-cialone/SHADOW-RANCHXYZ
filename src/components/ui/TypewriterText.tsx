@@ -10,31 +10,31 @@ interface TypewriterTextProps {
 export function TypewriterText({ text, speed = 50, delay = 0, className = '' }: TypewriterTextProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const startTyping = setTimeout(() => {
-      setIsTyping(true);
+    const startTimer = setTimeout(() => {
+      setStarted(true);
     }, delay);
 
-    return () => clearTimeout(startTyping);
+    return () => clearTimeout(startTimer);
   }, [delay]);
 
   useEffect(() => {
-    if (!isTyping) return;
+    if (!started) return;
 
     if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
+      const timer = setTimeout(() => {
         setDisplayText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
       }, speed);
 
-      return () => clearTimeout(timeout);
+      return () => clearTimeout(timer);
     }
-  }, [currentIndex, text, speed, isTyping]);
+  }, [currentIndex, text, speed, started]);
 
   return (
-    <span className="text-[#34dce9]">
+    <span className={className}>
       {displayText}
       {currentIndex < text.length && (
         <span className="animate-pulse">|</span>
