@@ -1,47 +1,25 @@
 import { HTMLAttributes, forwardRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
-const techCardVariants = cva(
-  "card-mobile-compact sm:card-mobile shadow-xl backdrop-blur-sm transition-all duration-200 hover:shadow-2xl",
-  {
-    variants: {
-      variant: {
-        default: "bg-gray-900/50 border-2 border-cyan-400/30",
-        purple: "bg-gray-900/50 border-2 border-purple-400/30",
-        cyan: "bg-gray-900/50 border-2 border-cyan-400/30",
-        pink: "bg-gray-900/50 border-2 border-purple-400/30",
-        neutral: "bg-gray-900/50 border-2 border-gray-600/30",
-      },
-      glow: {
-        none: "",
-        purple: "shadow-2xl shadow-purple-500/20",
-        cyan: "shadow-2xl shadow-cyan-500/20",
-        pink: "shadow-2xl shadow-purple-500/20",
-      }
-    },
-    defaultVariants: {
-      variant: "default",
-      glow: "none",
-    },
-  }
-);
+interface TechCardProps {
+  children: ReactNode;
+  variant?: 'cyan' | 'purple' | 'neutral';
+  className?: string;
+}
 
-export interface TechCardProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof techCardVariants> {}
+export function TechCard({ children, variant = 'neutral', className = '' }: TechCardProps) {
+  const baseClasses = "relative p-6 rounded-lg border backdrop-blur-sm transition-all duration-300";
+  
+  const variantClasses = {
+    cyan: "bg-black/80 border-cyan-400/30 hover:border-cyan-400/60 hover:bg-cyan-400/5",
+    purple: "bg-black/80 border-purple-400/30 hover:border-purple-400/60 hover:bg-purple-400/5",
+    neutral: "bg-black/80 border-gray-600/30 hover:border-gray-600/60 hover:bg-gray-600/5"
+  };
 
-const TechCard = forwardRef<HTMLDivElement, TechCardProps>(
-  ({ className, variant, glow, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(techCardVariants({ variant, glow, className }))}
-        {...props}
-      />
-    );
-  }
-);
-TechCard.displayName = "TechCard";
-
-export { TechCard, techCardVariants };
+  return (
+    <div className={cn(baseClasses, variantClasses[variant], className)}>
+      {children}
+    </div>
+  );
+}
