@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { TechButton } from "@/components/ui/TechButton";
 import { TechCard } from "@/components/ui/TechCard";
+import { UploadedMetadata } from "@/lib/mockUploader";
 
 interface NftAchievementModalProps {
   isVisible: boolean;
@@ -8,6 +9,11 @@ interface NftAchievementModalProps {
   challengeTitle: string;
   onContinue: () => void;
   onClose: () => void;
+  // New NFT-related props
+  nftMetadata?: UploadedMetadata;
+  transactionSignature?: string;
+  isWalletConnected?: boolean;
+  isMinting?: boolean;
 }
 
 export function NftAchievementModal({ 
@@ -15,7 +21,11 @@ export function NftAchievementModal({
   badge, 
   challengeTitle, 
   onContinue, 
-  onClose 
+  onClose,
+  nftMetadata,
+  transactionSignature,
+  isWalletConnected = false,
+  isMinting = false
 }: NftAchievementModalProps) {
   const getBadgeEmoji = (badge: string) => {
     switch (badge) {
@@ -31,6 +41,27 @@ export function NftAchievementModal({
       case "The Debugger": return "🐛";
       default: return "🏆";
     }
+  };
+
+  const getBadgeColor = (badge: string) => {
+    switch (badge) {
+      case "The Architect": return "from-green-500 to-green-600";
+      case "First Contact": return "from-cyan-500 to-blue-500";
+      case "State Keeper": return "from-orange-500 to-red-500";
+      case "Chain Writer": return "from-yellow-500 to-orange-500";
+      case "State Modifier": return "from-pink-500 to-purple-500";
+      case "Gatekeeper": return "from-emerald-500 to-green-500";
+      case "Master of Puppets": return "from-purple-600 to-purple-800";
+      case "The Composer": return "from-orange-500 to-red-500";
+      case "Toll Collector": return "from-yellow-400 to-yellow-600";
+      case "The Debugger": return "from-red-500 to-pink-500";
+      default: return "from-purple-600 to-cyan-600";
+    }
+  };
+
+  const getSolanaExplorerUrl = (signature: string) => {
+    // For localnet, we'll show a fake URL. In production, use appropriate cluster
+    return `https://explorer.solana.com/tx/${signature}?cluster=localnet`;
   };
 
   return (
@@ -104,7 +135,7 @@ export function NftAchievementModal({
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.7 }}
-                    className="bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-4 py-2 rounded-lg mb-4 inline-block"
+                    className={`bg-gradient-to-r ${getBadgeColor(badge)} text-white px-4 py-2 rounded-lg mb-4 inline-block`}
                   >
                     <div className="font-tech text-lg font-bold">
                       "{badge}" BADGE
@@ -115,11 +146,68 @@ export function NftAchievementModal({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.9 }}
-                    className="text-gray-300 mb-6 font-code"
+                    className="text-gray-300 mb-4 font-code"
                   >
                     You have successfully completed:<br />
                     <span className="text-cyan-400 font-bold">{challengeTitle}</span>
                   </motion.p>
+
+                  {/* NFT Status Information */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.0 }}
+                    className="mb-6 p-4 bg-gray-800/50 rounded-lg border border-gray-700"
+                  >
+                    <div className="text-sm text-gray-300 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span>🏆 NFT Achievement:</span>
+                        <span className={`font-bold ${
+                          transactionSignature ? 'text-green-400' : 
+                          isMinting ? 'text-yellow-400' :
+                          isWalletConnected ? 'text-blue-400' : 'text-gray-400'
+                        }`}>
+                          {transactionSignature ? '✅ Minted' : 
+                           isMinting ? '⏳ Minting...' :
+                           isWalletConnected ? '🎯 Ready to Mint' : '⚠️ Wallet Required'}
+                        </span>
+                      </div>
+                      
+                      {nftMetadata && (
+                        <div className="flex items-center justify-between">
+                          <span>📄 Metadata:</span>
+                          <a 
+                            href={nftMetadata.uri} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-cyan-400 hover:text-cyan-300 underline text-xs"
+                          >
+                            View JSON ↗
+                          </a>
+                        </div>
+                      )}
+                      
+                      {transactionSignature && (
+                        <div className="flex items-center justify-between">
+                          <span>🔗 Transaction:</span>
+                          <a 
+                            href={getSolanaExplorerUrl(transactionSignature)} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-cyan-400 hover:text-cyan-300 underline text-xs"
+                          >
+                            View on Explorer ↗
+                          </a>
+                        </div>
+                      )}
+                      
+                      {!isWalletConnected && (
+                        <div className="text-center text-yellow-400 text-xs mt-2">
+                          💡 Connect your wallet to mint NFT achievements!
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -130,18 +218,20 @@ export function NftAchievementModal({
                     <TechButton
                       variant="primary"
                       onClick={onContinue}
-                      className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-0"
+                      disabled={isMinting}
+                      className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-0 disabled:opacity-50"
                     >
-                      <span className="mr-2">🚀</span>
-                      CONTINUE TO NEXT CHALLENGE
+                      <span className="mr-2">{isMinting ? '⏳' : '🚀'}</span>
+                      {isMinting ? 'MINTING NFT...' : 'CONTINUE TO NEXT CHALLENGE'}
                     </TechButton>
                     
                     <TechButton
                       variant="secondary"
                       onClick={onClose}
-                      className="w-full bg-transparent border-gray-600 text-gray-400 hover:bg-gray-800"
+                      disabled={isMinting}
+                      className="w-full bg-transparent border-gray-600 text-gray-400 hover:bg-gray-800 disabled:opacity-50"
                     >
-                      VIEW BADGE COLLECTION
+                      {transactionSignature ? '🎨 VIEW NFT COLLECTION' : '📁 VIEW BADGE COLLECTION'}
                     </TechButton>
                   </motion.div>
                 </div>

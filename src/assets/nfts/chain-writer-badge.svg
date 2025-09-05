@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="background: #000;">
+  <defs>
+    <linearGradient id="writerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffff00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffaa00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Badge Border -->
+  <rect x="10" y="10" width="180" height="180" fill="none" stroke="#ffff00" stroke-width="2" rx="20"/>
+  
+  <!-- Inner Frame -->
+  <rect x="20" y="20" width="160" height="160" fill="none" stroke="#ffff00" stroke-width="1" rx="15"/>
+  
+  <!-- Chain Writer Symbol - Blockchain Links -->
+  <rect x="50" y="75" width="20" height="20" fill="none" stroke="url(#writerGrad)" stroke-width="2" rx="3"/>
+  <rect x="80" y="75" width="20" height="20" fill="none" stroke="url(#writerGrad)" stroke-width="2" rx="3"/>
+  <rect x="110" y="75" width="20" height="20" fill="none" stroke="url(#writerGrad)" stroke-width="2" rx="3"/>
+  <rect x="140" y="75" width="20" height="20" fill="none" stroke="url(#writerGrad)" stroke-width="2" rx="3"/>
+  
+  <!-- Chain Links -->
+  <line x1="70" y1="85" x2="80" y2="85" stroke="#ffff00" stroke-width="3"/>
+  <line x1="100" y1="85" x2="110" y2="85" stroke="#ffff00" stroke-width="3"/>
+  <line x1="130" y1="85" x2="140" y2="85" stroke="#ffff00" stroke-width="3"/>
+  
+  <!-- Writing Tool -->
+  <line x1="85" y1="50" x2="115" y2="50" stroke="#ffff00" stroke-width="2"/>
+  <line x1="95" y1="45" x2="105" y2="45" stroke="#ffff00" stroke-width="2"/>
+  <line x1="100" y1="45" x2="100" y2="75" stroke="#ffff00" stroke-width="1" stroke-dasharray="2,2"/>
+  
+  <!-- Terminal Command -->
+  <text x="100" y="120" text-anchor="middle" fill="#ffff00" font-family="monospace" font-size="10">&gt; write_to_chain()</text>
+  
+  <!-- Badge Title -->
+  <text x="100" y="165" text-anchor="middle" fill="#ffff00" font-family="monospace" font-size="12" font-weight="bold">CHAIN WRITER</text>
+  
+  <!-- Terminal Dots -->
+  <circle cx="30" cy="30" r="2" fill="#ffff00"/>
+  <circle cx="170" cy="30" r="2" fill="#ffff00"/>
+  <circle cx="30" cy="170" r="2" fill="#ffff00"/>
+  <circle cx="170" cy="170" r="2" fill="#ffff00"/>
+</svg>

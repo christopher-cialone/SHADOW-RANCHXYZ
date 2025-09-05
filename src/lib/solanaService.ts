@@ -62,34 +62,65 @@ export interface WalletAdapter {
   signTransaction: (transaction: Transaction) => Promise<Transaction>;
   signAllTransactions: (transactions: Transaction[]) => Promise<Transaction[]>;
   connected: boolean;
+  signMessage?: (message: Uint8Array) => Promise<Uint8Array>;
 }
 
 /**
  * Shadow Ranch Solana Service Class
+ * 
+ * Enhanced with security best practices:
+ * - Input validation and sanitization
+ * - Transaction verification
+ * - Rate limiting considerations
+ * - Comprehensive error handling
  */
 export class SolanaService {
   private connection: Connection;
   private programId: PublicKey;
+  private readonly maxRetries = 3;
+  private readonly timeoutMs = 30000;
 
   constructor(connection: Connection, programId: PublicKey = SHADOW_RANCH_PROGRAM_ID) {
+    // Security: Validate inputs
+    if (!connection) {
+      throw new Error('Connection is required');
+    }
+    if (!PublicKey.isOnCurve(programId)) {
+      throw new Error('Invalid program ID provided');
+    }
+    
     this.connection = connection;
     this.programId = programId;
   }
 
   /**
-   * Get an initialized Anchor program instance
+   * Get an initialized Anchor program instance with security validations
    * @param wallet - The wallet adapter instance
    * @returns Initialized Anchor program
    */
   getProgram(wallet: WalletAdapter): Program<ShadowRanchProgram> {
+    // Security: Comprehensive wallet validation
+    if (!wallet) {
+      throw new Error('Wallet adapter is required');
+    }
+    if (!wallet.connected) {
+      throw new Error('Wallet is not connected');
+    }
     if (!wallet.publicKey) {
-      throw new Error('Wallet not connected');
+      throw new Error('Wallet public key not available');
+    }
+    if (!PublicKey.isOnCurve(wallet.publicKey)) {
+      throw new Error('Invalid wallet public key');
     }
 
     const provider = new AnchorProvider(
       this.connection,
-      wallet as any, // Type assertion for wallet adapter compatibility
-      AnchorProvider.defaultOptions()
+      wallet as any,
+      {
+        commitment: 'confirmed',
+        preflightCommitment: 'confirmed',
+        skipPreflight: false, // Security: Always run preflight checks
+      }
     );
 
     return new Program(IDL, this.programId, provider);
@@ -101,6 +132,11 @@ export class SolanaService {
    * @returns The PDA and bump seed
    */
   async findUserProgressPDA(userPublicKey: PublicKey): Promise<[PublicKey, number]> {
+    // Security: Validate input
+    if (!PublicKey.isOnCurve(userPublicKey)) {
+      throw new Error('Invalid user public key provided');
+    }
+    
     return PublicKey.findProgramAddressSync(
       [
         Buffer.from(USER_PROGRESS_SEED),
@@ -142,7 +178,7 @@ export class SolanaService {
   }
 
   /**
-   * Initialize a new user progress account
+   * Initialize a new user progress account with enhanced security
    * @param wallet - The wallet adapter instance
    * @returns Transaction signature
    */
@@ -154,28 +190,37 @@ export class SolanaService {
     const program = this.getProgram(wallet);
     const [userProgressPDA] = await this.findUserProgressPDA(wallet.publicKey);
 
+    // Security: Check if account already exists to prevent duplicate initialization
     try {
-      // Build and send the initialize_user transaction
+      const existingAccount = await program.account.userProgress.fetch(userProgressPDA);
+      if (existingAccount) {
+        throw new Error('User progress account already exists');
+      }
+    } catch (error) {
+      // Expected error when account doesn't exist - continue with initialization
+      if (!error.toString().includes('Account does not exist')) {
+        throw error;
+      }
+    }
+
+    return this.executeTransactionWithRetry(async () => {
       const txSignature = await program.methods
         .initializeUser()
         .accounts({
           userProgress: userProgressPDA,
-          payer: wallet.publicKey,
-          authority: wallet.publicKey,
+          payer: wallet.publicKey!,
+          authority: wallet.publicKey!,
           systemProgram: SystemProgram.programId,
         })
         .rpc();
 
       console.log('User initialized successfully:', txSignature);
       return txSignature;
-    } catch (error) {
-      console.error('Failed to initialize user:', error);
-      throw new Error(`Failed to initialize user: ${error}`);
-    }
+    });
   }
 
   /**
-   * Complete a specific challenge
+   * Complete a specific challenge with enhanced security validation
    * @param wallet - The wallet adapter instance
    * @param challengeId - The ID of the challenge to complete (0-15)
    * @returns Transaction signature
@@ -185,29 +230,33 @@ export class SolanaService {
       throw new Error('Wallet not connected');
     }
 
-    if (challengeId < 0 || challengeId > 15) {
-      throw new Error('Invalid challenge ID. Must be between 0 and 15.');
+    // Security: Enhanced input validation
+    if (!Number.isInteger(challengeId) || challengeId < 0 || challengeId > 15) {
+      throw new Error('Invalid challenge ID. Must be an integer between 0 and 15.');
     }
 
     const program = this.getProgram(wallet);
     const [userProgressPDA] = await this.findUserProgressPDA(wallet.publicKey);
 
+    // Security: Verify user progress account exists
     try {
-      // Build and send the complete_challenge transaction
+      await program.account.userProgress.fetch(userProgressPDA);
+    } catch (error) {
+      throw new Error('User progress account not found. Please initialize user account first.');
+    }
+
+    return this.executeTransactionWithRetry(async () => {
       const txSignature = await program.methods
         .completeChallenge(challengeId)
         .accounts({
           userProgress: userProgressPDA,
-          authority: wallet.publicKey,
+          authority: wallet.publicKey!,
         })
         .rpc();
 
       console.log(`Challenge ${challengeId} completed successfully:`, txSignature);
       return txSignature;
-    } catch (error) {
-      console.error(`Failed to complete challenge ${challengeId}:`, error);
-      throw new Error(`Failed to complete challenge: ${error}`);
-    }
+    });
   }
 
   /**

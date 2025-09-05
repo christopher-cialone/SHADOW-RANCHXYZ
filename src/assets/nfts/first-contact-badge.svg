@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="background: #000;">
+  <defs>
+    <linearGradient id="contactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0088ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Badge Border -->
+  <rect x="10" y="10" width="180" height="180" fill="none" stroke="#00ffff" stroke-width="2" rx="20"/>
+  
+  <!-- Inner Frame -->
+  <rect x="20" y="20" width="160" height="160" fill="none" stroke="#00ffff" stroke-width="1" rx="15"/>
+  
+  <!-- First Contact Symbol - Handshake/Connection -->
+  <circle cx="70" cy="80" r="15" fill="none" stroke="url(#contactGrad)" stroke-width="3"/>
+  <circle cx="130" cy="80" r="15" fill="none" stroke="url(#contactGrad)" stroke-width="3"/>
+  
+  <!-- Connection Line -->
+  <line x1="85" y1="80" x2="115" y2="80" stroke="url(#contactGrad)" stroke-width="4"/>
+  
+  <!-- Data Flow Lines -->
+  <line x1="70" y1="95" x2="100" y2="110" stroke="#00ffff" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="130" y1="95" x2="100" y2="110" stroke="#00ffff" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Terminal Prompt -->
+  <text x="100" y="135" text-anchor="middle" fill="#00ffff" font-family="monospace" font-size="10">&gt; connect_wallet()</text>
+  
+  <!-- Badge Title -->
+  <text x="100" y="165" text-anchor="middle" fill="#00ffff" font-family="monospace" font-size="12" font-weight="bold">FIRST CONTACT</text>
+  
+  <!-- Terminal Dots -->
+  <circle cx="30" cy="30" r="2" fill="#00ffff"/>
+  <circle cx="170" cy="30" r="2" fill="#00ffff"/>
+  <circle cx="30" cy="170" r="2" fill="#00ffff"/>
+  <circle cx="170" cy="170" r="2" fill="#00ffff"/>
+</svg>

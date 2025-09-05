@@ -15,13 +15,16 @@ import {
   UserProgress,
   NFTMetadata 
 } from "@/lib/solanaService";
-import { Connection, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
+import { nftMetadata, getNFTMetadataByChallenge } from "@/data/nftMetadata";
+import { mockUploader, UploadedMetadata } from "@/lib/mockUploader";
 
 interface ChallengeProgress {
   currentChallenge: number;
   completedChallenges: Set<number>;
   code: string;
   badges: string[];
+  nftTransactions: Map<number, string>; // challengeId -> transaction signature
 }
 
 export default function CodingChallengePage() {
@@ -32,7 +35,8 @@ export default function CodingChallengePage() {
     currentChallenge: 1,
     completedChallenges: new Set(),
     code: "",
-    badges: []
+    badges: [],
+    nftTransactions: new Map()
   });
   
   const [isCompiling, setIsCompiling] = useState(false);
@@ -42,6 +46,42 @@ export default function CodingChallengePage() {
   } | null>(null);
   const [showVisualFeedback, setShowVisualFeedback] = useState(false);
   const [showAchievementModal, setShowAchievementModal] = useState(false);
+  const [mintingNFT, setMintingNFT] = useState(false);
+  const [lastMintedNFT, setLastMintedNFT] = useState<{
+    metadata: UploadedMetadata;
+    transactionSignature: string;
+  } | null>(null);
+  
+  // Solana connection and service
+  const { connected, address, connecting } = useWallet();
+  const [solanaService, setSolanaService] = useState<SolanaService | null>(null);
+  
+  // Create a wallet adapter for Solana service
+  const createWalletAdapter = () => {
+    if (!connected || !address) return null;
+    
+    // Create a simple wallet adapter interface for SolanaService
+    return {
+      publicKey: new PublicKey(address),
+      connected: true,
+      signTransaction: async (transaction: Transaction) => {
+        // This would normally use the actual wallet's signTransaction method
+        // For now, we'll assume it's handled by the service
+        throw new Error('Transaction signing not implemented in mock');
+      },
+      signAllTransactions: async (transactions: Transaction[]) => {
+        throw new Error('Batch transaction signing not implemented in mock');
+      }
+    };
+  };
+  
+  useEffect(() => {
+    if (connected) {
+      const connection = createConnection('localnet'); // Use env variable in production
+      const service = new SolanaService(connection);
+      setSolanaService(service);
+    }
+  }, [connected]);
   
   const { toast } = useToast();
   const currentChallenge = solanaChallenges.find(c => c.id === challengeId);
@@ -53,7 +93,8 @@ export default function CodingChallengePage() {
       const parsed = JSON.parse(savedProgress);
       setProgress({
         ...parsed,
-        completedChallenges: new Set(parsed.completedChallenges || [])
+        completedChallenges: new Set(parsed.completedChallenges || []),
+        nftTransactions: new Map(parsed.nftTransactions || [])
       });
     }
   }, []);
@@ -62,7 +103,8 @@ export default function CodingChallengePage() {
   const saveProgress = (newProgress: ChallengeProgress) => {
     const toSave = {
       ...newProgress,
-      completedChallenges: Array.from(newProgress.completedChallenges)
+      completedChallenges: Array.from(newProgress.completedChallenges),
+      nftTransactions: Array.from(newProgress.nftTransactions.entries())
     };
     localStorage.setItem('solana-challenge-progress', JSON.stringify(toSave));
     setProgress(newProgress);
@@ -88,6 +130,87 @@ export default function CodingChallengePage() {
     return challenge.validationPattern.test(code);
   };
 
+  /**
+   * Handles NFT minting after successful challenge completion
+   */
+  const handleNFTMinting = async (challengeId: number) => {
+    if (!connected || !address || !solanaService) {
+      toast({
+        title: "Wallet Not Connected",
+        description: "Please connect your wallet to mint achievement NFTs.",
+        variant: "destructive"
+      });
+      return null;
+    }
+
+    const walletAdapter = createWalletAdapter();
+    if (!walletAdapter) {
+      console.error('Failed to create wallet adapter');
+      return null;
+    }
+
+    const nftData = getNFTMetadataByChallenge(challengeId - 1); // challengeId is 1-indexed, array is 0-indexed
+    if (!nftData) {
+      console.error(`No NFT metadata found for challenge ${challengeId}`);
+      return null;
+    }
+
+    try {
+      setMintingNFT(true);
+      
+      toast({
+        title: "Minting NFT Achievement",
+        description: `Creating your ${nftData.name}...`,
+        duration: 3000
+      });
+
+      // Step 1: Upload metadata to "decentralized" storage
+      console.log(`📤 Uploading metadata for ${nftData.name}...`);
+      const uploadedMetadata = await mockUploader.uploadMetadata(nftData);
+
+      // Step 2: Mint the achievement NFT
+      console.log(`🎨 Minting NFT with metadata URI: ${uploadedMetadata.uri}`);
+      const nftMetadata: NFTMetadata = {
+        title: nftData.name,
+        symbol: nftData.symbol,
+        uri: uploadedMetadata.uri,
+        moduleId: Math.floor(challengeId / 3) // Group challenges into modules
+      };
+
+      const transactionSignature = await solanaService.mintAchievementNft(walletAdapter, nftMetadata);
+      
+      // Step 3: Store the transaction info
+      setLastMintedNFT({
+        metadata: uploadedMetadata,
+        transactionSignature
+      });
+
+      toast({
+        title: "NFT Minted Successfully! 🎉",
+        description: `Your ${nftData.name} has been minted to your wallet.`,
+        duration: 5000
+      });
+
+      console.log(`✅ NFT minted successfully!`);
+      console.log(`Transaction: ${transactionSignature}`);
+      console.log(`Metadata URI: ${uploadedMetadata.uri}`);
+      
+      return transactionSignature;
+      
+    } catch (error) {
+      console.error('NFT minting failed:', error);
+      toast({
+        title: "NFT Minting Failed",
+        description: error instanceof Error ? error.message : "Unknown error occurred.",
+        variant: "destructive",
+        duration: 5000
+      });
+      return null;
+    } finally {
+      setMintingNFT(false);
+    }
+  };
+
   const handleCompile = async () => {
     if (!currentChallenge) return;
 
@@ -109,17 +232,31 @@ export default function CodingChallengePage() {
       // Show visual feedback
       setShowVisualFeedback(true);
       
-      // After visual feedback, show achievement modal
-      setTimeout(() => {
+      // After visual feedback, handle NFT minting and show achievement modal
+      setTimeout(async () => {
         setShowVisualFeedback(false);
         
         // Mark challenge as completed
         const newCompletedChallenges = Array.from(progress.completedChallenges);
         newCompletedChallenges.push(challengeId);
+        
+        // Attempt to mint NFT if wallet is connected
+        let transactionSignature: string | null = null;
+        if (connected && address && solanaService) {
+          transactionSignature = await handleNFTMinting(challengeId);
+        }
+        
+        // Update progress with new completion and transaction
+        const newNftTransactions = new Map(progress.nftTransactions);
+        if (transactionSignature) {
+          newNftTransactions.set(challengeId, transactionSignature);
+        }
+        
         const newProgress = {
           ...progress,
           completedChallenges: new Set(newCompletedChallenges),
-          badges: [...progress.badges, currentChallenge.nftBadge]
+          badges: [...progress.badges, currentChallenge.nftBadge],
+          nftTransactions: newNftTransactions
         };
         saveProgress(newProgress);
         
@@ -331,6 +468,11 @@ export default function CodingChallengePage() {
         challengeTitle={currentChallenge.title}
         onContinue={handleContinue}
         onClose={handleCloseModal}
+        // Pass additional NFT-related props
+        nftMetadata={lastMintedNFT?.metadata}
+        transactionSignature={lastMintedNFT?.transactionSignature}
+        isWalletConnected={connected}
+        isMinting={mintingNFT}
       />
     </>
   );

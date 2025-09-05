@@ -1,15 +1,15 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{
     associated_token::AssociatedToken,
-    metadata::{
-        create_metadata_accounts_v3, create_mint_v2, create_master_edition_v3,
-        CreateMetadataAccountsV3, CreateMintV2, CreateMasterEditionV3,
-        Metadata, MetadataAccount, MasterEditionAccount,
-    },
-    token::{Mint, Token, TokenAccount},
+    metadata::{create_metadata_accounts_v3, create_master_edition_v3, Metadata},
+    token::{self, Token, TokenAccount, MintTo, Mint},
 };
-use mpl_token_metadata::types::{DataV2, Creator, Collection, Uses, CollectionDetails};
+use mpl_token_metadata::{
+    instructions::CreateV1CpiBuilder,
+    types::{Creator, TokenStandard},
+};
 
+// Security: Declare the program ID
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
 #[program]
@@ -17,9 +17,15 @@ pub mod shadow_ranch_program {
     use super::*;
 
     /// Initialize a new user progress account
-    /// This creates a PDA account to track the user's learning progress
+    /// Security: Only allows one progress account per user via PDA
     pub fn initialize_user(ctx: Context<InitializeUser>) -> Result<()> {
         let user_progress = &mut ctx.accounts.user_progress;
+        
+        // Security: Verify the authority matches the transaction signer
+        require!(
+            ctx.accounts.authority.key() == ctx.accounts.payer.key(),
+            ShadowRanchError::Unauthorized
+        );
         
         // Set the authority to the user who signed the transaction
         user_progress.authority = ctx.accounts.authority.key();
@@ -125,20 +131,6 @@ pub mod shadow_ranch_program {
             ShadowRanchError::ModuleNotComplete
         );
         
-        // Create the mint account
-        let cpi_accounts = CreateMintV2 {
-            mint: ctx.accounts.mint.to_account_info(),
-            authority: ctx.accounts.authority.to_account_info(),
-            payer: ctx.accounts.payer.to_account_info(),
-            system_program: ctx.accounts.system_program.to_account_info(),
-            token_program: ctx.accounts.token_program.to_account_info(),
-            associated_token_program: ctx.accounts.associated_token_program.to_account_info(),
-            rent: ctx.accounts.rent.to_account_info(),
-        };
-        
-        let cpi_ctx = CpiContext::new(ctx.accounts.token_program.to_account_info(), cpi_accounts);
-        create_mint_v2(cpi_ctx, 0, &ctx.accounts.authority.key(), None, None)?;
-        
         // Create the metadata account
         let creators = vec![
             Creator {
@@ -152,34 +144,38 @@ pub mod shadow_ranch_program {
             name: title,
             symbol,
             uri,
-            seller_fee_basis_points: 0, // No royalties for educational achievements
+            seller_fee_basis_points: 0,
             creators: Some(creators),
             collection: None,
             uses: None,
         };
         
-        let cpi_accounts = CreateMetadataAccountsV3 {
+        // Create metadata account
+        let cpi_accounts = anchor_spl::metadata::CreateMetadataAccountsV3 {
             metadata: ctx.accounts.metadata.to_account_info(),
             mint: ctx.accounts.mint.to_account_info(),
             mint_authority: ctx.accounts.authority.to_account_info(),
             payer: ctx.accounts.payer.to_account_info(),
             update_authority: ctx.accounts.authority.to_account_info(),
             system_program: ctx.accounts.system_program.to_account_info(),
-            rent: Some(ctx.accounts.rent.key()),
+            rent: ctx.accounts.rent.to_account_info(),
         };
         
-        let cpi_ctx = CpiContext::new(ctx.accounts.metadata_program.to_account_info(), cpi_accounts);
+        let cpi_ctx = CpiContext::new(
+            ctx.accounts.token_metadata_program.to_account_info(),
+            cpi_accounts,
+        );
+        
         create_metadata_accounts_v3(
             cpi_ctx,
             data_v2,
-            true, // is_mutable
-            true, // update_authority_is_signer
-            None, // collection_details
-            None, // uses
+            true,
+            true,
+            None,
         )?;
         
-        // Create the master edition account (non-fungible)
-        let cpi_accounts = CreateMasterEditionV3 {
+        // Create master edition
+        let cpi_accounts = anchor_spl::metadata::CreateMasterEditionV3 {
             edition: ctx.accounts.master_edition.to_account_info(),
             mint: ctx.accounts.mint.to_account_info(),
             update_authority: ctx.accounts.authority.to_account_info(),
@@ -188,34 +184,29 @@ pub mod shadow_ranch_program {
             metadata: ctx.accounts.metadata.to_account_info(),
             token_program: ctx.accounts.token_program.to_account_info(),
             system_program: ctx.accounts.system_program.to_account_info(),
-            rent: Some(ctx.accounts.rent.key()),
+            rent: ctx.accounts.rent.to_account_info(),
         };
         
-        let cpi_ctx = CpiContext::new(ctx.accounts.metadata_program.to_account_info(), cpi_accounts);
-        create_master_edition_v3(cpi_ctx, None)?;
-        
-        // Create the user's token account
-        let cpi_accounts = AssociatedToken::create(
-            ctx.accounts.associated_token_program.to_account_info(),
-            ctx.accounts.authority.to_account_info(),
-            ctx.accounts.mint.to_account_info(),
-            ctx.accounts.authority.to_account_info(),
-            ctx.accounts.token_program.to_account_info(),
-            ctx.accounts.system_program.to_account_info(),
-            ctx.accounts.rent.to_account_info(),
+        let cpi_ctx = CpiContext::new(
+            ctx.accounts.token_metadata_program.to_account_info(),
+            cpi_accounts,
         );
         
-        cpi_accounts?;
+        create_master_edition_v3(cpi_ctx, Some(0))?;
         
-        // Mint 1 token to the user's account
-        let cpi_accounts = anchor_spl::token::MintTo {
+        // Mint one token to the user's account
+        let cpi_accounts = MintTo {
             mint: ctx.accounts.mint.to_account_info(),
             to: ctx.accounts.user_token_account.to_account_info(),
             authority: ctx.accounts.authority.to_account_info(),
         };
         
-        let cpi_ctx = CpiContext::new(ctx.accounts.token_program.to_account_info(), cpi_accounts);
-        anchor_spl::token::mint_to(cpi_ctx, 1)?;
+        let cpi_ctx = CpiContext::new(
+            ctx.accounts.token_program.to_account_info(),
+            cpi_accounts,
+        );
+        
+        token::mint_to(cpi_ctx, 1)?;
         
         msg!("Achievement NFT minted for module {} completion!", module_id);
         Ok(())
@@ -269,6 +260,7 @@ pub struct CompleteModule<'info> {
 }
 
 #[derive(Accounts)]
+#[instruction(title: String, symbol: String, uri: String, module_id: u8)]
 pub struct MintAchievementNft<'info> {
     #[account(
         seeds = [b"user_progress", authority.key().as_ref()],
@@ -277,44 +269,30 @@ pub struct MintAchievementNft<'info> {
     )]
     pub user_progress: Account<'info, UserProgress>,
     
-    #[account(mut)]
+    #[account(
+        init,
+        payer = payer,
+        mint::decimals = 0,
+        mint::authority = authority,
+        mint::freeze_authority = authority,
+    )]
     pub mint: Account<'info, Mint>,
     
+    /// CHECK: This is safe because we're creating it via Metaplex CPI
+    #[account(mut)]
+    pub metadata: UncheckedAccount<'info>,
+    
+    /// CHECK: This is safe because we're creating it via Metaplex CPI  
+    #[account(mut)]
+    pub master_edition: UncheckedAccount<'info>,
+    
     #[account(
         init,
         payer = payer,
-        mint = mint,
-        authority = authority,
-        associated_token_program = associated_token_program,
-        token_program = token_program,
+        associated_token::mint = mint,
+        associated_token::authority = authority,
     )]
     pub user_token_account: Account<'info, TokenAccount>,
-    
-    #[account(
-        init,
-        payer = payer,
-        mint = mint,
-        update_authority = authority,
-        mint_authority = authority,
-        metadata = metadata,
-        token_program = token_program,
-        system_program = system_program,
-        rent = Some(rent.key()),
-    )]
-    pub master_edition: Account<'info, MasterEditionAccount>,
-    
-    #[account(
-        init,
-        payer = payer,
-        mint = mint,
-        mint_authority = authority,
-        update_authority = authority,
-        metadata = metadata,
-        token_program = token_program,
-        system_program = system_program,
-        rent = Some(rent.key()),
-    )]
-    pub metadata: Account<'info, MetadataAccount>,
     
     #[account(mut)]
     pub payer: Signer<'info>,
@@ -324,7 +302,9 @@ pub struct MintAchievementNft<'info> {
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, AssociatedToken>,
-    pub metadata_program: Program<'info, Metadata>,
+    /// CHECK: This is the MPL Token Metadata program ID
+    #[account(constraint = token_metadata_program.key() == mpl_token_metadata::ID)]
+    pub token_metadata_program: UncheckedAccount<'info>,
     pub rent: Sysvar<'info, Rent>,
 }
 
@@ -389,4 +369,16 @@ pub enum ShadowRanchError {
     
     #[msg("Module not complete. All challenges in the module must be completed first.")]
     ModuleNotComplete,
+    
+    #[msg("Invalid metadata URI. Must be a valid HTTPS URL.")]
+    InvalidMetadataUri,
+    
+    #[msg("NFT already minted for this module.")]
+    NftAlreadyMinted,
+    
+    #[msg("Invalid program authority.")]
+    InvalidProgramAuthority,
+    
+    #[msg("Account validation failed.")]
+    AccountValidationFailed,
 }
